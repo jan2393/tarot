@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>심플 타로카드 - 오늘의 운세</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+        
+        body {
+            background: linear-gradient(135deg, #1a0033, #330066);
+            color: #fff;
+            font-family: 'Nanum Pen Script', cursive;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        p { font-size: 1.5rem; margin-bottom: 30px; }
+        .deck {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            perspective: 1000px;
+        }
+        .card {
+            width: 120px;
+            height: 180px;
+            background: linear-gradient(45deg, #4a0b4e, #8b00a8);
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            transition: all 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card.back { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a0b4e"/><path d="M30 10 Q50 0, 70 10 Q80 30, 70 50 Q50 100, 30 50 Q20 30, 30 10" fill="%238b00a8"/><circle cx="50" cy="50" r="15" fill="%23ffcc00"/></svg>') no-repeat center/cover; }
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        .card-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: #fff;
+            color: #000;
+            border-radius: 12px;
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transform: rotateY(180deg);
+        }
+        .result {
+            margin-top: 40px;
+            font-size: 1.8rem;
+            max-width: 800px;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            background: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Nanum Pen Script', cursive;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+        button:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <h1>✨ 오늘의 타로 ✧</h1>
+    <p>마음 속 질문을 떠올리고, 카드 3장을 골라보세요</p>
+    
+    <div class="deck" id="deck"></div>
+    
+    <div class="result" id="result" style="display:none;">
+        <h2>오늘의 메시지</h2>
+        <div id="reading"></div>
+    </div>
+    
+    <button onclick="reset()">다시 뽑기 🔮</button>
+
+    <script>
+        // 메이저 아르카나 22장 중 인기 있는 15장만 간추려서 넣었어요
+        const tarotCards = [
+            { name: "광대 (The Fool)", upright: "새로운 시작, 모험, 순수한 가능성, 자유로운 영혼", reversed: "무모함, 망설임, 기회를 놓침" },
+            { name: "마법사 (The Magician)", upright: "창조력, 기술, 의지력, 모든 것이 가능해지는 순간", reversed: "조작, 속임수, 능력 낭비" },
+            { name: "여사제 (The High Priestess)", upright: "직관, 신비, 내면의 목소리, 숨겨진 지혜", reversed: "비밀, 감정 차단, 직관 무시" },
+            { name: "여황제 (The Empress)", upright: "풍요, 모성, 창조성, 자연과의 조화", reversed: "의존성, 창조력 정체" },
+            { name: "황제 (The Emperor)", upright: "권위, 구조, 안정, 리더십", reversed: "독재, 경직, 통제 과다" },
+            { name: "연인 (The Lovers)", upright: "사랑, 조화, 중요한 선택, 영혼의 짝", reversed: "불화, 잘못된 선택, 유혹" },
+            { name: "전차 (The Chariot)", upright: "승리, 의지력, 방향성, 목표 달성", reversed: "방향 상실, 좌절, 통제력 부족" },
+            { name: "힘 (Strength)", upright: "내면의 힘, 용기, 인내, 부드러운 통제", reversed: "자기 의심, 약함, 분노" },
+            { name: "은둔자 (The Hermit)", upright: "내면 탐구, 지혜, 혼자만의 시간, 진실 찾기", reversed: "고립, 외로움, 방향 감각 상실" },
+            { name: "운명의 수레바퀴 (Wheel of Fortune)", upright: "운명의 전환, 행운, 사이클, 기회의 순간", reversed: "불운, 저항, 통제 불가능" },
+            { name: "정의 (Justice)", upright: "공정함, 진실, 인과응보, 균형", reversed: "불공평, 거짓, 책임 회피" },
+            { name: "매달린 사람 (The Hanged Man)", upright: "희생, 새로운 관점, 기다림, 내려놓음", reversed: "저항, 정체, 무의미한 희생" },
+            { name: "죽음 (Death)", upright: "끝과 시작, 변화, 재탄생, 과거와의 단절", reversed: "변화 거부, 정체, 두려움" },
+            { name: "절제 (Temperance)", upright: "균형, 조화, 인내, 중용", reversed: "불균형, 과잉, 갈등" },
+            { name: "악마 (The Devil)", upright: "속박, 중독, 물질주의, 그림자 자아", reversed: "해방, 깨달음, 속박 탈출" },
+            { name: "탑 (The Tower)", upright: "갑작스러운 변화, 파괴, 깨달음, 기존 구조 붕괴", reversed: "재난 회피, 변화 거부, 두려움" },
+            { name: "별 (The Star)", upright: "희망, 영감, 치유, 밝은 미래", reversed: "불안, 믿음 상실, 실망" },
+            { name: "달 (The Moon)", upright: "불안, 환상, 무의식, 숨겨진 진실", reversed: "진실 드러남, 혼란 해소" },
+            { name: "해 (The Sun)", upright: "기쁨, 성공, 활력, 긍정 에너지", reversed: "일시적인 우울, 자신감 부족" },
+            { name: "심판 (Judgement)", upright: "부활, 깨달음, 새로운 소명, 과거 정리", reversed: "자기 비판, 지연, 부름 무시" },
+            { name: "세계 (The World)", upright: "완성, 성취, 통합, 여행의 끝과 시작", reversed: "미완성, 정체, 마무리 부족" }
+        ];
+
+        let selectedCards = [];
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createDeck() {
+            const deck = document.getElementById('deck');
+            deck.innerHTML = '';
+            selectedCards = [];
+            document.getElementById('result').style.display = 'none';
+            
+            // 카드 10장만 보여주고 그 중 3장 고르게 하기
+            const shuffled = shuffle([...tarotCards]).slice(0, 10);
+            
+            shuffled.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card back';
+                cardElement.dataset.index = index;
+                cardElement.dataset.card = JSON.stringify(card);
+                cardElement.onclick = () => flipCard(cardElement, card);
+                deck.appendChild(cardElement);
+            });
+        }
+
+        function flipCard(element, card) {
+            if (element.classList.contains('flipped') || selectedCards.length >= 3) return;
+            
+            element.classList.add('flipped');
+            const isReversed = Math.random() < 0.5;
+            
+            const front = document.createElement('div');
+            front.className = 'card-front';
+            front.innerHTML = `
+                <div style="font-size:1.2rem; font-weight:bold;">${card.name}</div>
+                <div style="font-size:4rem; margin:10px 0;">
+                    ${isReversed ? '↩' : '↪'}
+                </div>
+                <div style="font-size:0.9rem;">
+                    ${isReversed ? '역위치' : '정위치'}
+                </div>
+            `;
+            element.appendChild(front);
+            
+            selectedCards.push({ ...card, reversed: isReversed });
+            
+            if (selectedCards.length === 3) {
+                setTimeout(showResult, 1000);
+            }
+        }
+
+        function showResult() {
+            const resultDiv = document.getElementById('reading');
+            let reading = "<h3>과거 - 현재 - 미래</h3><br>";
+            
+            selectedCards.forEach((c, i) => {
+                const position = ['과거', '현재', '미래'][i];
+                const meaning = c.reversed ? c.reversed : c.upright;
+                reading += `<strong>${position}: ${c.name}</strong> (${c.reversed ? '역위치' : '정위치'})<br>${meaning}<br><br>`;
+            });
+            
+            reading += "<p style='font-size:2rem;margin-top:30px;'>오늘도 좋은 하루 되세요 💜</p>";
+            resultDiv.innerHTML = reading;
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function reset() {
+            createDeck();
+        }
+
+        // 시작
+        createDeck();
+    </script>
+</body>
+</html>
