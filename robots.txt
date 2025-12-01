@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jan2393.github.io/tarot/sitemap.xml
