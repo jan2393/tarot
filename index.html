@@ -8,130 +8,140 @@
     <title>올베스트 - 오늘의 무료 운세 타로 | 행운의 숫자</title>
     <meta name="description" content="매일 무료로 타로 3장 + 행운의 숫자 + 색깔까지! 2025년 오늘의 운세 가장 정확한 올베스트">
     <meta name="keywords" content="무료운세,숫자운세,오늘운세,타로, 타로카드, 오늘의타로, 무료타로, 타로점, 운세, 연애운, 타로뽑기">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script:wght@400;700&family=Gowun+Dodum&display=swap');
-        
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            background: linear-gradient(135deg, #0f0020, #2a0066, #120028);
-            color: #fff;
-            font-family: 'Gowun Dodum', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow-y: auto;
-            overflow-x: hidden;
-            position: relative;
-            padding: 30px 20px;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(120,60,255,0.25) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255,100,200,0.15) 0%, transparent 50%);
-            animation: twinkle 10s infinite alternate;
-            pointer-events: none;
-        }
-        @keyframes twinkle { 0% { opacity: 0.6; } 100% { opacity: 1; } }
-
-        .logo {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(6rem, 17vw, 10rem);
-            font-weight: 700;
-            letter-spacing: 6px;
-            background: linear-gradient(90deg, #ffdd00, #ff99dd);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 70px rgba(255,204,100,0.8);
-            animation: glow 4s infinite alternate;
-            margin-bottom: 0.5rem;
-        }
-        @keyframes glow { from { text-shadow: 0 0 50px #ffcc00; } to { text-shadow: 0 0 110px #ff66cc; } }
-
-        .sub-text {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(1.9rem, 5.5vw, 2.8rem);
-            color: #ffccff;
-            margin: 16px 0 50px;
-            text-shadow: 0 0 30px #ff66cc;
-            opacity: 0;
-            animation: fadeInUp 1.8s 0.8s forwards;
-        }
-        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
-
-       .buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);   /* 2열 강제 */
-    gap: 24px;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-}
-        
-/* 3번째 버튼(연애운 타로)은 가운데로 보내기 */
-.buttons .btn:nth-child(3) {
-    grid-column: 1 / -1;        /* 양쪽 끝까지 차지해서 가운데 정렬 */
-    justify-self: center;       /* 가로 가운데 */
-}
-
-        
-        .btn {
-            width: 280px;                    /* ← 크기 줄임 (320→280) */
-            height: 300px;                   /* ← 높이도 줄임 */
-            border-radius: 40px;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(18px);
-            border: 2px solid rgba(255,255,255,0.18);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.4s;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            padding: 20px;
-        }
-        .btn:hover {
-            transform: translateY(-15px) scale(1.04);
-            background: rgba(255,255,255,0.22);
-            box-shadow: 0 25px 60px rgba(255,102,204,0.35);
-        }
-        .btn span {
-            font-size: 4.8rem;               /* ← 영문 작게 (8rem → 4.8rem) */
-            color: #ffffff88;
-            margin-bottom: 12px;
-        }
-        .btn div {
-            font-size: 2.6rem;               /* ← 한글 크게 강조 */
-            font-weight: 600;
-            color: #ffffff;
-            letter-spacing: 1px;
-        }
-
-        @/* 모바일 세로 화면일 때 더 예쁘게 */
-@media (max-width: 480px) {
-    .buttons {
-        gap: 20px;
-        padding: 15px;
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script:wght@400;700&family=Gowun+Dodum&display=swap');
+    
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        background: linear-gradient(135deg, #0f0020, #2a0066, #120028);
+        color: #fff;
+        font-family: 'Gowun Dodum', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        padding: 30px 20px;
     }
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at 20% 80%, rgba(120,60,255,0.25) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255,100,200,0.15) 0%, transparent 50%);
+        animation: twinkle 10s infinite alternate;
+        pointer-events: none;
+    }
+    @keyframes twinkle { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+
+    .logo {
+        font-family: 'Nanum Pen Script', cursive;
+        font-size: clamp(6rem, 17vw, 10rem);
+        font-weight: 700;
+        letter-spacing: 6px;
+        background: linear-gradient(90deg, #ffdd00, #ff99dd);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 70px rgba(255,204,100,0.8);
+        animation: glow 4s infinite alternate;
+        margin-bottom: 0.5rem;
+    }
+    @keyframes glow { from { text-shadow: 0 0 50px #ffcc00; } to { text-shadow: 0 0 110px #ff66cc; } }
+
+    .sub-text {
+        font-family: 'Nanum Pen Script', cursive;
+        font-size: clamp(1.9rem, 5.5vw, 2.8rem);
+        color: #ffccff;
+        margin: 16px 0 50px;
+        text-shadow: 0 0 30px #ff66cc;
+        opacity: 0;
+        animation: fadeInUp 1.8s 0.8s forwards;
+    }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
+
+    /* 버튼 그리드 */
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));  /* 기본 2열 */
+        gap: 24px;
+        max-width: 620px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* 3번째 버튼(연애운 타로)은 가운데 */
+    .buttons .btn:nth-child(3) {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+
     .btn {
-        padding: 20px 10px !important;
-        font-size: 1.6rem !important;
+        width: 100%;                 /* 고정 폭 제거 */
+        max-width: 280px;            /* 최대 크기만 제한 */
+        height: 260px;
+        border-radius: 40px;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(18px);
+        border: 2px solid rgba(255,255,255,0.18);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.4s;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        padding: 20px;
+        justify-self: center;        /* 각 카드 가운데 정렬 */
+    }
+    .btn:hover {
+        transform: translateY(-15px) scale(1.04);
+        background: rgba(255,255,255,0.22);
+        box-shadow: 0 25px 60px rgba(255,102,204,0.35);
     }
     .btn span {
-        font-size: 1.3rem !important;
+        font-size: 4.2rem;
+        color: #ffffff88;
+        margin-bottom: 10px;
     }
-}
-        footer {
-            margin-top: 80px;
-            font-size: 0.95rem;
-            color: #aaa;
+    .btn div {
+        font-size: 2.4rem;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+    }
+
+    /* 모바일 세로 화면 (한 줄씩 1열로) */
+    @media (max-width: 480px) {
+        .buttons {
+            grid-template-columns: 1fr;   /* 1열로 변경 */
+            gap: 18px;
+            padding: 10px 0;
+            max-width: 360px;
         }
-    </style>
+        .btn {
+            max-width: 100%;
+            height: 230px;
+            padding: 18px 12px;
+        }
+        .btn span {
+            font-size: 3rem;
+        }
+        .btn div {
+            font-size: 2rem;
+        }
+    }
+
+    footer {
+        margin-top: 80px;
+        font-size: 0.95rem;
+        color: #aaa;
+    }
+</style>
+
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7346804428435887"
      crossorigin="anonymous"></script>
