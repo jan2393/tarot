@@ -89,8 +89,37 @@
     }
 
     /* 나머지 기존 스타일 그대로 */
-    .result {margin-top:50px;font-size:1.75rem;max-width:900px;line-height:1.9;background:rgba(255,255,255,0.1);padding:35px;border-radius:20px;backdrop-filter:blur(12px);}
-    .meaning {margin:30px 0;padding:25px;background:rgba(255,255,255,0.08);border-radius:15px;border-left:6px solid #ffcc00;}
+    .result {
+    margin: 50px auto;
+    padding: 30px 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    max-width: 95%;
+    font-size: clamp(1.6rem, 4.5vw, 2.2rem) !important;   /* 핵심: 모바일에서 안 커짐 */
+    line-height: 1.8;
+    text-align: center;
+}
+
+       
+   .meaning {
+    margin: 35px 0;
+    padding: 25px 20px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 16px;
+    border-left: 6px solid #ffcc00;
+    font-size: clamp(1.5rem, 4.2vw, 2rem) !important;   /* 카드별 해석도 딱 맞춤 */
+    line-height: 1.9;
+}
+
+       /* 카드 이름은 조금 더 작고 예쁘게 */
+.card-name {
+    font-size: clamp(1.4rem, 4vw, 1.8rem) !important;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 12px;
+}
+       
     button {margin:40px 15px;padding:16px 45px;font-size:1.9rem;background:#ffcc00;color:#000;border:none;border-radius:50px;cursor:pointer;font-family:'Nanum Pen Script,cursive;}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7346804428435887"
@@ -270,6 +299,8 @@ const tarotCards = [
     }
 }
 
+
+        
         function flipCard(el, card) {
     if (el.classList.contains('flipped') || selectedCards.length >= 3) return;
 
@@ -394,6 +425,7 @@ const tarotCards = [
     
 </body>
 </html>
+
 
 
 
