@@ -9,6 +9,9 @@
 <h1>올베스트 오늘의 타로</h1>
     <meta name="description" content="지금 바로 무료로 타로카드 3장을 뽑아보세요! 과거·현재·미래 + 정위치/역위치 해석까지 완벽 제공. 매일 업데이트되는 오늘의 운세">
 <meta name="keywords" content="타로, 타로카드, 오늘의타로, 무료타로, 타로점, 운세, 연애운, 타로뽑기">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
         
@@ -92,6 +95,19 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
         button:hover { transform: scale(1.05); }
+        
+         /* 기존 스타일 유지 + 아래만 추가/수정 */
+    .deck{gap:12px;margin:20px 0;}
+    .card{width:105px;height:155px;}
+    .card-front{padding:10px;font-size:0.9rem;}
+    .result{font-size:1.5rem;padding:20px;max-width:95%;}
+    button{padding:14px 35px;font-size:1.6rem;}
+    @media (max-width:480px){
+        h1{font-size:2.8rem;}
+        p{font-size:1.4rem;}
+        .card{width:95px;height:140px;}
+    }
+        
     </style>
 </head>
 <body>
@@ -249,6 +265,7 @@
     </script>
 </body>
 </html>
+
 
 
 
