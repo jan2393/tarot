@@ -1,119 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <link rel="preconnect" href="https://upload.wikimedia.org">
-    <meta name="google-site-verification" content="qLhZvZUDh2qoB1D0RgJy_2Bkfqyyh7EuqeutOAKE90Q" />
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>오늘의 타로 3장 무료 보기 - 과거 현재 미래 완벽 해석</title>
-<meta name="description" content="지금 바로 무료 타로 3장 뽑기! 정위치/역위치 + 과거·현재·미래 해석까지 완벽 제공. 매일 업데이트">
-<h1>올베스트 오늘의 타로</h1>
-<meta name="keywords" content="타로, 타로카드, 오늘의타로, 무료타로, 타로점, 운세, 연애운, 타로뽑기">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <title>오늘의 타로 3장 무료 보기 - 과거 현재 미래 완벽 해석</title>
+<meta name="description" content="지금 바로 무료 타로 3장 뽑기! 정위치/역위치 + 과거·현재·미래 해석까지 완벽 제공. 매일 업데이트">
+<h1>올베스트 오늘의 무료타로</h1>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
-        
-        body {
-            background: linear-gradient(135deg, #1a0033, #330066);
-            color: #fff;
-            font-family: 'Nanum Pen Script', cursive;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        h1 { font-size: 3.5rem; margin-bottom: 10px; }
-        p { font-size: 1.5rem; margin-bottom: 30px; }
-        .deck {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin: 30px 0;
-            perspective: 1000px;
-        }
-        .card {
-            width: 120px;
-            height: 180px;
-            background: linear-gradient(45deg, #4a0b4e, #8b00a8);
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            transition: all 0.6s;
-            transform-style: preserve-3d;
-            position: relative;
-            font-size: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .card.back { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a0b4e"/><path d="M30 10 Q50 0, 70 10 Q80 30, 70 50 Q50 100, 30 50 Q20 30, 30 10" fill="%238b00a8"/><circle cx="50" cy="50" r="15" fill="%23ffcc00"/></svg>') no-repeat center/cover; }
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
-        .card-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            background: #fff;
-            color: #000;
-            border-radius: 12px;
-            padding: 15px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transform: rotateY(180deg);
-        }
-        .result {
-            margin-top: 40px;
-            font-size: 1.8rem;
-            max-width: 800px;
-            line-height: 1.6;
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-        }
-        button {
-            margin-top: 30px;
-            padding: 15px 40px;
-            font-size: 1.5rem;
-            background: #ffcc00;
-            color: #000;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Nanum Pen Script', cursive;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        }
-        button:hover { transform: scale(1.05); }
-        
-         /* 기존 스타일 유지 + 아래만 추가/수정 */
-    .deck{gap:12px;margin:20px 0;}
-    .card{width:105px;height:155px;}
-    .card-front{padding:10px;font-size:0.9rem;}
-    .result{font-size:1.5rem;padding:20px;max-width:95%;}
-    button{padding:14px 35px;font-size:1.6rem;}
-    @media (max-width:480px){
-        h1{font-size:2.8rem;}
-        p{font-size:1.4rem;}
-        .card{width:95px;height:140px;}
-    }
-        
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
+        body {background:linear-gradient(135deg,#1a0033,#330066);color:#fff;font-family:'Gowun Dodum',sans-serif;text-align:center;padding:20px;min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+        h1 {font-family:'Nanum Pen Script',cursive;font-size:3.8rem;margin:20px 0;text-shadow:0 0 30px #ffcc00;}
+        .deck {display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin:40px 0;}
+        .card {width:100px;height:150px;background:linear-gradient(45deg,#4a0b4e,#8b00a8);border-radius:12px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,0.6);transition:0.6s;transform-style:preserve-3d;position:relative;}
+        .card.back {background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a0b4e"/><path d="M30 10 Q50 0,70 10 Q80 30,70 50 Q50 100,30 50 Q20 30,30 10" fill="%238b00a8"/><circle cx="50" cy="50" r="15" fill="%23ffcc00"/></svg>') center/cover;}
+        .card.flipped {transform:rotateY(180deg);}
+        .card-front {position:absolute;inset:0;backface-visibility:hidden;background:#fff;color:#000;border-radius:12px;padding:8px;display:flex;flex-direction:column;justify-content:space-between;transform:rotateY(180deg);}
+        .result {margin-top:50px;font-size:1.75rem;max-width:900px;line-height:1.9;background:rgba(255,255,255,0.1);padding:35px;border-radius:20px;backdrop-filter:blur(12px);}
+        .meaning {margin:30px 0;padding:25px;background:rgba(255,255,255,0.08);border-radius:15px;border-left:6px solid #ffcc00;}
+        button {margin:40px 15px;padding:16px 45px;font-size:1.9rem;background:#ffcc00;color:#000;border:none;border-radius:50px;cursor:pointer;font-family:'Nanum Pen Script',cursive;}
+        .ad-banner {margin:60px auto;max-width:95%;text-align:center;}
+        .ad-banner img {width:100%;height:auto;max-width:728px;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.5);}
     </style>
 </head>
 <body>
-    <meta name="google-site-verification" content="qLhZvZUDh2qoB1D0RgJy_2Bkfqyyh7EuqeutOAKE90Q" />
-    <!-- 쿠팡 파트너스 배너 - 아래 고정 -->
+  <!-- 쿠팡 파트너스 배너 - 아래 고정 -->
 <div style="margin: 50px auto; max-width: 95%; width: 100%; text-align: center;">
     <p style="font-size: 1.4rem; color: #ffcc00; margin-bottom: 15px; font-family: 'Nanum Pen Script', cursive;">
         오늘의 운세가 좋다면 행운 아이템도 함께
@@ -135,159 +45,165 @@
             style="width: 100%; height: auto; max-width: 728px; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.5);"></a>
 </div>
 
-    
-    
-    <h1>✨ 오늘의 타로 ✧</h1>
-    <p>마음 속 질문을 떠올리고, 카드 3장을 골라보세요</p>
+    <h1>오늘의 타로 3장</h1>
+    <p style="font-size:1.6rem;margin:20px;">마음을 가다듬고 질문을 떠올린 뒤, 카드 3장을 선택하세요</p>
     
     <div class="deck" id="deck"></div>
-    
+
     <div class="result" id="result" style="display:none;">
-        <h2>오늘의 메시지</h2>
+        <h2 style="font-size:2.6rem;margin-bottom:35px;">오늘의 메시지</h2>
         <div id="reading"></div>
         
-<div style="margin:40px auto; text-align:center;">
-    <a href="https://link.coupang.com/a/c9E1mC" target="_blank" referrerpolicy="unsafe-url">
-        <img src="https://ads-partners.coupang.com/banners/844850?subId=&traceId=V0-301-969b06e95b87326d-I844850&w=728&h=90" 
-             alt="쿠팡 파트너스" style="border-radius:15px; max-width:95%;">
-    </a>
-  <br>  쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-</div>
+        <div class="ad-banner">
+            <p style="font-size:1.5rem;color:#ffcc00;margin:20px 0;">운세가 좋다면 행운 아이템도 함께</p>
+            <a href="https://link.coupang.com/a/c9E1mC" target="_blank">
+                <img src="https://ads-partners.coupang.com/banners/844850?subId=&traceId=V0-301-969b06e95b87326d-I844850&w=728&h=90" alt="쿠팡 파트너스">
+            </a>
+        </div>
 
-        
+        <button onclick="reset()">다시 뽑기</button>
+        <button onclick="location.href='index.html'">홈으로</button>
     </div>
-    
-    <button onclick="reset()">다시 뽑기 🔮</button>
-<button onclick="location.href='index.html'" 
-        style="margin-top:20px; padding:14px 40px; font-size:1.6rem; 
-               background:#ffffff22; color:#fff; border:2px solid #ffcc00; 
-               border-radius:50px; cursor:pointer; font-family:'Nanum Pen Script', cursive;">
-    메인으로 돌아가기
-</button>
 
     <script>
-      const tarotCards = [
-    { name: "광대", upright: "새로운 시작, 순수한 가능성, 모험", reversed: "무모함, 기회를 놓침, 망설임", img: "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg" },
-    { name: "마법사", upright: "창조력, 기술, 의지력, 모든 것이 가능", reversed: "조작, 속임수, 능력 낭비", img: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg" },
-    { name: "여사제", upright: "직관, 신비, 내면의 지혜", reversed: "비밀, 감정 차단, 직관 무시", img: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg" },
-    { name: "여황제", upright: "풍요, 모성, 창조성, 자연", reversed: "의존성, 과잉 보호, 창조력 정체", img: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg" },
-    { name: "황제", upright: "권위, 안정, 구조, 리더십", reversed: "독재, 경직, 통제 과다", img: "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg" },
-    { name: "교황", upright: "전통, 영적 지도, 관습, 믿음", reversed: "편협, 권위에 대한 반항", img: "https://upload.wikimedia.org/wikipedia/commons/4/48/RWS_Tarot_05_Hierophant.jpg" },
-    { name: "연인", upright: "사랑, 조화, 중요한 선택, 파트너십", reversed: "불화, 유혹, 잘못된 선택", img: "https://upload.wikimedia.org/wikipedia/commons/3/3a/TheLovers.jpg" },
-    { name: "전차", upright: "승리, 의지력, 방향성, 통제", reversed: "방향 상실, 좌절, 공격성", img: "https://upload.wikimedia.org/wikipedia/commons/9/94/RWS_Tarot_07_Chariot.jpg" },
-    { name: "힘", upright: "내면의 힘, 용기, 인내, 부드러운 통제", reversed: "자기 의심, 약함, 분노 폭발", img: "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg" },
-    { name: "은둔자", upright: "내면 탐구, 지혜, 고독", reversed: "고립, 외로움, 방향 상실", img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg" },
-    { name: "운명의 수레바퀴", upright: "운명의 전환, 행운, 사이클", reversed: "불운, 저항, 통제 불가능", img: "https://upload.wikimedia.org/wikipedia/commons/3/36/RWS_Tarot_10_Wheel_of_Fortune.jpg" },
-    { name: "정의", upright: "공정함, 진실, 인과응보", reversed: "불공평, 거짓, 책임 회피", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg" },
-    { name: "매달린 사람", upright: "희생, 새로운 관점, 기다림", reversed: "저항, 정체, 무의미한 희생", img: "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg" },
-    { name: "죽음", upright: "끝과 시작, 변화, 재탄생", reversed: "변화 거부, 정체, 두려움", img: "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg" },
-    { name: "절제", upright: "균형, 조화, 인내, 치유", reversed: "불균형, 과잉, 갈등", img: "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg" },
-    { name: "악마", upright: "속박, 중독, 물질주의, 욕망", reversed: "해방, 깨달음, 속박 탈출", img: "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg" },
-    { name: "탑", upright: "갑작스러운 변화, 파괴, 깨달음", reversed: "재난 회피, 변화 거부", img: "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg" },
-    { name: "별", upright: "희망, 영감, 치유, 밝은 미래", reversed: "불안, 믿음 상실, 실망", img: "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg" },
-    { name: "달", upright: "불안, 환상, 무의식, 속임수", reversed: "진실 드러남, 혼란 해소", img: "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg" },
-    { name: "해", upright: "기쁨, 성공, 활력, 긍정", reversed: "일시적 우울, 자신감 부족", img: "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg" },
-    { name: "심판", upright: "부활, 깨달음, 새로운 소명", reversed: "자기 비판, 지연, 부름 무시", img: "https://upload.wikimedia.org/wikipedia/commons/d/d4/RWS_Tarot_20_Judgement.jpg" },
-    { name: "세계", upright: "완성, 성취, 통합, 여행의 끝", reversed: "미완성, 정체, 마무리 부족", img: "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg" }
+const tarotCards = [
+    // 메이저 아르카나 22장 (풀 디테일)
+    {name:"광대",upright:"새로운 시작의 상징으로, 두려움 없이 한 발짝 내디디면 인생이 완전히 바뀝니다. 연애: 운명 같은 만남이 다가와요 / 일: 예상치 못한 대박 기회 / 금전: 투자나 도전에서 성공 가능성 높음 / 건강: 자유로운 마음으로 스트레스 해소",reversed:"망설임과 무모함으로 기회를 놓칠 수 있어요. 지금이 아니면 영영 없을 타이밍입니다. 연애: 타이밍 놓침 주의 / 일: 과감한 도전 필요 / 금전: 손실 위험 / 건강: 부주의로 작은 사고"},
+    {name:"마법사",upright:"당신의 재능과 의지가 최고조에 달해요. 원하는 걸 현실로 만들 수 있는 마법 같은 시기! 연애: 적극적인 고백으로 성공 / 일: 프로젝트나 아이디어 대성공 / 금전: 돈이 들어올 길이 열림 / 건강: 에너지 넘침",reversed:"집중력 부족과 속임수에 주의하세요. 계획만 세우지 말고 실행이 핵심입니다. 연애: 말보다 행동이 필요 / 일: 속임수나 실수 조심 / 금전: 낭비 경고 / 건강: 피로 누적"},
+    {name:"여사제",upright:"직감이 200% 정확해요. 내면의 목소리를 믿고 따라가세요. 연애: 상대의 진심을 꿰뚫어볼 수 있음 / 일: 숨겨진 진실이 드러나 기회 / 금전: 조용히 큰돈 들어올 징조 / 건강: 정신적 안정",reversed:"감정에 치우쳐 객관성을 잃을 수 있어요. 비밀과 오해가 생길 위험. 연애: 오해와 갈등 가능성 / 일: 중요한 정보 놓칠 수 있음 / 금전: 사기 주의 / 건강: 불안증 증상"},
+    {name:"여황제",upright:"풍요와 사랑, 창조력이 대폭발! 임신·결실·행복한 가정의 상징. 연애: 사랑 가득한 관계 안정 / 일: 결과물이 풍성하게 나옴 / 금전: 돈이 저절로 모임 / 건강: 모성 에너지로 회복",reversed:"과소비와 의존성이 강해져요. 창조력이 정체될 수 있음. 연애: 과잉 보호로 갈등 / 일: 창의력 고갈 / 금전: 지출 증가 / 건강: 호르몬 불균형"},
+    {name:"황제",upright:"안정과 권위, 리더십이 빛납니다. 연애: 믿음직한 파트너와 안정 / 일: 승진·사업 성공 / 금전: 재정 안정화 / 건강: 강인함",reversed:"고집과 독단적 태도로 고립될 수 있어요. 권위 남용 주의. 연애: 통제 욕구로 다툼 / 일: 리더십 실패 / 금전: 재정 경직 / 건강: 관절 문제"},
+    {name:"교황",upright:"전통과 도덕, 좋은 조언자가 등장해요. 연애: 결혼에 적합한 안정 / 일: 스승·멘토 만남 / 금전: 정당한 보상 / 건강: 정신적 지도",reversed:"편협한 사고와 잘못된 가르침에 속을 위험. 연애: 가치관 충돌 / 일: 잘못된 조언 / 금전: 사기 가능성 / 건강: 정신적 혼란"},
+    {name:"연인",upright:"운명적인 사랑과 조화의 시작. 연애: 영혼의 짝 만남·결혼 / 일: 최고의 파트너십 / 금전: 함께하면 돈 됨 / 건강: 조화로운 균형",reversed:"삼각관계나 선택의 갈림길. 연애: 이중성·이별 위기 / 일: 신뢰 깨짐 / 금전: 파트너십 실패 / 건강: 불균형"},
+    {name:"전차",upright:"승리와 의지력으로 목표 달성! 연애: 열정적인 연애 성공 / 일: 경쟁에서 승리 / 금전: 돈 모이는 속도 빨라짐 / 건강: 활력 충만",reversed:"방향 상실과 충동적 결정으로 실수. 연애: 감정 폭주 / 일: 계획 어그러짐 / 금전: 손실 / 건강: 과로"},
+    {name:"힘",upright:"내면의 강인함과 인내로 고난 극복. 연애: 서로 지탱하는 관계 / 일: 리더십 발휘 / 금전: 위기 모면 / 건강: 회복력 강함",reversed:"자제력 부족으로 폭발할 수 있어요. 연애: 분노 다툼 / 일: 약함 드러남 / 금전: 충동 소비 / 건강: 스트레스 질환"},
+    {name:"은둔자",upright:"깊은 성찰과 지혜의 시간. 혼자만의 시간이 필요해요. 연애: 인연이 멀어질 수 있음 / 일: 독립 작업 유리 / 금전: 지출 줄이고 저축 / 건강: 명상으로 안정",reversed:"고립감 심화와 소통 단절. 연애: 외로움 / 일: 방향 상실 / 금전: 투자 실패 / 건강: 우울증"},
+    {name:"운명의 수레바퀴",upright:"큰 행운과 전환점! 갑작스러운 좋은 변화. 연애: 재회·급진전 / 일: 승진·이직 성공 / 금전: 횡재수 / 건강: 기적적 회복",reversed:"운이 막히고 저항으로 고통. 연애: 타이밍 놓침 / 일: 좌절 / 금전: 손실 / 건강: 만성 피로"},
+    {name:"정의",upright:"공정한 결과와 인과응보. 연애: 진실 드러나 안정 / 일: 시험·면접 합격 / 금전: 빌린 돈 돌려받음 / 건강: 공정한 치료",reversed:"불공평한 대우와 소송 패소 위험. 연애: 오해 / 일: 불이익 / 금전: 분쟁 / 건강: 법적 문제"},
+    {name:"매달린 사람",upright:"희생과 새로운 관점으로 깨달음. 연애: 기다림이 필요 / 일: 휴식 후 성공 / 금전: 포기하면 얻음 / 건강: 관점 변화로 치유",reversed:"무의미한 고집으로 정체. 연애: 희생 피로 / 일: 변화 거부 / 금전: 손실 지속 / 건강: 정체증"},
+    {name:"죽음",upright:"끝이자 새로운 시작! 과거 완전히 정리하고 재탄생. 연애: 독신 탈출·재회 / 일: 이직·창업 최적기 / 금전: 큰돈 들어올 전환점 / 건강: 완전 회복",reversed:"변화 거부로 썩은 관계 붙잡음. 연애: 헤어지지 못함 / 일: 정체 / 금전: 손실 / 건강: 재발 위험"},
+    {name:"절제",upright:"조화와 균형, 인내로 치유. 연애: 서로 맞춰가는 관계 / 일: 워라밸 회복 / 금전: 안정적 지출 / 건강: 빠른 회복",reversed:"극단적 태도와 중독 위험. 연애: 갈등 / 일: 불균형 / 금전: 과소비 / 건강: 불균형 질환"},
+    {name:"악마",upright:"중독·집착·물질의 노예. 연애: 불륜·집착 사랑 / 일: 돈 때문에 고통 / 금전: 빚 증가 / 건강: 중독 증상",reversed:"해방과 구원! 나쁜 관계·습관 끊을 기회. 연애: 자유 / 일: 깨달음 / 금전: 빚 청산 / 건강: 해독"},
+    {name:"탑",upright:"갑작스러운 파괴와 재탄생. 연애: 이별 후 더 좋은 사람 / 일: 해고→더 좋은 직장 / 금전: 손실 후 회복 / 건강: 위기 후 강함",reversed:"파국을 피하려 애쓰지만 결국 올 운명. 연애: 위기 지속 / 일: 더 큰 손실 / 금전: 재난 / 건강: 충격"},
+    {name:"별",upright:"최고의 희망 카드! 모든 소원 이루어질 시기. 연애: 운명의 상대 / 일: 꿈 이루어짐 / 금전: 로또급 횡재 / 건강: 치유 완성",reversed:"희망이 보이지만 아직은 때가 아님. 연애: 실망 / 일: 지연 / 금전: 기대 미달 / 건강: 불안"},
+    {name:"달",upright:"불안·환상·숨겨진 진실. 연애: 상대의 이중성 / 일: 배신·실수 가능성 / 금전: 사기 조심 / 건강: 불면증",reversed:"진실 드러남과 불안 해소. 연애: 오해 풀림 / 일: 혼란 해결 / 금전: 위기 모면 / 건강: 안정"},
+    {name:"해",upright:"인생 최고의 행복 시기! 연애: 결혼·임신 / 일: 대성공 / 금전: 돈 걱정 끝 / 건강: 완벽",reversed:"일시적 우울함. 곧 다시 빛남. 연애: 잠깐 다툼 / 일: 작은 실패 / 금전: 일시 손실 / 건강: 회복 중"},
+    {name:"심판",upright:"부활과 재회, 새로운 기회. 연애: 옛 연인 재회 / 일: 재취업 성공 / 금전: 잃었던 돈 되찾음 / 건강: 재기",reversed:"후회와 미련만 남음. 연애: 과거 집착 / 일: 기회 놓침 / 금전: 회복 지연 / 건강: 재발"},
+    {name:"세계",upright:"대망의 완성! 모든 게 이루어짐. 연애: 결혼 확정 / 일: 목표 100% 달성 / 금전: 큰돈 들어옴 / 건강: 완전체",reversed:"마지막 한 걸음만 남음. 포기하지 마세요. 연애: 결혼 날짜 미뤄짐 / 일: 최종 합격만 남음 / 금전: 거의 완성 / 건강: 마지막 치료"},
+
+    // 마이너 아르카나 - 완드 (Wands)
+    {name:"완드 에이스",upright:"뜨거운 열정의 시작! 새로운 도전 성공 확률 99%. 연애: 로맨틱 만남 / 일: 창업·프로젝트 성공 / 금전: 투자 대박",reversed:"열정 식음, 시작만 하고 포기. 연애: 열정 소진 / 일: 동기 부여 부족 / 금전: 초기 손실"},
+    {name:"완드 2",upright:"미래에 대한 설렘과 선택의 기로. 연애: 로맨틱 선택 / 일: 장기 계획 수립 / 금전: 장기 투자",reversed:"계획만 세우고 실행 못 함. 연애: 선택 장애 / 일: 방향성 없음 / 금전: 지연"},
+    {name:"완드 3",upright:"협력과 확장. 연애: 관계 발전 / 일: 팀워크 성공 / 금전: 사업 확대",reversed:"지연과 협력 실패. 연애: 소통 문제 / 일: 팀 갈등 / 금전: 확장 실패"},
+    {name:"완드 4",upright:"안정과 축하. 연애: 관계 안정 / 일: 성과 축하 / 금전: 안정적 수입",reversed:"불안정과 축하 없음. 연애: 불안 / 일: 성과 미달 / 금전: 불안정"},
+    {name:"완드 5",upright:"경쟁과 갈등. 연애: 경쟁자 등장 / 일: 경쟁 승리 / 금전: 투쟁 후 이득",reversed:"갈등 지속, 패배감. 연애: 다툼 / 일: 패배 / 금전: 손실"},
+    {name:"완드 6",upright:"승리와 인정. 연애: 로맨틱 승리 / 일: 승진·인정 / 금전: 보상",reversed:"지연된 승리. 연애: 지연 / 일: 인정 늦음 / 금전: 보상 지연"},
+    {name:"완드 7",upright:"방어와 도전. 연애: 관계 방어 / 일: 도전 성공 / 금전: 방어적 투자",reversed:"포기와 패배. 연애: 포기 / 일: 도전 실패 / 금전: 손실"},
+    {name:"완드 8",upright:"빠른 속도와 소식. 연애: 연락·만남 / 일: 빠른 진행 / 금전: 빠른 이득",reversed:"지연과 차질. 연애: 연락 끊김 / 일: 지연 / 금전: 지연"},
+    {name:"완드 9",upright:"경계와 인내. 연애: 관계 경계 / 일: 최종 도전 / 금전: 방어",reversed:"피로와 패배. 연애: 피로 / 일: 지침 / 금전: 손실"},
+    {name:"완드 10",upright:"무리한 책임. 연애: 과부하 / 일: 과로 / 금전: 부담",reversed:"책임 내려놓음. 연애: 자유 / 일: 휴식 / 금전: 경감"},
+    {name:"완드 페이지",upright:"열정적인 메시지. 연애: 로맨틱 소식 / 일: 새로운 아이디어 / 금전: 작은 기회",reversed:"충동적. 연애: 충동 / 일: 미숙 / 금전: 작은 손실"},
+    {name:"완드 기사",upright:"모험과 열정. 연애: 열정 연애 / 일: 빠른 행동 / 금전: 위험 투자",reversed:"충동적 실수. 연애: 다툼 / 일: 실수 / 금전: 손실"},
+    {name:"완드 여왕",upright:"자신감과 매력. 연애: 매력 발산 / 일: 리더십 / 금전: 자신감 투자",reversed:"질투와 불안. 연애: 질투 / 일: 불안 / 금전: 불안"},
+    {name:"완드 왕",upright:"리더십과 비전. 연애: 리더십 사랑 / 일: 사업 성공 / 금전: 큰 투자 성공",reversed:"고집과 독단. 연애: 통제 / 일: 실패 / 금전: 손실"},
+
+    // 마이너 아르카나 - 컵 (Cups)
+    {name:"컵 에이스",upright:"새로운 사랑과 감정. 연애: 진짜 사랑 시작 / 일: 창의적 아이디어 / 금전: 감정적 만족",reversed:"감정 소진. 연애: 사랑 지침 / 일: 창의력 고갈 / 금전: 불만"},
+    {name:"컵 2",upright:"서로의 진심과 파트너십. 연애: 결혼 적합 / 일: 좋은 협력 / 금정: 상호 이득",reversed:"연락 두절과 단절. 연애: 소통 문제 / 일: 파트너십 실패 / 금전: 불균형"},
+    {name:"컵 3",upright:"축하와 우정. 연애: 로맨틱 모임 / 일: 팀 성공 / 금전: 소소한 이득",reversed:"과음·과소비. 연애: 삼각관계 / 일: 팀 갈등 / 금전: 낭비"},
+    {name:"컵 4",upright:"무관심과 재고. 연애: 관계 재고 / 일: 휴식 필요 / 금전: 보수적",reversed:"새로운 기회. 연애: 재점화 / 일: 재시작 / 금전: 기회"},
+    {name:"컵 5",upright:"상실과 후회. 연애: 이별 아픔 / 일: 실패 후회 / 금전: 손실",reversed:"회복 시작. 연애: 치유 / 일: 교훈 / 금전: 회복"},
+    {name:"컵 6",upright:"추억과 순수. 연애: 옛 사랑 재회 / 일: 과거 성공 / 금전: 안정",reversed:"과거 집착. 연애: 미련 / 일: 과거에 갇힘 / 금전: 정체"},
+    {name:"컵 7",upright:"환상과 선택. 연애: 여러 선택지 / 일: 창의적 아이디어 / 금전: 위험한 투자",reversed:"환상 깨짐. 연애: 실망 / 일: 아이디어 실패 / 금전: 손실"},
+    {name:"컵 8",upright:"떠남과 새 시작. 연애: 이별 후 자유 / 일: 이직 성공 / 금전: 새 투자",reversed:"포기 두려움. 연애: 붙잡음 / 일: 정체 / 금전: 손실"},
+    {name:"컵 9",upright:"소원성취와 만족. 연애: 행복 절정 / 일: 소원 이루어짐 / 금전: 만족",reversed:"물질 만족만. 연애: 공허 / 일: 과도한 만족 / 금전: 과소비"},
+    {name:"컵 10",upright:"행복한 가정. 연애: 결혼·가족 / 일: 팀 성공 / 금전: 안정",reversed:"가족 갈등. 연애: 다툼 / 일: 팀 분열 / 금전: 불안"},
+    {name:"컵 페이지",upright:"감정적 메시지. 연애: 로맨틱 소식 / 일: 창의 소식 / 금전: 작은 기회",reversed:"감정 불안정. 연애: 불안 / 일: 미숙 / 금전: 작은 손실"},
+    {name:"컵 기사",upright:"로맨틱 모험. 연애: 로맨스 / 일: 창의적 진행 / 금정: 감정적 투자",reversed:"기분 변화. 연애: 변덕 / 일: 불안정 / 금전: 변동"},
+    {name:"컵 여왕",upright:"감정적 직관. 연애: 공감 사랑 / 일: 상담 성공 / 금전: 직감 투자",reversed:"감정 과잉. 연애: 집착 / 일: 과도 공감 / 금전: 손실"},
+    {name:"컵 왕",upright:"감정적 안정. 연애: 성숙 사랑 / 일: 리더십 / 금전: 안정 관리",reversed:"감정 불안정. 연애: 불안 / 일: 리더십 실패 / 금전: 불안"},
+
+    // 마이너 아르카나 - 소드 (Swords)
+    {name:"소드 에이스",upright:"명쾌한 돌파구! 연애: 진실 고백 성공 / 일: 시험 합격 / 금전: 명확한 결정",reversed:"혼란과 오해. 연애: 오해 / 일: 실패 / 금전: 혼란"},
+    {name:"소드 2",upright:"균형과 결정. 연애: 갈등 후 화해 / 일: 중립적 선택 / 금전: 균형 투자",reversed:"결정 장애. 연애: 갈등 지속 / 일: 선택 못 함 / 금전: 지연"},
+    {name:"소드 3",upright:"가슴 아픈 이별. 연애: 삼각관계 아픔 / 일: 실패 후회 / 금전: 손실",reversed:"아픔 치유 시작. 연애: 회복 / 일: 교훈 / 금전: 회복"},
+    {name:"소드 4",upright:"휴식과 회복. 연애: 관계 휴식 / 일: 휴가 필요 / 금전: 보수적",reversed:"휴식 거부. 연애: 갈등 / 일: 과로 / 금전: 손실"},
+    {name:"소드 5",upright:"갈등과 승리. 연애: 경쟁 승리 / 일: 소소한 승리 / 금전: 이득",reversed:"패배와 후회. 연애: 패배 / 일: 손실 / 금전: 손실"},
+    {name:"소드 6",upright:"치유의 여정. 연애: 관계 회복 / 일: 이동 성공 / 금정: 회복",reversed:"지연된 치유. 연애: 회복 늦음 / 일: 이동 지연 / 금전: 지연"},
+    {name:"소드 7",upright:"전략과 속임수. 연애: 은밀한 관계 / 일: 교묘한 성공 / 금정: 속임수 투자",reversed:"속임수 발각. 연애: 배신 / 일: 실패 / 금전: 손실"},
+    {name:"소드 8",upright:"제약과 두려움. 연애: 갇힌 관계 / 일: 제한 / 금정: 투자 제한",reversed:"해방. 연애: 자유 / 일: 제한 풀림 / 금정: 기회"},
+    {name:"소드 9",upright:"불안과 악몽. 연애: 불안 / 일: 스트레스 / 금정: 불안",reversed:"불안 해소. 연애: 안정 / 일: 회복 / 금정: 안정"},
+    {name:"소드 10",upright:"바닥을 찍음. 이제 올라갈 일만 남음. 연애: 최악의 이별 후 자유 / 일: 최악 후 재기 / 금정: 최저 후 회복",reversed:"최악 지속. 연애: 고통 / 일: 지속 / 금정: 손실"},
+    {name:"소드 페이지",upright:"호기심과 정보. 연애: 새로운 소식 / 일: 학습 / 금정: 정보 수집",reversed:"소문과 거짓. 연애: 오해 / 일: 잘못된 정보 / 금정: 사기"},
+    {name:"소드 기사",upright:"빠른 결정. 연애: 직설적 고백 / 일: 빠른 실행 / 금정: 빠른 거래",reversed:"충동적 실수. 연애: 다툼 / 일: 실수 / 금정: 손실"},
+    {name:"소드 여왕",upright:"명쾌한 직감. 연애: 진실 판단 / 일: 분석 성공 / 금정: 명확 투자",reversed:"비판적. 연애: 비난 / 일: 과도 분석 / 금정: 과도 보수"},
+    {name:"소드 왕",upright:"논리적 리더십. 연애: 공정한 관계 / 일: 리더십 / 금정: 전략 투자",reversed:"독단적. 연애: 통제 / 일: 독단 / 금정: 잘못된 결정"},
+
+    // 마이너 아르카나 - 펜타클 (Pentacles)
+    {name:"펜타클 에이스",upright:"큰돈 들어올 기회! 연애: 안정적 관계 / 일: 새로운 사업 / 금정: 투자 대박",reversed:"금전 손실. 연애: 물질 갈등 / 일: 시작 실패 / 금정: 손실"},
+    {name:"펜타클 2",upright:"균형과 적응. 연애: 균형 관계 / 일: 멀티태스킹 / 금정: 균형 관리",reversed:"불균형. 연애: 불안정 / 일: 과부하 / 금정: 불균형"},
+    {name:"펜타클 3",upright:"협력과 기술. 연애: 협력 관계 / 일: 팀워크 성공 / 금정: 공동 사업",reversed:"협력 실패. 연애: 갈등 / 일: 팀 문제 / 금정: 실패"},
+    {name:"펜타클 4",upright:"안정과 소유. 연애: 안정 관계 / 일: 기반 다짐 / 금정: 저축 성공",reversed:"집착과 손실. 연애: 소유욕 / 일: 고착 / 금정: 손실"},
+    {name:"펜타클 5",upright:"어려움과 회복. 연애: 위기 관계 / 일: 어려움 후 회복 / 금정: 손실 후 재기",reversed:"최악 회피. 연애: 회복 / 일: 도움 / 금정: 도움"},
+    {name:"펜타클 6",upright:"균형과 관대함. 연애: 균형 사랑 / 일: 공정한 거래 / 금정: 보상",reversed:"불공평. 연애: 불균형 / 일: 불공정 / 금정: 불균형"},
+    {name:"펜타클 7",upright:"노력의 결실. 연애: 인내 관계 / 일: 장기 노력 성공 / 금정: 투자 회수",reversed:"노력 낭비. 연애: 피로 / 일: 실패 / 금정: 손실"},
+    {name:"펜타클 8",upright:"전문성과 기술. 연애: 실용적 관계 / 일: 전문성 인정 / 금정: 기술 투자",reversed:"기술 부족. 연애: 실용성 부족 / 일: 인정 안 됨 / 금정: 실패"},
+    {name:"펜타클 9",upright:"경제적 독립과 여유. 연애: 안정적 사랑 / 일: 성공 / 금정: 부의 축적",reversed:"돈 집착. 연애: 물질 중심 / 일: 과도 만족 / 금정: 과소비"},
+    {name:"펜타클 10",upright:"부와 명예, 대를 잇는 재산. 연애: 가족 행복 / 일: 가업 성공 / 금정: 상속",reversed:"가업 단절. 연애: 가족 갈등 / 일: 실패 / 금정: 분쟁"},
+    {name:"펜타클 페이지",upright:"새로운 기회. 연애: 새로운 만남 / 일: 학습 / 금정: 작은 투자",reversed:"미숙. 연애: 미숙 / 일: 학습 부족 / 금정: 작은 손실"},
+    {name:"펜타클 기사",upright:"안정적 진행. 연애: 안정 연애 / 일: 꾸준함 성공 / 금정: 안정 투자",reversed:"지루함. 연애: 지루 / 일: 정체 / 금정: 지연"},
+    {name:"펜타클 여왕",upright:"실용적 관리. 연애: 실용 사랑 / 일: 관리 성공 / 금정: 가정 재정",reversed:"과도 실용. 연애: 감정 부족 / 일: 과도 관리 / 금정: 과도 보수"},
+    {name:"펜타클 왕",upright:"재정적 안정. 연애: 안정 파트너 / 일: 사업 성공 / 금정: 부의 축적",reversed:"탐욕. 연애: 탐욕 / 일: 탐욕 실패 / 금정: 탐욕 손실"}
 ];
+
         let selectedCards = [];
 
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
+        function shuffle(array) { for(let i=array.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[array[i],array[j]]=[array[j],array[i]];} return array; }
 
         function createDeck() {
-            const deck = document.getElementById('deck');
-            deck.innerHTML = '';
-            selectedCards = [];
+            const deck = document.getElementById('deck'); deck.innerHTML = ''; selectedCards = [];
             document.getElementById('result').style.display = 'none';
-            
-            // 카드 10장만 보여주고 그 중 3장 고르게 하기
-            const shuffled = shuffle([...tarotCards]).slice(0, 10);
-            
-            shuffled.forEach((card, index) => {
-                const cardElement = document.createElement('div');
-                cardElement.className = 'card back';
-                cardElement.dataset.index = index;
-                cardElement.dataset.card = JSON.stringify(card);
-                cardElement.onclick = () => flipCard(cardElement, card);
-                deck.appendChild(cardElement);
-            });
+            const shuffled = shuffle([...tarotCards]);
+            for(let i=0; i<10; i++){
+                const el = document.createElement('div');
+                el.className = 'card back';
+                el.onclick = () => flipCard(el, shuffled[i]);
+                deck.appendChild(el);
+            }
         }
 
-        function flipCard(element, card) {
-            if (element.classList.contains('flipped') || selectedCards.length >= 3) return;
-            
-            element.classList.add('flipped');
+        function flipCard(el, card) {
+            if(el.classList.contains('flipped') || selectedCards.length >= 3) return;
+            el.classList.add('flipped');
             const isReversed = Math.random() < 0.5;
-            
-            const front = document.createElement('div');
-            front.className = 'card-front';
+            const front = document.createElement('div'); front.className = 'card-front';
             front.innerHTML = `
-                <div style="font-size:1rem; font-weight:bold; margin-bottom:5px;">${card.name}</div>
-                <img src="${card.img}" style="width:100%; height:auto; border-radius:8px; transform: ${isReversed ? 'rotate(180deg)' : 'rotate(0deg)'};">
-                <div style="margin-top:8px; font-size:0.9rem; color:#c00;">
-                    ${isReversed ? '↩ 역위치' : '↪ 정위치'}
-                </div>
+                <div style="font-weight:bold;font-size:1rem;">${card.name}</div>
+                <div style="background:#000;height:80px;margin:5px 0;"></div>
+                <div style="font-size:0.9rem;color:#c00;">${isReversed?'역위치':'정위치'}</div>
             `;
-            element.appendChild(front);
-            
-            selectedCards.push({ 
-                ...card, 
-                isReversed: isReversed  // boolean 플래그로 변경 (기존 reversed 문자열 보존)
-            });
-            
-            if (selectedCards.length === 3) {
-                setTimeout(showResult, 1000);
-            }
+            el.appendChild(front);
+            selectedCards.push({...card, isReversed});
+            if(selectedCards.length === 3) setTimeout(showResult, 1200);
         }
 
         function showResult() {
-            const resultDiv = document.getElementById('reading');
-           let reading = "<h3>과거 · 현재 · 미래</h3><br><br>";
-            
+            let reading = "<h3 style='font-size:2rem;margin-bottom:30px;'>과거 · 현재 · 미래</h3>";
+            const positions = ['과거', '현재', '미래'];
             selectedCards.forEach((c, i) => {
-                const position = ['과거', '현재', '미래'][i];
-                const direction = c.isReversed ? '역위치' : '정위치';
-                const meaning = c.isReversed ? c.reversed : c.upright;  // isReversed로 조건 변경
-                reading += `<strong>${position}: ${c.name} (${direction})</strong><br>${meaning}<br><br>`;
+                const meaning = c.isReversed ? c.reversed : c.upright;
+                reading += `<div class="meaning">
+                    <strong style="font-size:2rem;color:#ffcc00;">${positions[i]}: ${c.name} (${c.isReversed?'역위치':'정위치'})</strong><br><br>
+                    ${meaning}
+                </div>`;
             });
-            
-            reading += "<p style='font-size:2rem;margin-top:30px;'>행운이 함께하길 빕니다</p>";
-            resultDiv.innerHTML = reading;
+            reading += "<p style='font-size:2.3rem;margin-top:50px;color:#ffcc00;font-family:Nanum Pen Script,cursive;'>오늘도 행운이 함께하길♡</p>";
+            document.getElementById('reading').innerHTML = reading;
             document.getElementById('result').style.display = 'block';
         }
 
-        function reset() {
-            createDeck();
-        }
-
-        // 시작
+        function reset() { createDeck(); }
         createDeck();
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
