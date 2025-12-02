@@ -65,75 +65,79 @@
 
     /* 버튼 그리드 */
     .buttons {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));  /* 기본 2열 */
-        gap: 24px;
-        max-width: 620px;
-        margin: 0 auto;
-        padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));  /* 항상 2열 */
+    gap: 20px;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+
+    .btn {
+    width: 100%;                 /* 그리드가 나누는 폭을 그대로 사용 */
+    max-width: 260px;            /* 너무 커지지 않게 상한만 설정 */
+    height: 240px;
+    border-radius: 40px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    border: 2px solid rgba(255,255,255,0.18);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.4s;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    padding: 18px;
+    justify-self: center;        /* 각 카드 가운데 정렬 */
+}
+.btn:hover {
+    transform: translateY(-15px) scale(1.04);
+    background: rgba(255,255,255,0.22);
+    box-shadow: 0 25px 60px rgba(255,102,204,0.35);
+}
+.btn span {
+    font-size: 3.6rem;
+    color: #ffffff88;
+    margin-bottom: 8px;
+}
+.btn div {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+    /* 모바일 세로 화면 (480px 이하) */
+@media (max-width: 480px) {
+    .buttons {
+        grid-template-columns: repeat(2, minmax(0, 1fr));  /* 모바일에서도 2열 유지 */
+        gap: 14px;
+        max-width: 360px;
+        padding: 10px 0;
     }
 
-    /* 3번째 버튼(연애운 타로)은 가운데 */
+    /* 모바일에서는 연애운 타로도 일반 버튼처럼 2열에 맞춰 정렬 */
     .buttons .btn:nth-child(3) {
-        grid-column: 1 / -1;
+        grid-column: auto;
         justify-self: center;
     }
 
     .btn {
-        width: 100%;                 /* 고정 폭 제거 */
-        max-width: 280px;            /* 최대 크기만 제한 */
-        height: 260px;
-        border-radius: 40px;
-        background: rgba(255,255,255,0.12);
-        backdrop-filter: blur(18px);
-        border: 2px solid rgba(255,255,255,0.18);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: all 0.4s;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-        padding: 20px;
-        justify-self: center;        /* 각 카드 가운데 정렬 */
-    }
-    .btn:hover {
-        transform: translateY(-15px) scale(1.04);
-        background: rgba(255,255,255,0.22);
-        box-shadow: 0 25px 60px rgba(255,102,204,0.35);
+        max-width: 100%;
+        height: 200px;
+        padding: 14px 8px;
+        border-radius: 28px;
     }
     .btn span {
-        font-size: 4.2rem;
-        color: #ffffff88;
-        margin-bottom: 10px;
+        font-size: 2.8rem;
+        margin-bottom: 6px;
     }
     .btn div {
-        font-size: 2.4rem;
-        font-weight: 600;
-        color: #ffffff;
-        letter-spacing: 1px;
+        font-size: 1.8rem;
     }
-
-    /* 모바일 세로 화면 (한 줄씩 1열로) */
-    @media (max-width: 480px) {
-        .buttons {
-            grid-template-columns: 1fr;   /* 1열로 변경 */
-            gap: 18px;
-            padding: 10px 0;
-            max-width: 360px;
-        }
-        .btn {
-            max-width: 100%;
-            height: 230px;
-            padding: 18px 12px;
-        }
-        .btn span {
-            font-size: 3rem;
-        }
-        .btn div {
-            font-size: 2rem;
-        }
-    }
+}
 
     footer {
         margin-top: 80px;
