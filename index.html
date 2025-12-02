@@ -213,7 +213,10 @@
             `;
             element.appendChild(front);
             
-            selectedCards.push({ ...card, reversed: isReversed });
+            selectedCards.push({ 
+                ...card, 
+                isReversed: isReversed  // boolean 플래그로 변경 (기존 reversed 문자열 보존)
+            });
             
             if (selectedCards.length === 3) {
                 setTimeout(showResult, 1000);
@@ -226,8 +229,8 @@
             
             selectedCards.forEach((c, i) => {
                 const position = ['과거', '현재', '미래'][i];
-                const direction = c.reversed ? '역위치' : '정위치';
-                const meaning = c.reversed ? c.reversed : c.upright;
+                const direction = c.isReversed ? '역위치' : '정위치';
+                const meaning = c.isReversed ? c.reversed : c.upright;  // isReversed로 조건 변경
                 reading += `<strong>${position}: ${c.name} (${direction})</strong><br>${meaning}<br><br>`;
             });
             
@@ -245,6 +248,7 @@
     </script>
 </body>
 </html>
+
 
 
 
