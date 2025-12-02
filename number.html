@@ -97,10 +97,12 @@ document.oncontextmenu = function() { return false; }; // 우클릭 차단
     <div id="col"></div>
     <p id="msg"></p>
 
-    <div style="margin-top:60px;display:flex;gap:30px;flex-wrap:wrap;justify-content:center;">
-        <button class="btn" onclick="showLucky()">다시 뽑기</button>
-        <button class="btn" onclick="location.href='index.html'">홈으로</button>
-    </div>
+    <div style="margin-top:80px; display:flex; gap:30px; flex-wrap:wrap; justify-content:center;">
+    <button class="btn" onclick="location.href='index.html'" 
+            style="width:180px; height:180px; font-size:2rem; background:rgba(255,255,255,0.25); backdrop-filter:blur(15px);">
+        홈으로<br>돌아가기
+    </button>
+</div>
 
     <!-- 아래 배너 -->
     <div class="ad-banner" style="margin-top:80px;">
