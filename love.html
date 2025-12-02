@@ -138,7 +138,96 @@
     "펜타클 왕": {정:"경제적으로 든든한 사람", 역:"너무 현실적"}
 };
 
-        const tarotCards = [/* 기존 78장 배열 그대로 */];
+        const tarotCards = [
+    // 메이저 아르카나
+    { name: "광대" },
+    { name: "마법사" },
+    { name: "여사제" },
+    { name: "여황제" },
+    { name: "황제" },
+    { name: "교황" },
+    { name: "연인" },
+    { name: "전차" },
+    { name: "힘" },
+    { name: "은둔자" },
+    { name: "운명의 수레바퀴" },
+    { name: "정의" },
+    { name: "매달린 사람" },
+    { name: "죽음" },
+    { name: "절제" },
+    { name: "악마" },
+    { name: "탑" },
+    { name: "별" },
+    { name: "달" },
+    { name: "해" },
+    { name: "심판" },
+    { name: "세계" },
+
+    // 컵
+    { name: "컵 에이스" },
+    { name: "컵 2" },
+    { name: "컵 3" },
+    { name: "컵 4" },
+    { name: "컵 5" },
+    { name: "컵 6" },
+    { name: "컵 7" },
+    { name: "컵 8" },
+    { name: "컵 9" },
+    { name: "컵 10" },
+    { name: "컵 페이지" },
+    { name: "컵 기사" },
+    { name: "컵 여왕" },
+    { name: "컵 왕" },
+
+    // 완드
+    { name: "완드 에이스" },
+    { name: "완드 2" },
+    { name: "완드 3" },
+    { name: "완드 4" },
+    { name: "완드 5" },
+    { name: "완드 6" },
+    { name: "완드 7" },
+    { name: "완드 8" },
+    { name: "완드 9" },
+    { name: "완드 10" },
+    { name: "완드 페이지" },
+    { name: "완드 기사" },
+    { name: "완드 여왕" },
+    { name: "완드 왕" },
+
+    // 소드
+    { name: "소드 에이스" },
+    { name: "소드 2" },
+    { name: "소드 3" },
+    { name: "소드 4" },
+    { name: "소드 5" },
+    { name: "소드 6" },
+    { name: "소드 7" },
+    { name: "소드 8" },
+    { name: "소드 9" },
+    { name: "소드 10" },
+    { name: "소드 페이지" },
+    { name: "소드 기사" },
+    { name: "소드 여왕" },
+    { name: "소드 왕" },
+
+    // 펜타클
+    { name: "펜타클 에이스" },
+    { name: "펜타클 2" },
+    { name: "펜타클 3" },
+    { name: "펜타클 4" },
+    { name: "펜타클 5" },
+    { name: "펜타클 6" },
+    { name: "펜타클 7" },
+    { name: "펜타클 8" },
+    { name: "펜타클 9" },
+    { name: "펜타클 10" },
+    { name: "펜타클 페이지" },
+    { name: "펜타클 기사" },
+    { name: "펜타클 여왕" },
+    { name: "펜타클 왕" }
+];
+        
         let selectedCards = [];
 
         function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -147,6 +236,7 @@
             document.getElementById('result').style.display='none';
             document.getElementById('buttons').style.display='none';
             const shuffled=shuffle([...tarotCards]);
+            
             for(let i=0;i<10;i++){
                 const cardEl=document.createElement('div');
                 cardEl.className='card';
@@ -160,10 +250,16 @@
             if(el.classList.contains('flipped')||selectedCards.length>=3) return;
             el.classList.add('flipped');
             const isReversed=Math.random()<0.5;
-            const imgMap = {/* 기존 78장 이미지 맵 그대로 */};
+            const imgMap = {};
+
+function getCardImage(cardName) {
+    // 카드별 이미지를 정의했다면 그걸 쓰고,
+    // 없다면 공통 기본 이미지로 처리
+    return imgMap[cardName] || "https://via.placeholder.com/96x146?text=Tarot";
+}
             el.querySelector('.card-front').innerHTML=`
                 <div class="name">${card.name}</div>
-                <img src="${imgMap[card.name]}" style="transform:${isReversed?'rotate(180deg)':''}">
+                <img src="${getCardImage(card.name)}" style="transform:${isReversed?'rotate(180deg)':''}">
                 <div class="pos">${isReversed?'역위치':'정위치'}</div>
             `;
             selectedCards.push({...card,isReversed});
