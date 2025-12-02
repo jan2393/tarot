@@ -3,109 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>행운의 숫자 무료 확인 - 오늘의 럭키넘버와 색깔</title>
+   <title>행운의 숫자 무료 확인 - 오늘의 럭키넘버와 색깔</title>
 <meta name="description" content="오늘의 행운의 숫자와 행운의 색깔 무료로 바로 확인! 2025년 나만의 럭키넘버는?">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
         
-        body {
-            background: linear-gradient(135deg, #120028, #2a0066);
-            color: #fff;
-            font-family: 'Gowun Dodum', sans-serif;
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(4.5rem, 13vw, 6.5rem);
-            text-shadow: 0 0 60px #ffcc00, 0 0 100px #ff66cc;
-            animation: glow 3s infinite alternate;
-            margin-bottom: 1rem;
-        }
-        .wish {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(2rem, 6.5vw, 3.2rem);
-            color: #ffccff;
-            margin: 20px 0 50px;
-            opacity: 0;
-            animation: fadeInUp 1.8s 0.6s forwards;
-            text-shadow: 0 0 30px #ff66cc;
-        }
-        .lucky-num {
-            font-size: clamp(9rem, 25vw, 14rem);
-            font-weight: bold;
-            margin: 30px 0;
-            animation: pulse 2.5s infinite;
-            text-shadow: 0 0 80px #fff;
-        }
-        #col {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            margin: 50px auto;
-            box-shadow: 0 0 140px #fff;
-            animation: glow 3s infinite alternate;
-        }
-        #msg {
-            font-size: clamp(1.9rem, 6vw, 3rem);
-            line-height: 1.6;
-            max-width: 90%;
-            margin: 30px 0;
-        }
-        .btn {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.18);
-            backdrop-filter: blur(15px);
-            border: none;
-            color: white;
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: 2.4rem;
-            cursor: pointer;
-            margin: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            transition: all 0.4s;
-        }
-        .btn:hover { transform: scale(1.1); background: rgba(255,255,255,0.3); }
-        .btn:active { transform: scale(0.95); }
+        body {background: linear-gradient(135deg, #120028, #2a0066);color:#fff;font-family:'Gowun Dodum',sans-serif;min-height:100vh;margin:0;display:flex;flex-direction:column;align-items:center;padding:20px 0;overflow-x:hidden;}
+        h1 {font-family:'Nanum Pen Script',cursive;font-size:clamp(4.5rem,13vw,6.5rem);text-shadow:0 0 60px #ffcc00,0 0 100px #ff66cc;animation:glow 3s infinite alternate;margin:20px 0;}
+        .wish {font-family:'Nanum Pen Script',cursive;font-size:clamp(2rem,6.5vw,3.2rem);color:#ffccff;margin:20px 0 50px;text-shadow:0 0 30px #ff66cc;opacity:0;animation:fadeInUp 1.8s 0.6s forwards;}
+        .lucky-num {font-size:clamp(9rem,25vw,14rem);font-weight:bold;margin:30px 0;animation:pulse 2.5s infinite;text-shadow:0 0 80px #fff;}
+        #col {width:280px;height:280px;border-radius:50%;margin:50px auto;box-shadow:0 0 140px #fff;animation:glow 3s infinite alternate;}
+        #msg {font-size:clamp(1.9rem,6vw,3rem);line-height:1.6;max-width:90%;margin:30px 0;}
+        .btn {width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.18);backdrop-filter:blur(15px);border:none;color:white;font-family:'Nanum Pen Script',cursive;font-size:2.4rem;cursor:pointer;margin:20px;box-shadow:0 15px 40px rgba(0,0,0,0.5);transition:all 0.4s;}
+        .btn:hover {transform:scale(1.1);background:rgba(255,255,255,0.3);}
+        .btn:active {transform:scale(0.95);}
 
-        @keyframes glow { from { text-shadow: 0 0 40px #ffcc00; } to { text-shadow: 0 0 100px #ff66cc; } }
-        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        /* 반응형 쿠팡 배너 공통 스타일 */
+        .ad-banner {margin:40px auto;max-width:95%;width:100%;text-align:center;}
+        .ad-banner img {width:100%;height:auto;max-width:728px;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.5);}
+
+        @keyframes glow {from{text-shadow:0 0 40px #ffcc00;}to{text-shadow:0 0 100px #ff66cc;}}
+        @keyframes pulse {0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+        @keyframes fadeInUp {from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:none;}}
     </style>
 </head>
 <body>
 
+    <!-- 맨 위 배너 -->
+    <div class="ad-banner">
+        <p style="font-size:1.4rem;color:#ffcc00;margin-bottom:15px;font-family:'Nanum Pen Script',cursive;">
+            오늘의 운세가 좋다면 행운 아이템도 함께
+        </p>
+        <a href="https://link.coupang.com/a/c9E1mC" target="_blank">
+            <img src="https://ads-partners.coupang.com/banners/844850?subId=&traceId=V0-301-969b06e95b87326d-I844850&w=728&h=90" alt="쿠팡 로켓 배너">
+        </a>
+        <p style="font-size:0.9rem;color:#ddd;margin-top:10px;">링크 클릭 시 소정의 수수료가 발생해요</p>
+    </div>
+
     <!-- 시작 화면 -->
     <div id="start-screen">
         <h1>올베스트</h1>
-        <button class="btn" onclick="showLucky()">
-            행운의 숫자<br>뽑아보기
-        </button>
+        <button class="btn" onclick="showLucky()">행운의 숫자<br>뽑아보기</button>
     </div>
 
     <!-- 결과 화면 -->
     <div id="result" style="display:none;">
         <h1>올베스트</h1>
-        
-        <!-- 여기 추가된 문구 -->
         <div class="wish">오늘도 행복한 하루 보내세요</div>
-        
         <div class="lucky-num" id="num"></div>
         <div id="col"></div>
         <p id="msg"></p>
 
-        <div style="margin-top: 60px; display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
-    <button class="btn" onclick="showLucky()">다시 뽑기</button>
-    <button class="btn" onclick="location.href='index.html'">홈으로</button>
-</div>
+        <div style="margin-top:60px;display:flex;gap:30px;flex-wrap:wrap;justify-content:center;">
+            <button class="btn" onclick="showLucky()">다시 뽑기</button>
+            <button class="btn" onclick="location.href='index.html'">홈으로</button>
+        </div>
+
+        <!-- 맨 아래 배너 -->
+        <div class="ad-banner" style="margin-top:80px;">
+            <p style="font-size:1.4rem;color:#ffcc00;margin-bottom:15px;font-family:'Nanum Pen Script',cursive;">
+                행운의 기운 더해줄 아이템 추천
+            </p>
+            <a href="https://link.coupang.com/a/c9FqyE" target="_blank">
+                <img src="https://ads-partners.coupang.com/banners/844851?subId=&traceId=V0-301-879dd1202e5c73b2-I844851&w=728&h=90" alt="쿠팡 로켓 배너">
+            </a>
+        </div>
     </div>
 
     <script>
@@ -115,11 +77,11 @@
             const colors = ['#ff66cc','#00ffcc','#ffff66','#ff99cc','#66ccff','#ccff66','#ff66ff'];
             const col = colors[Math.floor(Math.random() * colors.length)];
             const msgs = [
-                `오늘은 ${lucky}이(가) 당신을 지켜줍니다`,
-                `${lucky}을(를) 가까이 하세요, 행운이 올 거예요~`,
+                `오늘은 ${lucky}가 당신을 지켜줍니다`,
+                `${lucky}를 가까이 하세요, 행운이 올 거예요~`,
                 `행운의 숫자 ${lucky}! 오늘 대박 날 기운`,
                 `당신의 행운 숫자는 ${lucky}입니다`,
-                `${lucky}이(가) 나타났어요! 오늘은 특별한 날`
+                `${lucky}가 나타났어요! 오늘은 특별한 날`
             ];
 
             document.getElementById('num').innerText = lucky;
