@@ -1,10 +1,11 @@
 {
   "name": "오늘 운세",
-  "short_name": "오늘 운세",
-  "start_url": "/index.html",
+  "short_name": "오늘운세",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#120028",
   "theme_color": "#2a0066",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "https://gi.esmplus.com/vovs123/app/251202/icon192png.png",
