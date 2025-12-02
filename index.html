@@ -144,27 +144,27 @@
     <script>
         // 메이저 아르카나 22장 중 인기 있는 15장만 간추려서 넣었어요
        const tarotCards = [
-            { name: "광대", kor: "The Fool", upright: "새로운 시작, 모험, 순수한 가능성", reversed: "무모함, 망설임, 기회를 놓침", img: "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg" },
-            { name: "마법사", kor: "The Magician", upright: "창조력, 기술, 의지력", reversed: "조작, 속임수, 능력낭비", img: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg" },
-            { name: "여사제", kor: "The High Priestess", upright: "직관, 신비, 내면의 목소리", reversed: "비밀, 직관 무시", img: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg" },
-            { name: "여황제", kor: "The Empress", upright: "풍요, 모성, 창조성", reversed: "의존성, 창조력 정체", img: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg" },
-            { name: "황제", kor: "The Emperor", upright: "권위, 안정, 리더십", reversed: "독재, 경직", img: "https://upload.wikimedia.org/wikipedia/commons/4/4c/RWS_Tarot_04_Emperor.jpg" },
-            { name: "연인", kor: "The Lovers", upright: "사랑, 조화, 선택", reversed: "불화, 유혹", img: "https://upload.wikimedia.org/wikipedia/commons/3/3a/TheLovers.jpg" },
-            { name: "전차", kor: "The Chariot", upright: "승리, 의지력", reversed: "방향 상실", img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/RWS_Tarot_07_Chariot.jpg" },
-            { name: "힘", kor: "Strength", upright: "내면의 힘, 용기", reversed: "자기 의심", img: "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg" },
-            { name: "은둔자", kor: "The Hermit", upright: "내면 탐구, 지혜", reversed: "고립", img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg" },
-            { name: "운명의 수레바퀴", kor: "Wheel of Fortune", upright: "운명의 전환, 행운", reversed: "불운", img: "https://upload.wikimedia.org/wikipedia/commons/3/36/RWS_Tarot_10_Wheel_of_Fortune.jpg" },
-            { name: "정의", kor: "Justice", upright: "공정함, 진실", reversed: "불공평", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg" },
-            { name: "매달린 사람", kor: "The Hanged Man", upright: "희생, 새로운 관점", reversed: "저항", img: "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg" },
-            { name: "죽음", kor: "Death", upright: "끝과 시작, 변화", reversed: "변화 거부", img: "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg" },
-            { name: "절제", kor: "Temperance", upright: "균형, 조화", reversed: "불균형", img: "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg" },
-            { name: "악마", kor: "The Devil", upright: "속박, 중독", reversed: "해방", img: "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg" },
-            { name: "탑", kor: "The Tower", upright: "갑작스러운 변화, 파괴", reversed: "재난 회피", img: "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg" },
-            { name: "별", kor: "The Star", upright: "희망, 영감, 치유", reversed: "불안", img: "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg" },
-            { name: "달", kor: "The Moon", upright: "불안, 환상", reversed: "진실 드러남", img: "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg" },
-            { name: "해", kor: "The Sun", upright: "기쁨, 성공", reversed: "일시적 우울", img: "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg" },
-            { name: "심판", kor: "Judgement", upright: "부활, 깨달음", reversed: "자기 비판", img: "https://upload.wikimedia.org/wikipedia/commons/d/d4/RWS_Tarot_20_Judgement.jpg" },
-            { name: "세계", kor: "The World", upright: "완성, 성취", reversed: "미완성", img: "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg" }
+            { name: "광대", upright: "새로운 시작, 모험, 순수한 가능성", reversed: "무모함, 망설임, 기회를 놓침", img: "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg" },
+            { name: "마법사", upright: "창조력, 기술, 의지력, 모든 것이 가능해지는 순간", reversed: "조작, 속임수, 능력 낭비, 혼란", img: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg" },
+            { name: "여사제", upright: "직관, 신비, 내면의 목소리, 숨겨진 지혜", reversed: "비밀, 감정 차단, 직관 무시", img: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg" },
+            { name: "여황제", upright: "풍요, 모성, 창조성, 자연과의 조화", reversed: "의존성, 창조력 정체, 과잉 보호", img: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg" },
+            { name: "황제", upright: "권위, 구조, 안정, 리더십", reversed: "독재, 경직, 통제 과다", img: "https://upload.wikimedia.org/wikipedia/commons/4/4c/RWS_Tarot_04_Emperor.jpg" },
+            { name: "연인", upright: "사랑, 조화, 중요한 선택, 영혼의 짝", reversed: "불화, 잘못된 선택, 유혹", img: "https://upload.wikimedia.org/wikipedia/commons/3/3a/TheLovers.jpg" },
+            { name: "전차", upright: "승리, 의지력, 방향성, 목표 달성", reversed: "방향 상실, 좌절, 통제력 부족", img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/RWS_Tarot_07_Chariot.jpg" },
+            { name: "힘", upright: "내면의 힘, 용기, 인내, 부드러운 통제", reversed: "자기 의심, 약함, 분노 폭발", img: "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg" },
+            { name: "은둔자", upright: "내면 탐구, 지혜, 혼자만의 시간", reversed: "고립, 외로움, 방향 감각 상실", img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg" },
+            { name: "운명의 수레바퀴", upright: "운명의 전환, 행운, 사이클", reversed: "불운, 저항, 통제 불가능", img: "https://upload.wikimedia.org/wikipedia/commons/3/36/RWS_Tarot_10_Wheel_of_Fortune.jpg" },
+            { name: "정의", upright: "공정함, 진실, 인과응보", reversed: "불공평, 거짓, 책임 회피", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg" },
+            { name: "매달린 사람", upright: "희생, 새로운 관점, 기다림", reversed: "저항, 정체, 무의미한 희생", img: "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg" },
+            { name: "죽음", upright: "끝과 시작, 변화, 재탄생", reversed: "변화 거부, 정체, 두려움", img: "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg" },
+            { name: "절제", upright: "균형, 조화, 인내, 중용", reversed: "불균형, 과잉, 갈등", img: "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg" },
+            { name: "악마", upright: "속박, 중독, 물질주의", reversed: "해방, 깨달음, 속박 탈출", img: "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg" },
+            { name: "탑", upright: "갑작스러운 변화, 파괴, 깨달음", reversed: "재난 회피, 변화 거부", img: "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg" },
+            { name: "별", upright: "희망, 영감, 치유, 밝은 미래", reversed: "불안, 믿음 상실, 실망", img: "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg" },
+            { name: "달", upright: "불안, 환상, 무의식", reversed: "진실 드러남, 혼란 해소", img: "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg" },
+            { name: "해", upright: "기쁨, 성공, 활력, 긍정 에너지", reversed: "일시적인 우울, 자신감 부족", img: "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg" },
+            { name: "심판", upright: "부활, 깨달음, 새로운 소명", reversed: "자기 비판, 지연, 부름 무시", img: "https://upload.wikimedia.org/wikipedia/commons/d/d4/RWS_Tarot_20_Judgement.jpg" },
+            { name: "세계", upright: "완성, 성취, 통합, 여행의 끝과 시작", reversed: "미완성, 정체, 마무리 부족", img: "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg" }
         ];
 
         let selectedCards = [];
@@ -222,7 +222,7 @@
 
         function showResult() {
             const resultDiv = document.getElementById('reading');
-           let reading = "<h3>과거 · 현재 · 미래</h3><br>";
+           let reading = "<h3>과거 · 현재 · 미래</h3><br><br>";
             
             selectedCards.forEach((c, i) => {
                 const position = ['과거', '현재', '미래'][i];
@@ -231,7 +231,7 @@
                 reading += `<strong>${position}: ${c.name} (${direction})</strong><br>${meaning}<br><br>`;
             });
             
-            reading += "<p style='font-size:2rem;margin-top:30px;'>오늘도 좋은 하루 되세요 💜</p>";
+            reading += "<p style='font-size:2rem;margin-top:30px;'>행운이 함께하길 빕니다</p>";
             resultDiv.innerHTML = reading;
             document.getElementById('result').style.display = 'block';
         }
@@ -245,6 +245,7 @@
     </script>
 </body>
 </html>
+
 
 
 
