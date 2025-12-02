@@ -105,26 +105,30 @@
             text-align:center;
         }
 
-        /* 포춘쿠키 일러스트 영역 */
+        /* 포춘쿠키 이미지 영역 */
         .cookie-wrapper {
-            width:150px;
+            width:180px;
             margin:0 auto 16px;
             cursor:pointer;
             position:relative;
         }
 
-        .cookie-svg {
+        .cookie-img {
             width:100%;
-            height:auto;
-            filter:drop-shadow(0 10px 25px rgba(0,0,0,0.6));
-            transition:transform 0.25s ease;
+            height:100%;
+            display:block;
+            border-radius:22px;
+            object-fit:cover;
+            box-shadow:0 12px 30px rgba(0,0,0,0.6);
+            transition:transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .cookie-wrapper:hover .cookie-svg {
-            transform:translateY(-4px) scale(1.02);
+        .cookie-wrapper:hover .cookie-img {
+            transform:translateY(-4px) scale(1.03);
+            box-shadow:0 18px 40px rgba(0,0,0,0.7);
         }
 
-        .cookie-wrapper.shake .cookie-svg {
+        .cookie-wrapper.shake .cookie-img {
             animation:shake 0.4s;
         }
 
@@ -225,25 +229,9 @@
 
     <div class="card">
 
-        <!-- 포춘쿠키 이미지 영역 -->
+        <!-- 포춘쿠키 실사 이미지 -->
         <div class="cookie-wrapper" id="cookieBox" title="쿠키를 눌러 조언을 확인해 보세요">
-            <!-- 심플 포춘쿠키 SVG 일러스트 -->
-            <svg class="cookie-svg" viewBox="0 0 200 160">
-                <!-- 그림자 -->
-                <ellipse cx="100" cy="140" rx="55" ry="12" fill="rgba(0,0,0,0.35)"/>
-                <!-- 쿠키 왼쪽 -->
-                <path d="M40 95 C35 60, 65 40, 100 50 C85 60, 78 80, 80 100 C65 105, 50 105, 40 95Z"
-                      fill="#f2b56b" />
-                <!-- 쿠키 오른쪽 -->
-                <path d="M100 50 C135 40, 165 60, 160 95 C150 105, 135 105, 120 100 C122 80,115 60,100 50Z"
-                      fill="#f0a85d" />
-                <!-- 쿠키 안쪽 음영 -->
-                <path d="M83 82 C95 72, 105 72, 117 82 C112 86, 106 88, 100 89 C94 88, 88 86, 83 82Z"
-                      fill="#e39545" />
-                <!-- 포춘 종이 -->
-                <rect x="88" y="40" width="60" height="12" rx="3" ry="3" fill="#fffdf5" />
-                <rect x="88" y="40" width="60" height="12" rx="3" ry="3" fill="rgba(0,0,0,0.04)" />
-            </svg>
+            <img src="img/fortune-cookie.jpg" alt="포춘쿠키" class="cookie-img">
         </div>
 
         <div class="cookie-caption">쿠키를 눌러 오늘의 한 줄 조언을 열어보세요 🥠</div>
@@ -311,12 +299,11 @@
         function openCookie() {
             const adviceEl = document.getElementById('adviceText');
             const cookieBox = document.getElementById('cookieBox');
-
-            if (!adviceEl) return;
+            if (!adviceEl || !cookieBox) return;
 
             // 쿠키 흔들리는 애니메이션
             cookieBox.classList.remove('shake');
-            void cookieBox.offsetWidth; // reflow trick
+            void cookieBox.offsetWidth; // reflow
             cookieBox.classList.add('shake');
 
             // 랜덤 조언 선택
@@ -324,11 +311,9 @@
             do {
                 index = Math.floor(Math.random() * advices.length);
             } while (advices.length > 1 && index === lastIndex);
-
             lastIndex = index;
 
             const text = advices[index];
-
             adviceEl.style.opacity = 0;
             setTimeout(() => {
                 adviceEl.innerText = text;
@@ -338,10 +323,8 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             setTodayDate();
-
             const cookieBox = document.getElementById('cookieBox');
             const openBtn = document.getElementById('openBtn');
-
             cookieBox.addEventListener('click', openCookie);
             openBtn.addEventListener('click', openCookie);
         });
