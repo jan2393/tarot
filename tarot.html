@@ -124,37 +124,34 @@
 
    /* 모바일에서 쿠팡 배너가 너무 커지는 거 완벽 해결 */
 .ad-banner {
-    margin: 60px auto 40px;
-    max-width: 95%;
+    margin: 60px auto 40px !important;
+    max-width: 95vw !important;
     text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .ad-banner img {
-    width: 100%;
-    height: auto;
-    max-width: 420px !important;   /* ← 모바일에서 최대 420px로 제한 (핸드폰 화면 딱 맞음) */
-    max-height: 200px !important;  /* 세로도 과하지 않게 */
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-    display: block;
-    margin: 0 auto;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 420px !important;   /* 모바일 최대 너비 강제 */
+    max-height: 180px !important;  /* 세로도 제한 */
+    border-radius: 16px !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5) !important;
+    display: block !important;
+    margin: 0 auto !important;
+    object-fit: contain;
+    background: #fff;
 }
 
-/* PC에선 여전히 크게 보이게 (420px 이상 화면은 그대로) */
+/* PC에서만 크게 보이게 */
 @media (min-width: 768px) {
     .ad-banner img {
         max-width: 728px !important;
         max-height: none !important;
     }
-}
-   
-   
-   
-   
-   
-   
-   
-   
+} 
+       
    </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7346804428435887"
      crossorigin="anonymous"></script>
@@ -209,7 +206,7 @@ document.oncontextmenu = function() { return false; }; // 우클릭 차단
         <div class="ad-banner">
             <p style="font-size:1.5rem;color:#ffcc00;margin:20px 0;">운세가 좋다면 행운 아이템도 함께</p>
             <a href="https://link.coupang.com/a/c9E1mC" target="_blank">
-                <img src="https://ads-partners.coupang.com/banners/844850?subId=&traceId=V0-301-969b06e95b87326d-I844850&w=728&h=90" alt="쿠팡 파트너스">
+                <img src="https://ads-partners.coupang.com/banners/844850?subId=&traceId=V0-301-969b06e95b87326d-I844850&w=728&h=90" alt="쿠팡 파트너스" style="max-width:420px !important;width:100% !important;height:auto !important;display:block;margin:0 auto;border-radius:16px;">
             </a>
         </div>
 
@@ -459,6 +456,7 @@ const tarotCards = [
     
 </body>
 </html>
+
 
 
 
