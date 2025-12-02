@@ -332,15 +332,14 @@ const tarotCards = [
 
     const front = document.createElement('div');
     front.className = 'card-front';
-    const imgSrc = imgMap[card.name] || 'https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg'; // 기본 이미지
-    front.innerHTML = `
-        <div style="font-weight:bold;font-size:0.9rem;background:rgba(0,0,0,0.6);color:#ffcc00;padding:4px 0;border-radius:8px 8px 0 0;">
-            ${card.name}
-        </div>
-        <img src="${imgSrc}" 
-             style="width:100%;height:98px;object-fit:cover;display:block;border-radius:0 0 8px 8px;transform:${isReversed ? 'rotate(180deg)' : 'rotate(0deg)'};">
-        <div style="position:absolute;bottom:3px;right:5px;background:#c00;color:#fff;padding:2px 6px;border-radius:6px;font-size:0.7rem;">
-            ${isReversed ? '역위치' : '정위치'}
+    const imgSrc = imgMap[card.name] || 'https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg';
+
+    el.innerHTML = `
+        <div class="card-back"></div>
+        <div class="card-front">
+            <div class="title">${card.name}</div>
+            <img src="${imgSrc}" style="transform:${isReversed?'rotate(180deg)':''}">
+            <div class="position">${isReversed ? '역위치' : '정위치'}</div>
         </div>
     `;
     el.appendChild(front);
@@ -368,6 +367,7 @@ const tarotCards = [
     </script>
 </body>
 </html>
+
 
 
 
