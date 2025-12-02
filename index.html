@@ -63,14 +63,22 @@
         }
         @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
 
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: center;
-            width: 100%;
-            max-width: 800px;
-        }
+       .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);   /* 2열 강제 */
+    gap: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+        
+/* 3번째 버튼(연애운 타로)은 가운데로 보내기 */
+.buttons .btn:nth-child(3) {
+    grid-column: 1 / -1;        /* 양쪽 끝까지 차지해서 가운데 정렬 */
+    justify-self: center;       /* 가로 가운데 */
+}
+
+        
         .btn {
             width: 280px;                    /* ← 크기 줄임 (320→280) */
             height: 300px;                   /* ← 높이도 줄임 */
@@ -104,9 +112,20 @@
             letter-spacing: 1px;
         }
 
-        @media (min-width: 900px) {
-            .buttons { flex-wrap: nowrap; }
-        }
+        @/* 모바일 세로 화면일 때 더 예쁘게 */
+@media (max-width: 480px) {
+    .buttons {
+        gap: 20px;
+        padding: 15px;
+    }
+    .btn {
+        padding: 20px 10px !important;
+        font-size: 1.6rem !important;
+    }
+    .btn span {
+        font-size: 1.3rem !important;
+    }
+}
         footer {
             margin-top: 80px;
             font-size: 0.95rem;
