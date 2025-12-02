@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="qLhZvZUDh2qoB1D0RgJy_2Bkfqyyh7EuqeutOAKE90Q" />
-    <title>올베스트 - 오늘의 운세와 타로 운명 행운숫자</title>
+    <title>올베스트 - 오늘의 운세</title>
     <meta name="description" content="올베스트에서 매일 타로 3장과 행운의 숫자를 확인하세요">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
@@ -13,7 +13,7 @@
             background:linear-gradient(135deg,#120028,#2a0066);
             color:#fff;font-family:'Gowun Dodum',sans-serif;
             min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-            overflow:hidden;padding:20px;
+            padding:20px;overflow:hidden;
         }
         .logo{
             font-family:'Nanum Pen Script',cursive;
@@ -29,18 +29,35 @@
             text-align:center;line-height:1.5;
         }
         .buttons{
-            display:flex;flex-wrap:wrap;gap:40px;justify-content:center;width:100%;max-width:600px;
+            display:flex;
+            flex-wrap:wrap;           /* 모바일에선 자동 줄바꿈 */
+            gap:60px;
+            justify-content:center;
+            width:100%;
+            max-width:1000px;
         }
         .btn{
-            flex:1;min-width:280px;height:300px;
-            border-radius:50%;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);
+            width:320px;
+            height:340px;
+            border-radius:50px;
+            background:rgba(255,255,255,0.15);
+            backdrop-filter:blur(20px);
             display:flex;flex-direction:column;justify-content:center;align-items:center;
-            font-size:2.4rem;cursor:pointer;transition:all .4s;
-            box-shadow:0 20px 40px rgba(0,0,0,0.6);
+            font-size:2.6rem;cursor:pointer;transition:all .4s;
+            box-shadow:0 25px 50px rgba(0,0,0,0.6);
         }
         .btn:active{transform:scale(0.94);}
-        .btn:hover{background:rgba(255,255,255,0.28);}
-        .btn span{font-size:6.5rem;margin-bottom:15px;}
+        .btn:hover{background:rgba(255,255,255,0.28);transform:translateY(-10px);}
+        .btn span{font-size:7rem;margin-bottom:15px;}
+
+        /* PC 화면일 때 가로로 나란히 (800px 이상) */
+        @media (min-width: 800px) {
+            .buttons{
+                flex-wrap:nowrap;   /* 줄바꿈 안 함 → 가로 정렬 */
+            }
+            .tagline{margin:2rem 0 6rem;}
+        }
+
         footer{
             position:fixed;bottom:20px;left:0;right:0;
             font-size:0.9rem;color:#ccc;text-align:center;
@@ -55,11 +72,11 @@
 
     <div class="buttons">
         <div class="btn" onclick="location.href='tarot.html'">
-            <span>카드</span>
+            <span>Card</span>
             오늘의 타로
         </div>
         <div class="btn" onclick="location.href='number.html'">
-            <span>숫자</span>
+            <span>Number</span>
             행운의 숫자
         </div>
     </div>
