@@ -145,7 +145,7 @@
         // 메이저 아르카나 22장 중 인기 있는 15장만 간추려서 넣었어요
        const tarotCards = [
             { name: "광대", kor: "The Fool", upright: "새로운 시작, 모험, 순수한 가능성", reversed: "무모함, 망설임, 기회를 놓침", img: "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg" },
-            { name: "마법사", kor: "The Magician", upright: "창조력, 기술, 의지력", reversed: "조작, 속임수", img: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg" },
+            { name: "마법사", kor: "The Magician", upright: "창조력, 기술, 의지력", reversed: "조작, 속임수, 능력낭비", img: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg" },
             { name: "여사제", kor: "The High Priestess", upright: "직관, 신비, 내면의 목소리", reversed: "비밀, 직관 무시", img: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg" },
             { name: "여황제", kor: "The Empress", upright: "풍요, 모성, 창조성", reversed: "의존성, 창조력 정체", img: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg" },
             { name: "황제", kor: "The Emperor", upright: "권위, 안정, 리더십", reversed: "독재, 경직", img: "https://upload.wikimedia.org/wikipedia/commons/4/4c/RWS_Tarot_04_Emperor.jpg" },
@@ -222,12 +222,13 @@
 
         function showResult() {
             const resultDiv = document.getElementById('reading');
-            let reading = "<h3>과거 - 현재 - 미래</h3><br>";
+           let reading = "<h3>과거 · 현재 · 미래</h3><br>";
             
             selectedCards.forEach((c, i) => {
                 const position = ['과거', '현재', '미래'][i];
+                const direction = c.reversed ? '역위치' : '정위치';
                 const meaning = c.reversed ? c.reversed : c.upright;
-                reading += `<strong>${position}: ${c.name}</strong> (${c.reversed ? '역위치' : '정위치'})<br>${meaning}<br><br>`;
+                reading += `<strong>${position}: ${c.name} (${direction})</strong><br>${meaning}<br><br>`;
             });
             
             reading += "<p style='font-size:2rem;margin-top:30px;'>오늘도 좋은 하루 되세요 💜</p>";
@@ -244,6 +245,7 @@
     </script>
 </body>
 </html>
+
 
 
 
