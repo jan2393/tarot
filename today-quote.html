@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>올베스트 - 오늘의 명언</title>
+    <meta name="description" content="하루 한 문장, 오늘의 명언으로 마음을 정돈해보세요.">
+    <meta name="keywords" content="오늘의 명언, 좋은 글귀, 동기부여, 올베스트, 명언 모음">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script:wght@400;700&family=Gowun+Dodum&display=swap');
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            background: linear-gradient(135deg, #0f0020, #2a0066, #120028);
+            color:#fff;
+            font-family:'Gowun Dodum',sans-serif;
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:flex-start;
+            padding:30px 16px 50px;
+            position:relative;
+            overflow-x:hidden;
+        }
+        body::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(120,60,255,0.25) 0%, transparent 55%),
+                radial-gradient(circle at 80% 20%, rgba(255,100,200,0.18) 0%, transparent 55%);
+            pointer-events:none;
+            animation:twinkle 10s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity:0.6; }
+            100%{ opacity:1; }
+        }
+
+        .logo {
+            position:relative;
+            z-index:1;
+            font-family:'Nanum Pen Script',cursive;
+            font-size:clamp(4.5rem, 13vw, 7.5rem);
+            font-weight:700;
+            letter-spacing:6px;
+            background:linear-gradient(90deg,#ffdd00,#ff99dd);
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+            text-shadow:0 0 70px rgba(255,204,100,0.8);
+            animation:glow 4s infinite alternate;
+            margin-bottom:0.2rem;
+        }
+        @keyframes glow {
+            from { text-shadow:0 0 50px #ffcc00; }
+            to   { text-shadow:0 0 110px #ff66cc; }
+        }
+
+        .sub-text {
+            position:relative;
+            z-index:1;
+            font-family:'Nanum Pen Script',cursive;
+            font-size:clamp(1.8rem, 4.8vw, 2.4rem);
+            color:#ffccff;
+            margin-bottom:26px;
+            text-shadow:0 0 26px #ff66cc;
+            opacity:0;
+            animation:fadeInUp 1.4s 0.4s forwards;
+            text-align:center;
+        }
+        @keyframes fadeInUp {
+            from { opacity:0; transform:translateY(24px); }
+            to   { opacity:1; transform:none; }
+        }
+
+        .date-badge {
+            position:relative;
+            z-index:1;
+            font-size:0.95rem;
+            color:#ffdffb;
+            padding:6px 14px;
+            border-radius:999px;
+            border:1px solid rgba(255,255,255,0.25);
+            background:rgba(0,0,0,0.25);
+            margin-bottom:18px;
+            backdrop-filter:blur(10px);
+        }
+
+        .card {
+            position:relative;
+            z-index:1;
+            max-width:640px;
+            width:100%;
+            margin:0 auto;
+            background:rgba(255,255,255,0.12);
+            border-radius:26px;
+            padding:28px 20px 26px;
+            box-shadow:0 18px 50px rgba(0,0,0,0.55);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.18);
+        }
+
+        .quote-mark {
+            font-family:'Nanum Pen Script',cursive;
+            font-size:3.2rem;
+            color:#ffdde9;
+            margin-bottom:8px;
+        }
+
+        .quote-text {
+            font-size:clamp(1.3rem, 1.6rem, 1.7rem);
+            line-height:1.8;
+            color:#ffffff;
+            margin-bottom:18px;
+            white-space:pre-line;
+        }
+
+        .quote-author {
+            text-align:right;
+            font-size:1rem;
+            color:#ffe6ff;
+            opacity:0.9;
+        }
+
+        .buttons-area {
+            position:relative;
+            z-index:1;
+            display:flex;
+            gap:10px;
+            justify-content:center;
+            margin-top:26px;
+            flex-wrap:wrap;
+        }
+
+        .btn {
+            min-width:150px;
+            padding:11px 24px;
+            border-radius:999px;
+            border:none;
+            cursor:pointer;
+            font-family:'Nanum Pen Script',cursive;
+            font-size:1.8rem;
+            background:linear-gradient(135deg,#ff99cc,#ff66c4);
+            color:#fff;
+            box-shadow:0 10px 28px rgba(0,0,0,0.4);
+            transition:all 0.3s;
+        }
+        .btn:hover {
+            transform:translateY(-3px) scale(1.02);
+            box-shadow:0 16px 40px rgba(255,102,196,0.45);
+        }
+
+        .btn-outline {
+            background:transparent;
+            border:1px solid rgba(255,255,255,0.5);
+            color:#ffe6ff;
+        }
+        .btn-outline:hover {
+            background:rgba(255,255,255,0.12);
+            box-shadow:0 12px 32px rgba(0,0,0,0.4);
+        }
+
+        footer {
+            position:relative;
+            z-index:1;
+            margin-top:40px;
+            font-size:0.9rem;
+            color:#aaa;
+            text-align:center;
+        }
+
+        @media (max-width:480px) {
+            .card {
+                padding:22px 16px 20px;
+                border-radius:22px;
+            }
+            .quote-text {
+                font-size:1.2rem;
+            }
+            .buttons-area {
+                flex-direction:column;
+            }
+            .btn {
+                width:100%;
+                max-width:320px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">올베스트</div>
+    <div class="sub-text">오늘, 이 한 문장만 마음에 담아가세요</div>
+    <div id="today" class="date-badge"></div>
+
+    <div class="card">
+        <div class="quote-mark">“</div>
+        <div id="quoteText" class="quote-text">
+            로딩 중입니다...
+        </div>
+        <div id="quoteAuthor" class="quote-author"></div>
+    </div>
+
+    <div class="buttons-area">
+        <button class="btn" onclick="showRandomQuote()">다른 명언 보기</button>
+        <button class="btn btn-outline" onclick="location.href='index.html'">홈으로</button>
+    </div>
+
+    <footer>© 2025 올베스트 allbest.kr · 오늘의 명언</footer>
+
+    <script>
+        const quotes = [
+            { text: "오늘 내가 할 수 있는 최선을 다하면,\n내일은 오늘보다 한 걸음 더 나아가 있을 거예요.", author: "올베스트" },
+            { text: "완벽한 순간을 기다리기보다,\n지금 이 순간을 완벽하게 만드는 사람이 더 행복합니다.", author: "Unknown" },
+            { text: "포기하고 싶어질 때가,\n사실은 거의 다 온 순간일 때가 많아요.", author: "익명" },
+            { text: "천천히 가도 괜찮아요.\n중요한 건 멈추지 않는 거예요.", author: "콘푸치우스(재해석)" },
+            { text: "남들과 비교하느라\n내가 걸어온 길의 아름다움을 놓치지 마세요.", author: "올베스트" },
+            { text: "마음이 가는 곳에\n너의 시간이 모이고,\n그게 곧 너의 인생이 됩니다.", author: "익명" },
+            { text: "오늘의 작은 선택들이\n미래의 너를 만들고 있어요.", author: "Unknown" },
+            { text: "불안해도 괜찮아요.\n불안하다는 건,\n여전히 잘해내고 싶다는 뜻이니까요.", author: "올베스트" },
+            { text: "넘어졌다고 실패가 아니에요.\n일어나지 않겠다고 마음먹는 순간이 실패예요.", author: "익명" },
+            { text: "지금의 나를 아끼고 사랑할수록,\n다가올 사람과의 사랑도 더 깊어집니다.", author: "올베스트" },
+            { text: "어제의 나보다\n1cm만 나아져도 충분히 잘하고 있는 거예요.", author: "Unknown" },
+            { text: "누군가의 한마디보다\n스스로에게 건네는 한마디가 더 큰 힘이 됩니다.", author: "올베스트" }
+          { text: "지금 이 순간을 사랑하려는 마음이\n내 인생을 가장 따뜻하게 바꿔줍니다.", author: "올베스트" },
+{ text: "조금 늦어도 괜찮아요.\n당신은 지금도 충분히 아름답게 나아가고 있어요.", author: "올베스트" },
+{ text: "작은 변화라도 반복되면\n당신의 내일을 완전히 바꿀 수 있어요.", author: "익명" },
+{ text: "스스로를 믿는 순간,\n세상이 건네는 기회가 보이기 시작합니다.", author: "Unknown" },
+{ text: "당신이 흘린 노력은 절대로 사라지지 않아요.\n어느 순간 빛이 되어 돌아올 거예요.", author: "올베스트" },
+{ text: "괜찮아지는 데는 시간이 필요해요.\n그 기다림조차 당신의 용기입니다.", author: "익명" },
+{ text: "누군가의 기준에 맞추기보다\n나만의 속도로, 나만의 길을 걸어가세요.", author: "올베스트" },
+{ text: "마음이 무너지는 날에도\n당신은 다시 일어설 힘을 가지고 있어요.", author: "Unknown" },
+{ text: "어두운 길을 걷는 것 같아도\n당신 안에는 언제나 빛이 있습니다.", author: "올베스트" },
+{ text: "오늘의 수고가 내일의 나를 지켜줄 거예요.", author: "익명" },
+{ text: "조급해하지 마세요.\n꽃도 각자 피어나는 계절이 다릅니다.", author: "올베스트" },
+{ text: "하루 한 번이라도\n나를 칭찬해 주세요.\n그 작은 말이 인생을 바꿉니다.", author: "올베스트" },
+{ text: "어떤 선택이든\n당신이 깊이 고민했다면 그건 이미 좋은 선택입니다.", author: "익명" },
+{ text: "마음이 흔들릴 땐\n처음 꿈꿨던 이유를 떠올려보세요.", author: "Unknown" },
+{ text: "고단한 하루도 결국 지나가요.\n당신의 내일은 더 부드러울 거예요.", author: "올베스트" },
+{ text: "당신이 해낸 작은 용기 하나가\n세상을 바라보는 눈을 바꿉니다.", author: "익명" },
+{ text: "실패는 멈춘 사람에게만 머무릅니다.\n당신은 아직 계속하고 있으니까 괜찮아요.", author: "올베스트" },
+{ text: "당신의 걸음은 느릴 수 있지만,\n절대 뒤로 가고 있지는 않아요.", author: "Unknown" },
+{ text: "누구나 흔들려요.\n하지만 그 흔들림 속에서 더 단단해집니다.", author: "올베스트" },
+{ text: "지금의 고민도 언젠가\n나를 성장시킨 이유가 됩니다.", author: "익명" },
+{ text: "자신을 아끼는 일은\n어떤 노력보다 값진 투자입니다.", author: "올베스트" },
+{ text: "하루 중 단 5분이라도\n마음을 쉬게 해주세요.\n그 시간이 당신을 지켜줍니다.", author: "Unknown" },
+{ text: "두려움은 늘 과장되지만\n당신의 가능성은 과소평가되고 있어요.", author: "올베스트" },
+{ text: "누구보다 늦게 가는 것 같아도\n당신만의 길에는 당신만의 풍경이 있습니다.", author: "익명" },
+{ text: "잠시 멈춘 건 실패가 아니라\n더 멀리 가기 위한 숨 고르기예요.", author: "올베스트" },
+{ text: "당신이 지나온 시간은 모두 의미 있어요.\n그 덕분에 지금의 당신이 있어요.", author: "Unknown" },
+{ text: "행복은 멀리 있지 않아요.\n작은 감사 한 줄기에서 시작됩니다.", author: "올베스트" },
+{ text: "스스로에게 조금 더 친절해지세요.\n그 kindness가 당신의 내일을 밝혀줍니다.", author: "익명" },
+{ text: "힘든 날도 지나고,\n아름다운 날도 또 올 거예요.\n그게 인생의 균형입니다.", author: "올베스트" },
+{ text: "오늘 당신이 노력한 만큼\n내일의 당신이 웃을 거예요.", author: "Unknown" }
+        ];
+
+        let lastIndex = -1;
+
+        function showRandomQuote() {
+            if (quotes.length === 0) return;
+
+            let index;
+            do {
+                index = Math.floor(Math.random() * quotes.length);
+            } while (quotes.length > 1 && index === lastIndex);
+
+            lastIndex = index;
+            const { text, author } = quotes[index];
+
+            const quoteTextEl = document.getElementById('quoteText');
+            const quoteAuthorEl = document.getElementById('quoteAuthor');
+
+            // 간단한 페이드 효과
+            quoteTextEl.style.opacity = 0;
+            quoteAuthorEl.style.opacity = 0;
+
+            setTimeout(() => {
+                quoteTextEl.textContent = "";
+                quoteTextEl.innerText = text; // 줄바꿈 유지
+                quoteAuthorEl.textContent = author ? `- ${author} -` : "";
+
+                quoteTextEl.style.opacity = 1;
+                quoteAuthorEl.style.opacity = 1;
+            }, 150);
+        }
+
+        function setTodayDate() {
+            const todayEl = document.getElementById('today');
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const date = String(now.getDate()).padStart(2, '0');
+
+            const weekdayNames = ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
+            const weekday = weekdayNames[now.getDay()];
+
+            todayEl.textContent = `${year}. ${month}. ${date} · ${weekday}`;
+        }
+
+        // 페이지 로드 시 자동 실행
+        setTodayDate();
+        showRandomQuote();
+    </script>
+</body>
+</html>
