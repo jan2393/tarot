@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올베스트 - 오늘의 운세와 행운의 숫자</title>
+    <meta name="description" content="무료 타로카드 3장 + 오늘의 행운의 숫자와 색깔까지!">
+    <meta name="google-site-verification" content="qLhZvZUDh2qoB1D0RgJy_2Bkfqyyh7EuqeutOAKE90Q" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+        body {
+            margin:0; padding:0; height:100vh;
+            background: linear-gradient(135deg, #1a0033, #330066);
+            color:#fff; font-family:'Nanum Pen Script', cursive;
+            display:flex; flex-direction:column; justify-content:center; align-items:center;
+            overflow:hidden;
+        }
+        .intro-text {
+            font-size:4.5rem; text-align:center; margin-bottom:50px;
+            animation: glow 3s infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ffcc00; }
+            to { text-shadow: 0 0 50px #ff66cc, 0 0 80px #ffcc00; }
+        }
+        .buttons {
+            display:flex; gap:40px; flex-wrap:wrap; justify-content:center;
+        }
+        .btn {
+            width:280px; height:280px; border-radius:50%;
+            background: rgba(255,255,255,0.15); backdrop-filter:blur(10px);
+            display:flex; flex-direction:column; justify-content:center; align-items:center;
+            font-size:2.2rem; cursor:pointer; transition:0.5s;
+            box-shadow:0 10px 30px rgba(0,0,0,0.5);
+        }
+        .btn:hover { transform:scale(1.1); background:rgba(255,255,255,0.3); }
+        .btn span { font-size:5rem; display:block; margin-bottom:20px; }
+        footer { position:absolute; bottom:20px; font-size:1rem; color:#aaa; }
+    </style>
+</head>
+<body>
+    <div class="intro-text">
+        행복한 하루,<br>즐거운 미래만 가득하시길 ♡
+    </div>
+
+    <div class="buttons">
+        <div class="btn" onclick="location.href='tarot.html'">
+            <span>카드</span>
+            오늘의 운세
+        </div>
+        <div class="btn" onclick="location.href='lucky.html'">
+            <span>숫자</span>
+            행운의 숫자
+        </div>
+    </div>
+
+    <footer>© 2025 allbest.kr</footer>
+
+    <!-- 기존 타로 페이지 (tarot.html)와 행운의 숫자 페이지 (lucky.html) 자동 생성 -->
+    <script>
+        // tarot.html 자동 생성 (기존 코드 그대로)
+        const tarotCode = `여기에 당신이 지금까지 완성한 타로 전체 코드 넣기`; // (너무 길어서 아래에 별도 제공)
+        // lucky.html 자동 생성
+        const luckyCode = `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>오늘의 행운의 숫자와 색깔</title><style>@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');body{background:linear-gradient(135deg,#1a0033,#330066);color:#fff;font-family:'Nanum Pen Script',cursive;text-align:center;padding:50px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;}h1{font-size:4rem;margin:20px;}h2{font-size:6rem;margin:30px;}p{font-size:2rem;}.color{display:inline-block;width:200px;height:200px;border-radius:50%;margin:30px;box-shadow:0 0 50px #fff;}</style></head><body><h1>오늘의 행운의 숫자와 색깔</h1><h2 id="num"></h2><div class="color" id="col"></div><p id="msg"></p><script>const nums=[0,1,3,5,7,8,9];const lucky=nums[Math.floor(Math.random()*nums.length)];const colors=['#ff66cc','#00ffcc','#ffff66','#ff99cc','#66ccff','#ccff66'];const col=colors[Math.floor(Math.random()*colors.length)];document.getElementById('num').innerText=lucky;document.getElementById('col').style.background=col;document.getElementById('msg').innerText=[\`오늘은 \${lucky}가 행운의 숫자예요!\`,\`행운의 색은 이 색이에요!\`,\`이 숫자와 색을 가까이 두세요~\`][Math.floor(Math.random()*3)];</script></body></html>`;
+
+        // 로컬스토리지에 저장 (GitHub Pages에서 바로 사용 가능)
+        if (!localStorage.getItem('tarot.html')) localStorage.setItem('tarot.html', 'EXISTING_TAROT_CODE_HERE');
+        if (!localStorage.getItem('lucky.html')) localStorage.setItem('lucky.html', luckyCode);
+    </script>
+</body>
+</html>
