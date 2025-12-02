@@ -6,73 +6,63 @@
     <title>오늘의 타로 3장 무료 보기 - 과거 현재 미래 완벽 해석</title>
 <meta name="description" content="지금 바로 무료 타로 3장 뽑기! 정위치/역위치 + 과거·현재·미래 해석까지 완벽 제공. 매일 업데이트">
 <h1>올베스트 오늘의 무료타로</h1>
-    <style>
+   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
+    body {background:linear-gradient(135deg,#1a0033,#330066);color:#fff;font-family:'Gowun Dodum',sans-serif;text-align:center;padding:20px;min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+    h1 {font-family:'Nanum Pen Script',cursive;font-size:3.8rem;margin:20px 0;text-shadow:0 0 30px #ffcc00;}
     
-    body {
-        background: linear-gradient(135deg, #1a0033, #330066);
-        color: #fff;
-        font-family: 'Gowun Dodum', sans-serif;
-        text-align: center;
-        padding: 20px;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    h1 {
-        font-family: 'Nanum Pen Script', cursive;
-        font-size: 3.8rem;
-        margin: 20px 0;
-        text-shadow: 0 0 30px #ffcc00;
-    }
     .deck {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
-        padding: 30px 10px;
-        max-width: 100%;
+        margin: 40px 0;
     }
-    
-    /* 핵심: 완벽한 3D 카드 플립 */
+
     .card {
         width: 96px;
         height: 146px;
         position: relative;
         cursor: pointer;
-        transform-style: preserve-3d;
-        transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
-    .card.flipped {
+
+    .card-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        border-radius: 14px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    }
+
+    .card.flipped .card-inner {
         transform: rotateY(180deg);
     }
-    
+
     .card-front, .card-back {
         position: absolute;
         width: 100%;
         height: 100%;
         backface-visibility: hidden;
         border-radius: 14px;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.7);
         overflow: hidden;
     }
-    
-    /* 카드 뒷면 (선택 전) */
+
     .card-back {
         background: linear-gradient(45deg, #4a0b4e, #8b00a8);
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a0b4e"/><path d="M30 10 Q50 0,70 10 Q80 30,70 50 Q50 100,30 50 Q20 30,30 10" fill="%238b00a8"/><circle cx="50" cy="50" r="15" fill="%23ffcc00"/></svg>');
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234a0b4e'/%3E%3Cpath d='M30 10 Q50 0,70 10 Q80 30,70 50 Q50 100,30 50 Q20 30,30 10' fill='%238b00a8'/%3E%3Ccircle cx='50' cy='50' r='15' fill='%23ffcc00'/%3E%3C/svg%3E");
         background-size: cover;
     }
-    
-    /* 카드 앞면 (뒤집힌 후) */
+
     .card-front {
-        background: white;
+        background: #fff;
         transform: rotateY(180deg);
         display: flex;
         flex-direction: column;
     }
-    .card-front .title {
+
+    .card-front .name {
         font-weight: bold;
         font-size: 0.85rem;
         background: rgba(0,0,0,0.7);
@@ -80,29 +70,28 @@
         padding: 4px 0;
         text-align: center;
     }
+
     .card-front img {
         width: 100%;
         height: 98px;
         object-fit: cover;
     }
-    .card-front .position {
+
+    .card-front .pos {
         position: absolute;
-        bottom: 4px;
+        bottom: 5px;
         right: 6px;
         background: #c00;
         color: white;
+        font-size: 0.7rem;
         padding: 2px 7px;
         border-radius: 8px;
-        font-size: 0.7rem;
-        font-weight: bold;
     }
-    
-    /* 결과 화면 스타일 유지 */
+
+    /* 나머지 기존 스타일 그대로 */
     .result {margin-top:50px;font-size:1.75rem;max-width:900px;line-height:1.9;background:rgba(255,255,255,0.1);padding:35px;border-radius:20px;backdrop-filter:blur(12px);}
     .meaning {margin:30px 0;padding:25px;background:rgba(255,255,255,0.08);border-radius:15px;border-left:6px solid #ffcc00;}
-    button {margin:40px 15px;padding:16px 45px;font-size:1.9rem;background:#ffcc00;color:#000;border:none;border-radius:50px;cursor:pointer;font-family:'Nanum Pen Script',cursive;}
-    .ad-banner {margin:60px auto;max-width:95%;text-align:center;}
-    .ad-banner img {width:100%;height:auto;max-width:728px;border-radius:16px;box-shadow:0 8px 30px rgba(0, 0, 0, 0.5);}
+    button {margin:40px 15px;padding:16px 45px;font-size:1.9rem;background:#ffcc00;color:#000;border:none;border-radius:50px;cursor:pointer;font-family:'Nanum Pen Script,cursive;}
 </style>
 </head>
 <body>
@@ -244,16 +233,25 @@ const tarotCards = [
         function shuffle(array) { for(let i=array.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[array[i],array[j]]=[array[j],array[i]];} return array; }
 
         function createDeck() {
-            const deck = document.getElementById('deck'); deck.innerHTML = ''; selectedCards = [];
-            document.getElementById('result').style.display = 'none';
-            const shuffled = shuffle([...tarotCards]);
-            for(let i=0; i<10; i++){
-                const el = document.createElement('div');
-                el.className = 'card back';
-                el.onclick = () => flipCard(el, shuffled[i]);
-                deck.appendChild(el);
-            }
-        }
+    const deck = document.getElementById('deck');
+    deck.innerHTML = '';
+    selectedCards = [];
+    document.getElementById('result').style.display = 'none';
+
+    const shuffled = shuffle([...tarotCards]);
+    for(let i = 0; i < 10; i++){
+        const cardEl = document.createElement('div');
+        cardEl.className = 'card';  // flipped 없음
+        cardEl.innerHTML = `
+            <div class="card-inner">
+                <div class="card-back"></div>
+                <div class="card-front"></div>
+            </div>
+        `;
+        cardEl.onclick = () => flipCard(cardEl, shuffled[i]);
+        deck.appendChild(cardEl);
+    }
+}
 
         function flipCard(el, card) {
     if (el.classList.contains('flipped') || selectedCards.length >= 3) return;
@@ -334,14 +332,12 @@ const tarotCards = [
     front.className = 'card-front';
     const imgSrc = imgMap[card.name] || 'https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg';
 
-    el.innerHTML = `
-        <div class="card-back"></div>
-        <div class="card-front">
-            <div class="title">${card.name}</div>
-            <img src="${imgSrc}" style="transform:${isReversed?'rotate(180deg)':''}">
-            <div class="position">${isReversed ? '역위치' : '정위치'}</div>
-        </div>
+   el.querySelector('.card-front').innerHTML = `
+        <div class="name">${card.name}</div>
+        <img src="${imgSrc}" style="transform:${isReversed?'rotate(180deg)':''}">
+        <div class="pos">${isReversed ? '역위치' : '정위치'}</div>
     `;
+            
     el.appendChild(front);
 
     selectedCards.push({ ...card, isReversed });
@@ -367,6 +363,7 @@ const tarotCards = [
     </script>
 </body>
 </html>
+
 
 
 
