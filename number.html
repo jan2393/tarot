@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올베스트 - 오늘의 행운의 숫자와 색깔</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
+        body{background:linear-gradient(135deg,#120028,#2a0066);color:#fff;font-family:'Gowun Dodum',sans-serif;text-align:center;padding:50px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+        h1{font-size:5rem;margin:20px;font-family:'Nanum Pen Script',cursive;text-shadow:0 0 40px #ffcc00;}
+        h2{font-size:9rem;margin:40px 0;animation:pulse 2s infinite;}
+        .color{display:inline-block;width:260px;height:260px;border-radius:50%;margin:40px;box-shadow:0 0 100px #fff;animation:glow 3s infinite alternate;}
+        p{font-size:2.5rem;margin:30px;}
+        @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+        @keyframes glow{from{box-shadow:0 0 70px #fff;}to{box-shadow:0 0 140px #ffcc00;}}
+    </style>
+</head>
+<body>
+    <h1>올베스트</h1>
+    <h2 id="num"></h2>
+    <div class="color" id="col"></div>
+    <p id="msg"></p>
+    <script>
+        const luckies = [0,1,3,5,7,8,9];
+        const lucky = luckies[Math.floor(Math.random()*luckies.length)];
+        const colors = ['#ff66cc','#00ffcc','#ffff66','#ff99cc','#66ccff','#ccff66','#ff66ff'];
+        const col = colors[Math.floor(Math.random()*colors.length)];
+        document.getElementById('num').innerText = lucky;
+        document.getElementById('col').style.background = col;
+        const msgs = [`오늘은 ${lucky}가 당신을 지켜줍니다`,`${lucky}를 가까이 하세요, 행운이 올 거예요~`,`행운의 숫자 ${lucky}! 오늘 대박 날 기운`];
+        document.getElementById('msg').innerText = msgs[Math.floor(Math.random()*msgs.length)];
+    </script>
+</body>
+</html>
