@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>올베스트 - 오늘의 한줄 조언 포춘쿠키</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="하루에 딱 한 줄, 오늘의 미니 포춘쿠키로 마음을 가볍게 만들어 보세요.">
+    <meta name="keywords" content="오늘의 한줄 조언, 포춘쿠키, 미니 포춘쿠키, 올베스트, 오늘운세">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script:wght@400;700&family=Gowun+Dodum&display=swap');
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            background: linear-gradient(135deg, #0f0020, #2a0066, #120028);
+            color:#fff;
+            font-family:'Gowun Dodum',sans-serif;
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:flex-start;
+            padding:30px 16px 50px;
+            position:relative;
+            overflow-x:hidden;
+        }
+        body::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(120,60,255,0.25) 0%, transparent 55%),
+                radial-gradient(circle at 80% 20%, rgba(255,100,200,0.18) 0%, transparent 55%);
+            pointer-events:none;
+            animation:twinkle 10s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity:0.6; }
+            100%{ opacity:1; }
+        }
+
+        .logo {
+            position:relative;
+            z-index:1;
+            font-family:'Nanum Pen Script',cursive;
+            font-size:clamp(4.5rem, 13vw, 7.5rem);
+            font-weight:700;
+            letter-spacing:6px;
+            background:linear-gradient(90deg,#ffdd00,#ff99dd);
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+            text-shadow:0 0 70px rgba(255,204,100,0.8);
+            animation:glow 4s infinite alternate;
+            margin-bottom:0.2rem;
+        }
+        @keyframes glow {
+            from { text-shadow:0 0 50px #ffcc00; }
+            to   { text-shadow:0 0 110px #ff66cc; }
+        }
+
+        .sub-text {
+            position:relative;
+            z-index:1;
+            font-family:'Nanum Pen Script',cursive;
+            font-size:clamp(1.8rem, 4.8vw, 2.4rem);
+            color:#ffccff;
+            margin-bottom:26px;
+            text-shadow:0 0 26px #ff66cc;
+            opacity:0;
+            animation:fadeInUp 1.4s 0.4s forwards;
+            text-align:center;
+        }
+        @keyframes fadeInUp {
+            from { opacity:0; transform:translateY(24px); }
+            to   { opacity:1; transform:none; }
+        }
+
+        .date-badge {
+            position:relative;
+            z-index:1;
+            font-size:0.95rem;
+            color:#ffdffb;
+            padding:6px 14px;
+            border-radius:999px;
+            border:1px solid rgba(255,255,255,0.25);
+            background:rgba(0,0,0,0.25);
+            margin-bottom:18px;
+            backdrop-filter:blur(10px);
+        }
+
+        .card {
+            position:relative;
+            z-index:1;
+            max-width:520px;
+            width:100%;
+            margin:0 auto;
+            background:rgba(255,255,255,0.12);
+            border-radius:26px;
+            padding:26px 20px 24px;
+            box-shadow:0 18px 50px rgba(0,0,0,0.55);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.18);
+            text-align:center;
+        }
+
+        /* 포춘쿠키 일러스트 영역 */
+        .cookie-wrapper {
+            width:150px;
+            margin:0 auto 16px;
+            cursor:pointer;
+            position:relative;
+        }
+
+        .cookie-svg {
+            width:100%;
+            height:auto;
+            filter:drop-shadow(0 10px 25px rgba(0,0,0,0.6));
+            transition:transform 0.25s ease;
+        }
+
+        .cookie-wrapper:hover .cookie-svg {
+            transform:translateY(-4px) scale(1.02);
+        }
+
+        .cookie-wrapper.shake .cookie-svg {
+            animation:shake 0.4s;
+        }
+
+        @keyframes shake {
+            0%   { transform:translateX(0); }
+            25%  { transform:translateX(-4px); }
+            50%  { transform:translateX(4px); }
+            75%  { transform:translateX(-2px); }
+            100% { transform:translateX(0); }
+        }
+
+        .cookie-caption {
+            font-size:0.95rem;
+            color:#ffe6ff;
+            opacity:0.9;
+            margin-bottom:10px;
+        }
+
+        .advice-text {
+            font-size:clamp(1.3rem, 1.6rem, 1.7rem);
+            line-height:1.7;
+            color:#ffffff;
+            margin-top:4px;
+            min-height:2.4em;
+            transition:opacity 0.2s ease;
+        }
+
+        .buttons-area {
+            position:relative;
+            z-index:1;
+            display:flex;
+            gap:10px;
+            justify-content:center;
+            margin-top:26px;
+            flex-wrap:wrap;
+        }
+
+        .btn {
+            min-width:150px;
+            padding:11px 24px;
+            border-radius:999px;
+            border:none;
+            cursor:pointer;
+            font-family:'Nanum Pen Script',cursive;
+            font-size:1.8rem;
+            background:linear-gradient(135deg,#ff99cc,#ff66c4);
+            color:#fff;
+            box-shadow:0 10px 28px rgba(0,0,0,0.4);
+            transition:all 0.3s;
+        }
+        .btn:hover {
+            transform:translateY(-3px) scale(1.02);
+            box-shadow:0 16px 40px rgba(255,102,196,0.45);
+        }
+
+        .btn-outline {
+            background:transparent;
+            border:1px solid rgba(255,255,255,0.5);
+            color:#ffe6ff;
+        }
+        .btn-outline:hover {
+            background:rgba(255,255,255,0.12);
+            box-shadow:0 12px 32px rgba(0,0,0,0.4);
+        }
+
+        footer {
+            position:relative;
+            z-index:1;
+            margin-top:40px;
+            font-size:0.9rem;
+            color:#aaa;
+            text-align:center;
+        }
+
+        @media (max-width:480px) {
+            .card {
+                padding:22px 16px 20px;
+                border-radius:22px;
+            }
+            .advice-text {
+                font-size:1.2rem;
+            }
+            .buttons-area {
+                flex-direction:column;
+            }
+            .btn {
+                width:100%;
+                max-width:320px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">올베스트</div>
+    <div class="sub-text">오늘, 쿠키 하나에 담긴 조용한 위로</div>
+    <div id="today" class="date-badge"></div>
+
+    <div class="card">
+
+        <!-- 포춘쿠키 이미지 영역 -->
+        <div class="cookie-wrapper" id="cookieBox" title="쿠키를 눌러 조언을 확인해 보세요">
+            <!-- 심플 포춘쿠키 SVG 일러스트 -->
+            <svg class="cookie-svg" viewBox="0 0 200 160">
+                <!-- 그림자 -->
+                <ellipse cx="100" cy="140" rx="55" ry="12" fill="rgba(0,0,0,0.35)"/>
+                <!-- 쿠키 왼쪽 -->
+                <path d="M40 95 C35 60, 65 40, 100 50 C85 60, 78 80, 80 100 C65 105, 50 105, 40 95Z"
+                      fill="#f2b56b" />
+                <!-- 쿠키 오른쪽 -->
+                <path d="M100 50 C135 40, 165 60, 160 95 C150 105, 135 105, 120 100 C122 80,115 60,100 50Z"
+                      fill="#f0a85d" />
+                <!-- 쿠키 안쪽 음영 -->
+                <path d="M83 82 C95 72, 105 72, 117 82 C112 86, 106 88, 100 89 C94 88, 88 86, 83 82Z"
+                      fill="#e39545" />
+                <!-- 포춘 종이 -->
+                <rect x="88" y="40" width="60" height="12" rx="3" ry="3" fill="#fffdf5" />
+                <rect x="88" y="40" width="60" height="12" rx="3" ry="3" fill="rgba(0,0,0,0.04)" />
+            </svg>
+        </div>
+
+        <div class="cookie-caption">쿠키를 눌러 오늘의 한 줄 조언을 열어보세요 🥠</div>
+
+        <div id="adviceText" class="advice-text">
+            아직 쿠키를 열지 않았어요.
+        </div>
+    </div>
+
+    <div class="buttons-area">
+        <button class="btn" id="openBtn">다른 조언 보기</button>
+        <button class="btn btn-outline" onclick="location.href='index.html'">홈으로</button>
+    </div>
+
+    <footer>© 2025 올베스트 allbest.kr · 미니 포춘쿠키</footer>
+
+    <script>
+        const advices = [
+            "오늘은 나를 조금 더 아껴 주세요.",
+            "조급해하지 말고, 한 걸음만 내딛어도 충분해요.",
+            "당신이 생각하는 것보다 훨씬 잘하고 있어요.",
+            "오늘 한 번은, 스스로를 칭찬해 주세요.",
+            "완벽하지 않아도 괜찮아요. 당신은 이미 충분히 소중해요.",
+            "비교 대신, 어제의 나와만 조용히 마주해 보세요.",
+            "잠깐 쉬어 가는 것도, 잘 가기 위한 한 과정입니다.",
+            "지금의 고민도 언젠가 웃으며 이야기할 추억이 될 거예요.",
+            "하고 싶은 말을 마음에만 두지 말고, 오늘은 한 마디 꺼내 보세요.",
+            "당신의 속도는 틀린 게 아니라, 그냥 당신의 리듬일 뿐이에요.",
+            "실수해도 괜찮아요. 그 덕분에 조금 더 단단해집니다.",
+            "오늘 하루, 나에게 부드러운 눈으로 바라봐 주세요.",
+            "포기하고 싶을 때일수록, 잠깐만 멈추고 숨을 고르세요.",
+            "마음이 불안하다면, 지금 당장 할 수 있는 작은 일 하나만 해봐요.",
+            "당신을 응원하는 눈은 생각보다 훨씬 더 많습니다.",
+            "오늘의 작은 선택이 내일의 큰 변화를 만들 거예요.",
+            "지쳐 보인다면, 잘 버티고 있다는 증거일지도 몰라요.",
+            "너무 멀리까지 생각하지 말고, 오늘만 잘 보내도 괜찮아요.",
+            "당신의 마음을 귀하게 다뤄줄 사람은 분명히 있어요.",
+            "오늘 하루는, '괜찮아'라는 말을 나에게 먼저 건네 주세요.",
+            "남들의 시선보다, 내 마음이 편한 선택을 해도 됩니다.",
+            "해내지 못한 것보다, 오늘도 버틴 나에게 박수를 보내 주세요.",
+            "작게라도 웃을 수 있는 순간을 오늘 꼭 한 번은 만들어 보세요.",
+            "힘든 날이 길어졌다고 해서, 좋은 날이 오지 않는 건 아니에요.",
+            "내가 원하는 나로 천천히 옮겨가는 중이라고 생각해 보세요.",
+            "불안한 만큼 당신은 간절했고, 간절했기에 이미 충분히 멋져요.",
+            "걱정은 조금만 줄이고, 감사는 한 줄 더 늘려 보세요.",
+            "누군가에게는 이미, 당신이 큰 위로가 되는 사람입니다.",
+            "오늘의 나는, 어제의 내가 바라던 모습을 조금은 닮아 있겠죠.",
+            "생각보다 괜찮은 사람이라는 걸, 오늘은 나부터 믿어 보세요."
+        ];
+
+        let lastIndex = -1;
+
+        function setTodayDate() {
+            const todayEl = document.getElementById('today');
+            if (!todayEl) return;
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const date = String(now.getDate()).padStart(2, '0');
+            const weekdayNames = ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
+            const weekday = weekdayNames[now.getDay()];
+            todayEl.textContent = `${year}. ${month}. ${date} · ${weekday}`;
+        }
+
+        function openCookie() {
+            const adviceEl = document.getElementById('adviceText');
+            const cookieBox = document.getElementById('cookieBox');
+
+            if (!adviceEl) return;
+
+            // 쿠키 흔들리는 애니메이션
+            cookieBox.classList.remove('shake');
+            void cookieBox.offsetWidth; // reflow trick
+            cookieBox.classList.add('shake');
+
+            // 랜덤 조언 선택
+            let index;
+            do {
+                index = Math.floor(Math.random() * advices.length);
+            } while (advices.length > 1 && index === lastIndex);
+
+            lastIndex = index;
+
+            const text = advices[index];
+
+            adviceEl.style.opacity = 0;
+            setTimeout(() => {
+                adviceEl.innerText = text;
+                adviceEl.style.opacity = 1;
+            }, 150);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTodayDate();
+
+            const cookieBox = document.getElementById('cookieBox');
+            const openBtn = document.getElementById('openBtn');
+
+            cookieBox.addEventListener('click', openCookie);
+            openBtn.addEventListener('click', openCookie);
+        });
+    </script>
+</body>
+</html>
