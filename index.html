@@ -116,6 +116,21 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7346804428435887"
      crossorigin="anonymous"></script>
+
+<script>
+// 우클릭, F12, Ctrl+U, Ctrl+Shift+I, Ctrl+S 전부 차단
+document.onkeydown = function(e) {
+    if(e.keyCode == 123 || // F12
+       (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I
+       (e.ctrlKey && e.shiftKey && e.keyCode == 67) || // Ctrl+Shift+C
+       (e.ctrlKey && e.keyCode == 85) || // Ctrl+U
+       (e.ctrlKey && e.keyCode == 83)) { // Ctrl+S
+        return false;
+    }
+};
+document.oncontextmenu = function() { return false; }; // 우클릭 차단
+</script>
+    
 </head>
 <body>
 
