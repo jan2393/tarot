@@ -12,7 +12,17 @@
         h1 {font-family:'Nanum Pen Script',cursive;font-size:clamp(4.5rem,13vw,6.5rem);text-shadow:0 0 60px #ffcc00,0 0 100px #ff66cc;animation:glow 3s infinite alternate;margin:20px 0;}
         .wish {font-family:'Nanum Pen Script',cursive;font-size:clamp(2rem,6.5vw,3.2rem);color:#ffccff;margin:20px 0 50px;text-shadow:0 0 30px #ff66cc;opacity:0;animation:fadeInUp 1.8s 0.6s forwards;}
         .lucky-num {font-size:clamp(9rem,25vw,14rem);font-weight:bold;margin:30px 0;animation:pulse 2.5s infinite;text-shadow:0 0 80px #fff;}
-        #col {width:280px;height:280px;border-radius:50%;margin:50px auto;box-shadow:0 0 140px #fff;animation:glow 3s infinite alternate;}
+        #col {
+    width: min(280px, 70vw);     
+    height: min(280px, 70vw);
+    border-radius: 50%;
+    background: #ff66cc;
+    box-shadow: 0 0 140px #fff;
+    animation: glow 3s infinite alternate;
+    margin: 50px auto;
+    flex-shrink: 0;
+        }
+       
         #msg {font-size:clamp(1.9rem,6vw,3rem);line-height:1.6;max-width:90%;margin:30px 0;}
         .btn {width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.18);backdrop-filter:blur(15px);border:none;color:white;font-family:'Nanum Pen Script',cursive;font-size:2.4rem;cursor:pointer;margin:20px;box-shadow:0 15px 40px rgba(0,0,0,0.5);transition:all 0.4s;}
         .btn:hover {transform:scale(1.1);background:rgba(255,255,255,0.3);}
