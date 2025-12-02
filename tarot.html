@@ -10,30 +10,59 @@
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
         body {background:linear-gradient(135deg,#1a0033,#330066);color:#fff;font-family:'Gowun Dodum',sans-serif;text-align:center;padding:20px;min-height:100vh;display:flex;flex-direction:column;align-items:center;}
         h1 {font-family:'Nanum Pen Script',cursive;font-size:3.8rem;margin:20px 0;text-shadow:0 0 30px #ffcc00;}
-       .deck {
-    max-width: 95vw;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+      .deck {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        padding: 20px 10px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
         .card {
-    width: 92px !important; 
-    height: 140px !important; 
-    margin: 6px !important;
-    flex-shrink: 0;
-}
+        width: 92px;
+        height: 140px;
+        margin: 0;
+        perspective: 1000px;           /* 이거 필수! */
+    }
+        .card > div {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transform-style: preserve-3d;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
         
-        .card.back {background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a0b4e"/><path d="M30 10 Q50 0,70 10 Q80 30,70 50 Q50 100,30 50 Q20 30,30 10" fill="%238b00a8"/><circle cx="50" cy="50" r="15" fill="%23ffcc00"/></svg>') center/cover;}
-        .card.flipped {transform:rotateY(180deg);}
-        .card-front {position:absolute;inset:0;backface-visibility:hidden;background:#fff;color:#000;border-radius:12px;padding:8px;display:flex;flex-direction:column;justify-content:space-between;transform:rotateY(180deg);}
-        .card-front img {
-    height: 98px !important; 
-    object-fit: cover;
-}
-        .result {margin-top:50px;font-size:1.75rem;max-width:900px;line-height:1.9;background:rgba(255,255,255,0.1);padding:35px;border-radius:20px;backdrop-filter:blur(12px);}
-        .meaning {margin:30px 0;padding:25px;background:rgba(255,255,255,0.08);border-radius:15px;border-left:6px solid #ffcc00;}
-        button {margin:40px 15px;padding:16px 45px;font-size:1.9rem;background:#ffcc00;color:#000;border:none;border-radius:50px;cursor:pointer;font-family:'Nanum Pen Script',cursive;}
-        .ad-banner {margin:60px auto;max-width:95%;text-align:center;}
-        .ad-banner img {width:100%;height:auto;max-width:728px;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.5);}
+       .card.back > div { transform: rotateY(0deg); }
+    .card.flipped > div { transform: rotateY(180deg); }
+        
+       .card-front, .card.back::before {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 12px;
+    }
+    .card.back::before {
+        content: '';
+        background: linear-gradient(45deg, #4a0b4e, #8b00a8);
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a0b4e"/><path d="M30 10 Q50 0,70 10 Q80 30,70 50 Q50 100,30 50 Q20 30,30 10" fill="%238b00a8"/><circle cx="50" cy="50" r="15" fill="%23ffcc00"/></svg>');
+        background-size: cover;
+    }
+    .card-front {
+        background: white;
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+    }
+    .card-front img {
+        width: 100%;
+        height: 98px;
+        object-fit: cover;
+        display: block;
+    }
     </style>
 </head>
 <body>
@@ -299,6 +328,7 @@ const tarotCards = [
     </script>
 </body>
 </html>
+
 
 
 
