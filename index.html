@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="qLhZvZUDh2qoB1D0RgJy_2Bkfqyyh7EuqeutOAKE90Q" />
-    <title>올베스트 - 오늘의 운세</title>
+    <title>올베스트 - 오늘의 운세와 타로 운명 행운숫자</title>
     <meta name="description" content="올베스트에서 매일 타로 3장과 행운의 숫자를 확인하세요">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
@@ -13,37 +13,37 @@
             background:linear-gradient(135deg,#120028,#2a0066);
             color:#fff;font-family:'Gowun Dodum',sans-serif;
             min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-            overflow-x:hidden;padding:20px;
+            overflow:hidden;padding:20px;
         }
         .logo{
             font-family:'Nanum Pen Script',cursive;
-            font-size:clamp(4.5rem, 15vw, 8rem);
-            letter-spacing:4px;margin-bottom:1rem;
+            font-size:clamp(5rem,16vw,9rem);
+            letter-spacing:6px;margin-bottom:1rem;
             text-shadow:0 0 50px #ffcc00,0 0 90px #ff66cc;
             animation:glow 2.5s infinite alternate;
         }
         .tagline{
-            font-size:clamp(1.4rem, 5vw, 2.3rem);
-            margin:2rem 0 4rem;
+            font-size:clamp(1.5rem,5.5vw,2.5rem);
+            margin:2rem 0 5rem;
             opacity:0;animation:fadeIn 1.8s 0.8s forwards;
-            text-align:center;line-height:1.4;
+            text-align:center;line-height:1.5;
         }
         .buttons{
-            display:flex;flex-wrap:wrap;gap:30px;justify-content:center;width:100%;max-width:500px;
+            display:flex;flex-wrap:wrap;gap:40px;justify-content:center;width:100%;max-width:600px;
         }
         .btn{
-            flex:1;min-width:260px;max-width:320px;height:280px;
-            border-radius:40px;background:rgba(255,255,255,0.15);backdrop-filter:blur(15px);
+            flex:1;min-width:280px;height:300px;
+            border-radius:50%;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);
             display:flex;flex-direction:column;justify-content:center;align-items:center;
-            font-size:2.2rem;cursor:pointer;transition:transform .4s,background .4s;
-            box-shadow:0 15px 35px rgba(0,0,0,0.5);
+            font-size:2.4rem;cursor:pointer;transition:all .4s;
+            box-shadow:0 20px 40px rgba(0,0,0,0.6);
         }
-        .btn:active{transform:scale(0.95);}
-        .btn:hover,.btn:active{background:rgba(255,255,255,0.3);}
-        .btn span{font-size:5.5rem;margin-bottom:10px;}
+        .btn:active{transform:scale(0.94);}
+        .btn:hover{background:rgba(255,255,255,0.28);}
+        .btn span{font-size:6.5rem;margin-bottom:15px;}
         footer{
-            position:fixed;bottom:15px;left:0;right:0;
-            font-size:0.9rem;color:#aaa;text-align:center;
+            position:fixed;bottom:20px;left:0;right:0;
+            font-size:0.9rem;color:#ccc;text-align:center;
         }
         @keyframes glow{from{text-shadow:0 0 40px #ffcc00;}to{text-shadow:0 0 80px #ff66cc,0 0 120px #ffcc00;}}
         @keyframes fadeIn{to{opacity:1;}}
@@ -55,11 +55,11 @@
 
     <div class="buttons">
         <div class="btn" onclick="location.href='tarot.html'">
-            <span>Card</span>
+            <span>카드</span>
             오늘의 타로
         </div>
         <div class="btn" onclick="location.href='number.html'">
-            <span>Number</span>
+            <span>숫자</span>
             행운의 숫자
         </div>
     </div>
