@@ -17,6 +17,20 @@
         .btn {width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.18);backdrop-filter:blur(15px);border:none;color:white;font-family:'Nanum Pen Script',cursive;font-size:2.4rem;cursor:pointer;margin:20px;box-shadow:0 15px 40px rgba(0,0,0,0.5);transition:all 0.4s;}
         .btn:hover {transform:scale(1.1);background:rgba(255,255,255,0.3);}
         .btn:active {transform:scale(0.95);}
+       #result {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+.lucky-num, #col, #msg, h1, .wish {
+    width: 100%;
+    text-align: center;
+}
+        
 
         /* 반응형 쿠팡 배너 공통 스타일 */
         .ad-banner {margin:40px auto;max-width:95%;width:100%;text-align:center;}
@@ -47,28 +61,28 @@
     </div>
 
     <!-- 결과 화면 -->
-    <div id="result" style="display:none;">
-        <h1>올베스트</h1>
-        <div class="wish">오늘도 행복한 하루 보내세요</div>
-        <div class="lucky-num" id="num"></div>
-        <div id="col"></div>
-        <p id="msg"></p>
+   <div id="result" style="display:none; width:100%; text-align:center;">
+    <h1 style="text-align:center;">올베스트</h1>
+    <div class="wish">오늘도 행복한 하루 보내세요</div>
+    <div class="lucky-num" id="num"></div>
+    <div id="col"></div>
+    <p id="msg"></p>
 
-        <div style="margin-top:60px;display:flex;gap:30px;flex-wrap:wrap;justify-content:center;">
-            <button class="btn" onclick="showLucky()">다시 뽑기</button>
-            <button class="btn" onclick="location.href='index.html'">홈으로</button>
-        </div>
-
-        <!-- 맨 아래 배너 -->
-        <div class="ad-banner" style="margin-top:80px;">
-            <p style="font-size:1.4rem;color:#ffcc00;margin-bottom:15px;font-family:'Nanum Pen Script',cursive;">
-                행운의 기운 더해줄 아이템 추천
-            </p>
-            <a href="https://link.coupang.com/a/c9FqyE" target="_blank">
-                <img src="https://ads-partners.coupang.com/banners/844851?subId=&traceId=V0-301-879dd1202e5c73b2-I844851&w=728&h=90" alt="쿠팡 로켓 배너">
-            </a>
-        </div>
+    <div style="margin-top:60px;display:flex;gap:30px;flex-wrap:wrap;justify-content:center;">
+        <button class="btn" onclick="showLucky()">다시 뽑기</button>
+        <button class="btn" onclick="location.href='index.html'">홈으로</button>
     </div>
+
+    <!-- 아래 배너 -->
+    <div class="ad-banner" style="margin-top:80px;">
+        <p style="font-size:1.4rem;color:#ffcc00;margin-bottom:15px;font-family:'Nanum Pen Script',cursive;">
+            행운의 기운 더해줄 아이템 추천
+        </p>
+        <a href="https://link.coupang.com/a/c9FqyE" target="_blank">
+            <img src="https://ads-partners.coupang.com/banners/844851?subId=&traceId=V0-301-879dd1202e5c73b2-I844851&w=728&h=90" alt="쿠팡 로켓 배너">
+        </a>
+    </div>
+</div>
 
     <script>
         function showLucky() {
@@ -77,11 +91,11 @@
             const colors = ['#ff66cc','#00ffcc','#ffff66','#ff99cc','#66ccff','#ccff66','#ff66ff'];
             const col = colors[Math.floor(Math.random() * colors.length)];
             const msgs = [
-                `오늘은 ${lucky}가 당신을 지켜줍니다`,
-                `${lucky}를 가까이 하세요, 행운이 올 거예요~`,
+                `오늘은 ${lucky}(이)가 당신을 지켜줍니다`,
+                `${lucky}(을)를 가까이 하세요, 행운이 올 거예요~`,
                 `행운의 숫자 ${lucky}! 오늘 대박 날 기운`,
                 `당신의 행운 숫자는 ${lucky}입니다`,
-                `${lucky}가 나타났어요! 오늘은 특별한 날`
+                `${lucky}(이)가 나타났어요! 오늘은 특별한 날`
             ];
 
             document.getElementById('num').innerText = lucky;
