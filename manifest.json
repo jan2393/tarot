@@ -1,6 +1,6 @@
 {
-  "name": "오늘의 무료운세",
-  "short_name": "오늘의 무료운세",
+  "name": "오늘 운세",
+  "short_name": "오늘 운세",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#120028",
