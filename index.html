@@ -2,35 +2,64 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="qLhZvZUDh2qoB1D0RgJy_2Bkfqyyh7EuqeutOAKE90Q" />
-    <title>올베스트 - 오늘의 운세와 타로 행운의 모든 것</title>
-    <meta name="description" content="올베스트에서 매일 타로 3장 뽑고 행운의 숫자까지 확인하세요. 당신의 운이 여기서 시작됩니다.">
+    <title>올베스트 - 오늘의 운세</title>
+    <meta name="description" content="올베스트에서 매일 타로 3장과 행운의 숫자를 확인하세요">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
-        body{margin:0;height:100vh;background:linear-gradient(135deg,#120028,#2a0066);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;font-family:'Gowun Dodum',sans-serif;}
-        .logo{font-size:7.5rem;font-family:'Nanum Pen Script',cursive;letter-spacing:5px;margin-bottom:20px;text-shadow:0 0 50px #ffcc00,0 0 90px #ff66cc;animation:glow 2.5s infinite alternate;}
-        .tagline{font-size:2.3rem;margin-bottom:70px;opacity:0;animation:fadeIn 2s 1s forwards;}
-        .buttons{display:flex;gap:60px;flex-wrap:wrap;justify-content:center;}
-        .btn{width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.15);backdrop-filter:blur(15px);display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:2.6rem;cursor:pointer;transition:0.5s;box-shadow:0 15px 40px rgba(0,0,0,0.6);}
-        .btn:hover{transform:scale(1.12);background:rgba(255,255,255,0.3);}
-        .btn span{font-size:6.5rem;display:block;margin-bottom:15px;}
-        footer{position:absolute;bottom:25px;font-size:1rem;color:#ccc;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{
+            background:linear-gradient(135deg,#120028,#2a0066);
+            color:#fff;font-family:'Gowun Dodum',sans-serif;
+            min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+            overflow-x:hidden;padding:20px;
+        }
+        .logo{
+            font-family:'Nanum Pen Script',cursive;
+            font-size:clamp(4.5rem, 15vw, 8rem);
+            letter-spacing:4px;margin-bottom:1rem;
+            text-shadow:0 0 50px #ffcc00,0 0 90px #ff66cc;
+            animation:glow 2.5s infinite alternate;
+        }
+        .tagline{
+            font-size:clamp(1.4rem, 5vw, 2.3rem);
+            margin:2rem 0 4rem;
+            opacity:0;animation:fadeIn 1.8s 0.8s forwards;
+            text-align:center;line-height:1.4;
+        }
+        .buttons{
+            display:flex;flex-wrap:wrap;gap:30px;justify-content:center;width:100%;max-width:500px;
+        }
+        .btn{
+            flex:1;min-width:260px;max-width:320px;height:280px;
+            border-radius:40px;background:rgba(255,255,255,0.15);backdrop-filter:blur(15px);
+            display:flex;flex-direction:column;justify-content:center;align-items:center;
+            font-size:2.2rem;cursor:pointer;transition:transform .4s,background .4s;
+            box-shadow:0 15px 35px rgba(0,0,0,0.5);
+        }
+        .btn:active{transform:scale(0.95);}
+        .btn:hover,.btn:active{background:rgba(255,255,255,0.3);}
+        .btn span{font-size:5.5rem;margin-bottom:10px;}
+        footer{
+            position:fixed;bottom:15px;left:0;right:0;
+            font-size:0.9rem;color:#aaa;text-align:center;
+        }
         @keyframes glow{from{text-shadow:0 0 40px #ffcc00;}to{text-shadow:0 0 80px #ff66cc,0 0 120px #ffcc00;}}
         @keyframes fadeIn{to{opacity:1;}}
     </style>
 </head>
 <body>
     <div class="logo">올베스트</div>
-    <div class="tagline">행복한 하루, 즐거운 미래만 가득하시길</div>
+    <div class="tagline">행복한 하루,<br>즐거운 미래만 가득하시길</div>
 
     <div class="buttons">
         <div class="btn" onclick="location.href='tarot.html'">
-            <span>카드</span>
+            <span>Card</span>
             오늘의 타로
         </div>
         <div class="btn" onclick="location.href='number.html'">
-            <span>숫자</span>
+            <span>Number</span>
             행운의 숫자
         </div>
     </div>
