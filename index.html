@@ -5,16 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="qLhZvZUDh2qoB1D0RgJy_2Bkfqyyh7EuqeutOAKE90Q" />
     <title>올베스트 - 오늘의 운세 무료 타로 | 행운의 숫자</title>
-<meta name="description" content="매일 무료로 타로 3장 + 행운의 숫자 + 색깔까지! 2025년 오늘의 운세 가장 정확한 올베스트">
+    <meta name="description" content="매일 무료로 타로 3장 + 행운의 숫자 + 색깔까지! 2025년 오늘의 운세 가장 정확한 올베스트">
     <meta name="keywords" content="무료운세,숫자운세,오늘운세,타로, 타로카드, 오늘의타로, 무료타로, 타로점, 운세, 연애운, 타로뽑기">
-      <meta name="theme-color" content="#2a0066">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="https://gi.esmplus.com/vovs123/app/251202/icon192png.png">
-  <link rel="apple-touch-icon" href="https://gi.esmplus.com/vovs123/app/251202/icon512png.png">
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script:wght@400;700&family=Gowun+Dodum&display=swap');
         
@@ -28,130 +20,105 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow-y: auto;     
+            overflow-y: auto;
             overflow-x: hidden;
             position: relative;
+            padding: 30px 20px;
         }
-        /* 별빛 배경 효과 */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(120,60,255,0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255,100,200,0.2) 0%, transparent 50%),
-                        radial-gradient(circle at 50% 50%, rgba(255,255,150,0.15) 0%, transparent 60%);
-            animation: twinkle 8s infinite alternate;
+            background: radial-gradient(circle at 20% 80%, rgba(120,60,255,0.25) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,100,200,0.15) 0%, transparent 50%);
+            animation: twinkle 10s infinite alternate;
             pointer-events: none;
         }
         @keyframes twinkle { 0% { opacity: 0.6; } 100% { opacity: 1; } }
 
         .logo {
             font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(6rem, 18vw, 11rem);
+            font-size: clamp(6rem, 17vw, 10rem);
             font-weight: 700;
-            letter-spacing: 8px;
-            background: linear-gradient(90deg, #ffcc00, #ff66cc, #ccff);
+            letter-spacing: 6px;
+            background: linear-gradient(90deg, #ffdd00, #ff99dd);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 80px rgba(255,204,0,0.8);
-            animation: logoGlow 4s infinite alternate;
-            margin-bottom: 1rem;
-            z-index: 2;
+            text-shadow: 0 0 70px rgba(255,204,100,0.8);
+            animation: glow 4s infinite alternate;
+            margin-bottom: 0.5rem;
         }
-        @keyframes logoGlow {
-            from { text-shadow: 0 0 60px #ffcc00; }
-            to { text-shadow: 0 0 120px #ff66cc, 0 0 160px #ff99ff; }
-        }
+        @keyframes glow { from { text-shadow: 0 0 50px #ffcc00; } to { text-shadow: 0 0 110px #ff66cc; } }
 
-        .wish {
+        .sub-text {
             font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(2.2rem, 7vw, 3.8rem);
+            font-size: clamp(1.9rem, 5.5vw, 2.8rem);
             color: #ffccff;
-            margin: 20px 0 60px;
-            text-shadow: 0 0 40px #ff66cc;
+            margin: 16px 0 50px;
+            text-shadow: 0 0 30px #ff66cc;
             opacity: 0;
-            animation: fadeInUp 2s 0.8s forwards;
-            z-index: 2;
+            animation: fadeInUp 1.8s 0.8s forwards;
         }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
 
         .buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 50px;
+            gap: 40px;
             justify-content: center;
-            z-index: 2;
+            width: 100%;
+            max-width: 800px;
         }
         .btn {
-            width: 340px;
-            height: 360px;
-            border-radius: 50px;
+            width: 280px;                    /* ← 크기 줄임 (320→280) */
+            height: 300px;                   /* ← 높이도 줄임 */
+            border-radius: 40px;
             background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(18px);
+            border: 2px solid rgba(255,255,255,0.18);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: all 0.5s;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-            padding: 0 20px;
+            transition: all 0.4s;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            padding: 20px;
         }
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(30deg);
-            transition: all 0.7s;
-            opacity: 0;
-        }
-        .btn:hover::before { opacity: 1; transform: rotate(30deg) translate(30%, 30%); }
         .btn:hover {
-            transform: translateY(-20px) scale(1.05);
+            transform: translateY(-15px) scale(1.04);
             background: rgba(255,255,255,0.22);
-            box-shadow: 0 30px 80px rgba(255,102,204,0.4);
+            box-shadow: 0 25px 60px rgba(255,102,204,0.35);
         }
-        .btn:active { transform: translateY(-10px) scale(1.02); }
-
         .btn span {
-    font-size: 7.2rem;     
-    margin-bottom: 16px;
-    display: block;
-    line-height: 1;       
-
+            font-size: 4.8rem;               /* ← 영문 작게 (8rem → 4.8rem) */
+            color: #ffffff88;
+            margin-bottom: 12px;
+        }
         .btn div {
-            font-size: 2.8rem;
-            font-family: 'Nanum Pen Script', cursive;
+            font-size: 2.6rem;               /* ← 한글 크게 강조 */
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 1px;
         }
 
-        footer {
-            position: fixed;
-            bottom: 25px;
-            font-size: 1rem;
-            color: #aaa;
-            z-index: 2;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* PC에서 가로 정렬 */
         @media (min-width: 900px) {
             .buttons { flex-wrap: nowrap; }
+        }
+        footer {
+            margin-top: 80px;
+            font-size: 0.95rem;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
 
     <div class="logo">올베스트</div>
-    <div class="wish">오늘도 행복한 하루 보내세요</div>
+    
+    <!-- 새로 추가된 문구 -->
+    <div class="sub-text">무료 운세로 기분 좋은 하루 맞이하세요</div>
 
     <div class="buttons">
         <div class="btn" onclick="location.href='tarot.html'">
