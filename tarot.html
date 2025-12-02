@@ -121,7 +121,41 @@
 }
        
     button {margin:40px 15px;padding:16px 45px;font-size:1.9rem;background:#ffcc00;color:#000;border:none;border-radius:50px;cursor:pointer;font-family:'Nanum Pen Script,cursive;}
-</style>
+
+   /* 모바일에서 쿠팡 배너가 너무 커지는 거 완벽 해결 */
+.ad-banner {
+    margin: 60px auto 40px;
+    max-width: 95%;
+    text-align: center;
+}
+
+.ad-banner img {
+    width: 100%;
+    height: auto;
+    max-width: 420px !important;   /* ← 모바일에서 최대 420px로 제한 (핸드폰 화면 딱 맞음) */
+    max-height: 200px !important;  /* 세로도 과하지 않게 */
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    display: block;
+    margin: 0 auto;
+}
+
+/* PC에선 여전히 크게 보이게 (420px 이상 화면은 그대로) */
+@media (min-width: 768px) {
+    .ad-banner img {
+        max-width: 728px !important;
+        max-height: none !important;
+    }
+}
+   
+   
+   
+   
+   
+   
+   
+   
+   </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7346804428435887"
      crossorigin="anonymous"></script>
 
@@ -425,6 +459,7 @@ const tarotCards = [
     
 </body>
 </html>
+
 
 
 
