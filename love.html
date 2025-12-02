@@ -250,8 +250,87 @@
             if(el.classList.contains('flipped')||selectedCards.length>=3) return;
             el.classList.add('flipped');
             const isReversed=Math.random()<0.5;
-            const imgMap = { // 메이저 아르카나 (22장) "광대": "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg", "마법사": "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg", "여사제": "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg", "여황제": "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg", "황제": "https://upload.wikimedia.org/wikipedia/commons/7/71/RWS_Tarot_04_Emperor.jpg", "교황": "https://upload.wikimedia.org/wikipedia/commons/5/5a/RWS_Tarot_05_Hierophant.jpg", "연인": "https://upload.wikimedia.org/wikipedia/commons/3/3a/TheLovers.jpg", "전차": "https://upload.wikimedia.org/wikipedia/commons/1/14/RWS_Tarot_07_Chariot.jpg", "힘": "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg", "은둔자": "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg", "운명의 수레바퀴": "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg", "정의": "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg", "매달린 사람": "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg", "죽음": "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg", "절제": "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg", "악마": "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg", "탑": "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg", "별": "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg", "달": "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg", "해": "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg", "심판": "https://upload.wikimedia.org/wikipedia/commons/d/d4/RWS_Tarot_20_Judgement.jpg", "세계": "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg", // 마이너 아르카나 (56장 – 위키미디어에서 작동하는 정확한 링크) "완드 에이스": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/RWS_Tarot_21_Wands_I.jpg/300px-RWS_Tarot_21_Wands_I.jpg", "완드 2": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/RWS_Tarot_21_Wands_II.jpg/300px-RWS_Tarot_21_Wands_II.jpg", "완드 3": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/RWS_Tarot_21_Wands_III.jpg/300px-RWS_Tarot_21_Wands_III.jpg", "완드 4": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/RWS_Tarot_21_Wands_IV.jpg/300px-RWS_Tarot_21_Wands_IV.jpg", "완드 5": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/RWS_Tarot_21_Wands_V.jpg/300px-RWS_Tarot_21_Wands_V.jpg", "완드 6": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/RWS_Tarot_21_Wands_VI.jpg/300px-RWS_Tarot_21_Wands_VI.jpg", "완드 7": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/RWS_Tarot_21_Wands_VII.jpg/300px-RWS_Tarot_21_Wands_VII.jpg", "완드 8": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/RWS_Tarot_21_Wands_VIII.jpg/300px-RWS_Tarot_21_Wands_VIII.jpg", "완드 9": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/RWS_Tarot_21_Wands_IX.jpg/300px-RWS_Tarot_21_Wands_IX.jpg", "완드 10": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/RWS_Tarot_21_Wands_X.jpg/300px-RWS_Tarot_21_Wands_X.jpg", "컵 에이스": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/RWS_Tarot_21_Cups_I.jpg/300px-RWS_Tarot_21_Cups_I.jpg", "컵 2": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/RWS_Tarot_21_Cups_II.jpg/300px-RWS_Tarot_21_Cups_II.jpg", "컵 3": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/RWS_Tarot_21_Cups_III.jpg/300px-RWS_Tarot_21_Cups_III.jpg", "컵 4": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/RWS_Tarot_21_Cups_IV.jpg/300px-RWS_Tarot_21_Cups_IV.jpg", "컵 5": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/RWS_Tarot_21_Cups_V.jpg/300px-RWS_Tarot_21_Cups_V.jpg", "컵 6": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/RWS_Tarot_21_Cups_VI.jpg/300px-RWS_Tarot_21_Cups_VI.jpg", "컵 7": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/RWS_Tarot_21_Cups_VII.jpg/300px-RWS_Tarot_21_Cups_VII.jpg", "컵 8": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/RWS_Tarot_21_Cups_VIII.jpg/300px-RWS_Tarot_21_Cups_VIII.jpg", "컵 9": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/RWS_Tarot_21_Cups_IX.jpg/300px-RWS_Tarot_21_Cups_IX.jpg", "컵 10": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/RWS_Tarot_21_Cups_X.jpg/300px-RWS_Tarot_21_Cups_X.jpg", "소드 에이스": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/RWS_Tarot_21_Swords_I.jpg/300px-RWS_Tarot_21_Swords_I.jpg", "소드 2": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/RWS_Tarot_21_Swords_II.jpg/300px-RWS_Tarot_21_Swords_II.jpg", "소드 3": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/RWS_Tarot_21_Swords_III.jpg/300px-RWS_Tarot_21_Swords_III.jpg", "소드 4": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/RWS_Tarot_21_Swords_IV.jpg/300px-RWS_Tarot_21_Swords_IV.jpg", "소드 5": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/RWS_Tarot_21_Swords_V.jpg/300px-RWS_Tarot_21_Swords_V.jpg", "소드 6": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/RWS_Tarot_21_Swords_VI.jpg/300px-RWS_Tarot_21_Swords_VI.jpg", "소드 7": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/RWS_Tarot_21_Swords_VII.jpg/300px-RWS_Tarot_21_Swords_VII.jpg", "소드 8": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/RWS_Tarot_21_Swords_VIII.jpg/300px-RWS_Tarot_21_Swords_VIII.jpg", "소드 9": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/RWS_Tarot_21_Swords_IX.jpg/300px-RWS_Tarot_21_Swords_IX.jpg", "소드 10": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RWS_Tarot_21_Swords_X.jpg/300px-RWS_Tarot_21_Swords_X.jpg", "펜타클 에이스": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/RWS_Tarot_21_Pentacles_I.jpg/300px-RWS_Tarot_21_Pentacles_I.jpg", "펜타클 2": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/RWS_Tarot_21_Pentacles_II.jpg/300px-RWS_Tarot_21_Pentacles_II.jpg", "펜타클 3": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/RWS_Tarot_21_Pentacles_III.jpg/300px-RWS_Tarot_21_Pentacles_III.jpg", "펜타클 4": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/RWS_Tarot_21_Pentacles_IV.jpg/300px-RWS_Tarot_21_Pentacles_IV.jpg", "펜타클 5": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/RWS_Tarot_21_Pentacles_V.jpg/300px-RWS_Tarot_21_Pentacles_V.jpg", "펜타클 6": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RWS_Tarot_21_Pentacles_VI.jpg/300px-RWS_Tarot_21_Pentacles_VI.jpg", "펜타클 7": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/RWS_Tarot_21_Pentacles_VII.jpg/300px-RWS_Tarot_21_Pentacles_VII.jpg", "펜타클 8": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/RWS_Tarot_21_Pentacles_VIII.jpg/300px-RWS_Tarot_21_Pentacles_VIII.jpg", "펜타클 9": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/RWS_Tarot_21_Pentacles_IX.jpg/300px-RWS_Tarot_21_Pentacles_IX.jpg", "펜타클 10": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/RWS_Tarot_21_Pentacles_X.jpg/300px-RWS_Tarot_21_Pentacles_X.jpg" // 위키미디어에서 작동하는 링크로 78장 전부 매칭 (검색으로 확인한 최신 URL) };
+            const imgMap = {
+    // 메이저 아르카나 (22장)
+    "광대": "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg",
+    "마법사": "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg",
+    "여사제": "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg",
+    "여황제": "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg",
+    "황제": "https://upload.wikimedia.org/wikipedia/commons/7/71/RWS_Tarot_04_Emperor.jpg",
+    "교황": "https://upload.wikimedia.org/wikipedia/commons/5/5a/RWS_Tarot_05_Hierophant.jpg",
+    "연인": "https://upload.wikimedia.org/wikipedia/commons/3/3a/TheLovers.jpg",
+    "전차": "https://upload.wikimedia.org/wikipedia/commons/1/14/RWS_Tarot_07_Chariot.jpg",
+    "힘": "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg",
+    "은둔자": "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg",
+    "운명의 수레바퀴": "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg",
+    "정의": "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg",
+    "매달린 사람": "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg",
+    "죽음": "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg",
+    "절제": "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg",
+    "악마": "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg",
+    "탑": "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg",
+    "별": "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg",
+    "달": "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg",
+    "해": "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg",
+    "심판": "https://upload.wikimedia.org/wikipedia/commons/d/d4/RWS_Tarot_20_Judgement.jpg",
+    "세계": "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg",
 
+    // 완드 (숫자 카드)
+    "완드 에이스": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/RWS_Tarot_21_Wands_I.jpg/300px-RWS_Tarot_21_Wands_I.jpg",
+    "완드 2": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/RWS_Tarot_21_Wands_II.jpg/300px-RWS_Tarot_21_Wands_II.jpg",
+    "완드 3": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/RWS_Tarot_21_Wands_III.jpg/300px-RWS_Tarot_21_Wands_III.jpg",
+    "완드 4": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/RWS_Tarot_21_Wands_IV.jpg/300px-RWS_Tarot_21_Wands_IV.jpg",
+    "완드 5": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/RWS_Tarot_21_Wands_V.jpg/300px-RWS_Tarot_21_Wands_V.jpg",
+    "완드 6": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/RWS_Tarot_21_Wands_VI.jpg/300px-RWS_Tarot_21_Wands_VI.jpg",
+    "완드 7": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/RWS_Tarot_21_Wands_VII.jpg/300px-RWS_Tarot_21_Wands_VII.jpg",
+    "완드 8": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/RWS_Tarot_21_Wands_VIII.jpg/300px-RWS_Tarot_21_Wands_VIII.jpg",
+    "완드 9": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/RWS_Tarot_21_Wands_IX.jpg/300px-RWS_Tarot_21_Wands_IX.jpg",
+    "완드 10": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/RWS_Tarot_21_Wands_X.jpg/300px-RWS_Tarot_21_Wands_X.jpg",
+
+    // 컵
+    "컵 에이스": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/RWS_Tarot_21_Cups_I.jpg/300px-RWS_Tarot_21_Cups_I.jpg",
+    "컵 2": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/RWS_Tarot_21_Cups_II.jpg/300px-RWS_Tarot_21_Cups_II.jpg",
+    "컵 3": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/RWS_Tarot_21_Cups_III.jpg/300px-RWS_Tarot_21_Cups_III.jpg",
+    "컵 4": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/RWS_Tarot_21_Cups_IV.jpg/300px-RWS_Tarot_21_Cups_IV.jpg",
+    "컵 5": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/RWS_Tarot_21_Cups_V.jpg/300px-RWS_Tarot_21_Cups_V.jpg",
+    "컵 6": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/RWS_Tarot_21_Cups_VI.jpg/300px-RWS_Tarot_21_Cups_VI.jpg",
+    "컵 7": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/RWS_Tarot_21_Cups_VII.jpg/300px-RWS_Tarot_21_Cups_VII.jpg",
+    "컵 8": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/RWS_Tarot_21_Cups_VIII.jpg/300px-RWS_Tarot_21_Cups_VIII.jpg",
+    "컵 9": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/RWS_Tarot_21_Cups_IX.jpg/300px-RWS_Tarot_21_Cups_IX.jpg",
+    "컵 10": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/RWS_Tarot_21_Cups_X.jpg/300px-RWS_Tarot_21_Cups_X.jpg",
+
+    // 소드
+    "소드 에이스": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/RWS_Tarot_21_Swords_I.jpg/300px-RWS_Tarot_21_Swords_I.jpg",
+    "소드 2": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/RWS_Tarot_21_Swords_II.jpg/300px-RWS_Tarot_21_Swords_II.jpg",
+    "소드 3": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/RWS_Tarot_21_Swords_III.jpg/300px-RWS_Tarot_21_Swords_III.jpg",
+    "소드 4": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/RWS_Tarot_21_Swords_IV.jpg/300px-RWS_Tarot_21_Swords_IV.jpg",
+    "소드 5": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/RWS_Tarot_21_Swords_V.jpg/300px-RWS_Tarot_21_Swords_V.jpg",
+    "소드 6": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/RWS_Tarot_21_Swords_VI.jpg/300px-RWS_Tarot_21_Swords_VI.jpg",
+    "소드 7": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/RWS_Tarot_21_Swords_VII.jpg/300px-RWS_Tarot_21_Swords_VII.jpg",
+    "소드 8": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/RWS_Tarot_21_Swords_VIII.jpg/300px-RWS_Tarot_21_Swords_VIII.jpg",
+    "소드 9": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/RWS_Tarot_21_Swords_IX.jpg/300px-RWS_Tarot_21_Swords_IX.jpg",
+    "소드 10": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RWS_Tarot_21_Swords_X.jpg/300px-RWS_Tarot_21_Swords_X.jpg",
+
+    // 펜타클
+    "펜타클 에이스": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/RWS_Tarot_21_Pentacles_I.jpg/300px-RWS_Tarot_21_Pentacles_I.jpg",
+    "펜타클 2": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/RWS_Tarot_21_Pentacles_II.jpg/300px-RWS_Tarot_21_Pentacles_II.jpg",
+    "펜타클 3": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/RWS_Tarot_21_Pentacles_III.jpg/300px-RWS_Tarot_21_Pentacles_III.jpg",
+    "펜타클 4": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/RWS_Tarot_21_Pentacles_IV.jpg/300px-RWS_Tarot_21_Pentacles_IV.jpg",
+    "펜타클 5": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/RWS_Tarot_21_Pentacles_V.jpg/300px-RWS_Tarot_21_Pentacles_V.jpg",
+    "펜타클 6": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RWS_Tarot_21_Pentacles_VI.jpg/300px-RWS_Tarot_21_Pentacles_VI.jpg",
+    "펜타클 7": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/RWS_Tarot_21_Pentacles_VII.jpg/300px-RWS_Tarot_21_Pentacles_VII.jpg",
+    "펜타클 8": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/RWS_Tarot_21_Pentacles_VIII.jpg/300px-RWS_Tarot_21_Pentacles_VIII.jpg",
+    "펜타클 9": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/RWS_Tarot_21_Pentacles_IX.jpg/300px-RWS_Tarot_21_Pentacles_IX.jpg",
+    "펜타클 10": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/RWS_Tarot_21_Pentacles_X.jpg/300px-RWS_Tarot_21_Pentacles_X.jpg"
+};
+
+// 이미지 없을 때 대비용 (법정·기사·여왕·왕은 아직 URL 없으니까)
+function getCardImage(cardName) {
+    return imgMap[cardName] || "https://via.placeholder.com/96x146?text=Tarot";
+}
+
+
+            
 function getCardImage(cardName) {
     // 카드별 이미지를 정의했다면 그걸 쓰고,
     // 없다면 공통 기본 이미지로 처리
