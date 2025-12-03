@@ -53,6 +53,8 @@
             border: 1px solid rgba(255,255,255,0.18);
             box-shadow: 0 10px 30px rgba(0,0,0,0.45);
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
 
         .category {
@@ -74,8 +76,48 @@
             transform: translateY(-2px);
         }
 
+        /* 장소 리스트 */
+        .place-list {
+            margin-top: 10px;
+            padding: 10px 8px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .place-item {
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.06);
+            font-size: 1.05rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .place-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .place-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ffcc00;
+            flex-shrink: 0;
+        }
+
+        .place-item:hover {
+            background: rgba(255,255,255,0.16);
+            transform: translateX(2px);
+        }
+
         .info {
-            margin-top: 16px;
+            margin-top: 12px;
             padding: 12px 10px;
             background: rgba(255,255,255,0.08);
             border-radius: 12px;
@@ -238,6 +280,11 @@
                 <div class="category" data-type="tarot">타로카페</div>
                 <div class="category" data-type="saju">사주 / 관상</div>
 
+                <!-- 이름 리스트가 들어갈 자리 -->
+                <div id="placeList" class="place-list">
+                    <!-- JS에서 동적으로 채움 -->
+                </div>
+
                 <div class="info" id="info">
                     원하시는 종류를 선택하면<br>
                     현재 위치 기준으로 가까운 곳을 지도에 표시해드려요.<br><br>
@@ -334,6 +381,38 @@
 
         document.getElementById('myLocationBtn').addEventListener('click', moveToCurrentLocation);
 
+        // 이름 리스트 렌더링
+        function renderPlaceList(type) {
+            const listEl = document.getElementById('placeList');
+            listEl.innerHTML = '';
+
+            places[type].forEach((p, idx) => {
+                const item = document.createElement('div');
+                item.className = 'place-item';
+
+                const bullet = document.createElement('div');
+                bullet.className = 'place-bullet';
+
+                const nameSpan = document.createElement('div');
+                nameSpan.textContent = p.name;
+
+                item.appendChild(bullet);
+                item.appendChild(nameSpan);
+
+                // 클릭 시 지도 이동 + 해당 마커 클릭
+                item.addEventListener('click', () => {
+                    const pos = new naver.maps.LatLng(p.lat, p.lng);
+                    map.panTo(pos);
+                    map.setZoom(15);
+                    if (markers[idx]) {
+                        naver.maps.Event.trigger(markers[idx], 'click');
+                    }
+                });
+
+                listEl.appendChild(item);
+            });
+        }
+
         function showPlaces(type) {
             markers.forEach(m => m.setMap(null));
             markers = [];
@@ -359,6 +438,9 @@
                     }).open(map, marker);
                 });
             });
+
+            // 선택된 카테고리의 이름 리스트도 갱신
+            renderPlaceList(type);
         }
 
         document.querySelectorAll('.category').forEach(el => {
