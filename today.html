@@ -243,7 +243,7 @@ input:focus, select:focus {
         const r = (arr) => arr[Math.floor(Math.random() * arr.length)];
         const result = document.getElementById('result');
         result.innerHTML = `
-            <div class="luckey">★★★★★</div>
+            <div class="luckey">${randomStars()}</div>
             <div class="section"><strong>총운</strong><br>${r(total)}</div>
             <div class="section"><strong>연애운</strong><br>${r(love)} 오늘 하루만 믿고 행동해보세요</div>
             <div class="section"><strong>재물운</strong><br>${r(money)} 돈 냄새가 납니다!</div>
@@ -254,7 +254,10 @@ input:focus, select:focus {
         result.style.display = 'block';
         window.scrollTo({top: result.offsetTop - 100, behavior:'smooth'});
     }
-
+        function randomStars() {
+    const count = Math.floor(Math.random() * 5) + 1;  // 1~5개
+    return "★".repeat(count) + "☆".repeat(5 - count); // 예: ★★★☆☆
+}
     // 페이지 로드 시 버튼 비활성화 초기화
     window.onload = function() {
         document.getElementById('unseBtn').disabled = true;
