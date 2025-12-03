@@ -64,11 +64,11 @@
     @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
 
     /* 버튼 그리드 */
-    .buttons {
+.buttons {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));  /* 항상 2열 */
+    grid-template-columns: repeat(4, minmax(0, 1fr));  /* PC에서 4열 */
     gap: 20px;
-    max-width: 520px;
+    max-width: 1040px;  /* 4열이 들어가도록 넓혀줌 */
     margin: 0 auto;
     padding: 20px 10px;
 }
@@ -113,13 +113,12 @@
     /* 모바일 세로 화면 (480px 이하) */
 @media (max-width: 480px) {
     .buttons {
-        grid-template-columns: repeat(2, minmax(0, 1fr));  /* 모바일에서도 2열 유지 */
+        grid-template-columns: repeat(2, minmax(0, 1fr));  /* 모바일에서 2열 유지 */
         gap: 14px;
         max-width: 360px;
         padding: 10px 0;
     }
 
-    /* 모바일에서는 연애운 타로도 일반 버튼처럼 2열에 맞춰 정렬 */
     .buttons .btn:nth-child(3) {
         grid-column: auto;
         justify-self: center;
