@@ -5,86 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>올베스트 내 주변 무당·타로·사주 찾기</title>
     <meta name="description" content="내 위치 기준으로 가장 가까운 무당집, 타로카페, 사주 명당 바로 찾기">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
-        
+
+        /* ===== 전체 레이아웃 복구 (PC + 모바일 모두 안정화) ===== */
+
         body {
-    margin:0;
-    background:linear-gradient(135deg,#1a0033,#330066);
-    color:#fff;
-    font-family:'Gowun Dodum',sans-serif;
-    display:flex;
-    flex-direction:column;
-    min-height:100vh;         
-}
+            margin: 0;
+            background: linear-gradient(135deg, #1a0033, #330066);
+            color: #fff;
+            font-family: 'Gowun Dodum', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
 
-        
-        h1 {font-family:'Nanum Pen Script',cursive;font-size:3.5rem;text-align:center;margin:15px 0;text-shadow:0 0 40px #ffcc00;}
-        
+        h1 {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 3.5rem;
+            text-align: center;
+            margin: 15px 0;
+            text-shadow: 0 0 40px #ffcc00;
+        }
+
         .container {
-    flex:1;
-    display:flex;
-    min-height:0;
-}
-        
-        .sidebar {width:100%;max-width:380px;background:rgba(255,255,255,0.1);padding:20px;backdrop-filter:blur(10px);border-right:1px solid rgba(255,255,255,0.2);}
-        .category {padding:20px;margin:15px 0;background:rgba(255,255,255,0.15);border-radius:16px;cursor:pointer;font-size:1.8rem;text-align:center;transition:0.3s;box-shadow:0 8px 20px rgba(0,0,0,0.3);}
-    
-        .category.active, .category:hover {background:#ffcc00;color:#000;transform:scale(1.05);}
-        
-        #map {
-    flex:1 0 auto;   
-    width:100%;
-    height:100%;
-    min-height:350px;
-}
-        
-        .info {margin-top:20px;padding:15px;background:rgba(255,255,255,0.1);border-radius:12px;font-size:1.4rem;line-height:1.7;}
-        
-        /* 하단 고정 버튼 & 광고문의 */
-        .bottom-bar {height:120px;background:rgba(0,0,0,0.4);backdrop-filter:blur(15px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:10px 0;border-top:1px solid rgba(255,255,255,0.15);}
-        .home-btn {padding:14px 50px;background:#ffcc00;color:#000;font-size:2rem;border-radius:50px;font-family:'Nanum Pen Script',cursive;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,0.5);}
-        .ad-text {font-family:'Nanum Pen Script',cursive;font-size:1.9rem;color:#ffcc00;}
-        .ad-email {font-size:1.5rem;color:#fff;opacity:0.9;}
+            flex: 1;
+            display: flex;
+            height: calc(100vh - 180px);
+            min-height: 0;
+        }
 
-        @media (max-width:768px) {
-    .container {
-        flex-direction:column;
-        height:auto;           /* 컬럼일 땐 높이 고정 X */
-    }
-    .sidebar {
-        max-width:100%;
-        height:auto;
-        flex-shrink:0;
-    }
-    #map {
-        flex:0 0 auto;
-        width:100%;
-        height:60vh;          /* 화면의 60% 정도를 지도에 할당 */
-        min-height:320px;     /* 너무 작아지지 않게 */
-    }
-    .bottom-bar {
-        height:140px;
-    }
-}
+        .sidebar {
+            width: 100%;
+            max-width: 380px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255,255,255,0.2);
+            overflow-y: auto;
+        }
+
+        .category {
+            padding: 20px;
+            margin: 15px 0;
+            background: rgba(255,255,255,0.15);
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 1.8rem;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .category.active,
+        .category:hover {
+            background: #ffcc00;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* 지도 래퍼 */
+        .map-wrap {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+        }
+
+        /* 내 위치 버튼 */
+        .my-location-btn {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            z-index: 1000;
+            padding: 10px 16px;
+            background: rgba(255,255,255,0.95);
+            color: #000;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+            user-select: none;
+        }
+
+        .my-location-btn:active {
+            transform: scale(0.96);
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-size: 1.4rem;
+            line-height: 1.7;
+        }
+
+        /* 하단 고정 버튼 */
+        .bottom-bar {
+            height: 120px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .home-btn {
+            padding: 14px 50px;
+            background: #ffcc00;
+            color: #000;
+            font-size: 2rem;
+            border-radius: 50px;
+            font-family: 'Nanum Pen Script', cursive;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+        .ad-text {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 1.9rem;
+            color: #ffcc00;
+        }
+
+        .ad-email {
+            font-size: 1.5rem;
+            color: #fff;
+            opacity: 0.9;
+        }
+
+
+        /* ===== 모바일 최적화 ===== */
+        @media (max-width: 768px) {
+
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            #map {
+                height: 60vh;
+                min-height: 300px;
+            }
+
+            .sidebar {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .bottom-bar {
+                height: 140px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <h1>내 주변 무당·타로·사주</h1>
+
     <div class="container">
         <div class="sidebar">
             <div class="category active" data-type="mudang">무당 / 굿</div>
             <div class="category" data-type="tarot">타로카페</div>
             <div class="category" data-type="saju">사주 / 관상</div>
+
             <div class="info" id="info">
-                원하시는 종류를 선택하면<br>현재 위치 기준으로 가까운 곳을 지도에 표시해드려요<br><br>
+                원하시는 종류를 선택하면<br>
+                현재 위치 기준으로 가까운 곳을 지도에 표시해드려요<br><br>
                 위치 정보 허용 후 새로고침해주세요
             </div>
         </div>
-        <div id="map"></div>
+
+        <!-- 지도 + 내 위치 버튼 -->
+        <div class="map-wrap">
+            <div id="map"></div>
+            <div id="myLocationBtn" class="my-location-btn">내 위치로</div>
+        </div>
     </div>
 
-    <!-- 하단 고정 영역 -->
+    <!-- 하단 영역 -->
     <div class="bottom-bar">
         <div class="home-btn" onclick="location.href='index.html'">홈으로 가기</div>
         <div>
@@ -93,106 +205,113 @@
         </div>
     </div>
 
-    <!-- 네이버 지도 API (당신 Client ID 적용 완료) -->
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=5c48rfrsdf&ver=3.19.1"></script>
+    <!-- 네이버 지도 API -->
+    <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=5c48rfrsdf&ver=3.19.1"></script>
 
-   <script>
-    let map, markers = [];
+    <script>
+        let map, markers = [];
+        let userMarker = null;
 
-    // 여기만 제대로 채워주세요!!! (샘플 데이터 완성본)
-    const places = {
-        mudang: [
-            {name:"강남 보살", addr:"서울 강남구 역삼동", lat:37.5008, lng:127.0369, tel:"010-1111-2222"},
-            {name:"홍대 유명 무당", addr:"서울 마포구 서교동", lat:37.5567, lng:126.9235, tel:"010-3333-4444"},
-            {name:"부천 점집", addr:"경기 부천시", lat:37.5035, lng:126.7660, tel:"010-5555-6666"}
-        ],
-        tarot: [
-            {name:"연남동 타로카페", addr:"서울 마포구 연남동", lat:37.5612, lng:126.9228, tel:"010-7777-8888"},
-            {name:"익선동 타로", addr:"서울 종로구 익선동", lat:37.5740, lng:126.9892, tel:"010-9999-0000"},
-            {name:"성수 타로명당", addr:"서울 성동구 성수동", lat:37.5443, lng:127.0560, tel:"010-1234-5678"}
-        ],
-        saju: [
-            {name:"종로 사주카페", addr:"서울 종로구 인사동", lat:37.5728, lng:126.9867, tel:"02-123-4567"},
-            {name:"명동 사주명당", addr:"서울 중구 명동", lat:37.5637, lng:126.9829, tel:"010-8888-9999"},
-            {name:"신촌 관상집", addr:"서울 서대문구 창천동", lat:37.5581, lng:126.9365, tel:"010-2222-3333"}
-        ]
-    };
+        // 샘플 데이터
+        const places = {
+            mudang: [
+                {name:"강남 보살", addr:"서울 강남구 역삼동", lat:37.5008, lng:127.0369, tel:"010-1111-2222"},
+                {name:"홍대 유명 무당", addr:"서울 마포구 서교동", lat:37.5567, lng:126.9235, tel:"010-3333-4444"},
+                {name:"부천 점집", addr:"경기 부천시", lat:37.5035, lng:126.7660, tel:"010-5555-6666"}
+            ],
+            tarot: [
+                {name:"연남동 타로카페", addr:"서울 마포구 연남동", lat:37.5612, lng:126.9228, tel:"010-7777-8888"},
+                {name:"익선동 타로", addr:"서울 종로구 익선동", lat:37.5740, lng:126.9892, tel:"010-9999-0000"},
+                {name:"성수 타로명당", addr:"서울 성동구 성수동", lat:37.5443, lng:127.0560, tel:"010-1234-5678"}
+            ],
+            saju: [
+                {name:"종로 사주카페", addr:"서울 종로구 인사동", lat:37.5728, lng:126.9867, tel:"02-123-4567"},
+                {name:"명동 사주명당", addr:"서울 중구 명동", lat:37.5637, lng:126.9829, tel:"010-8888-9999"},
+                {name:"신촌 관상집", addr:"서울 서대문구 창천동", lat:37.5581, lng:126.9365, tel:"010-2222-3333"}
+            ]
+        };
 
-    function initMap() {
-        map = new naver.maps.Map('map', {
-            center: new naver.maps.LatLng(37.5665, 126.9780),
-            zoom: 15
-        });
+        function initMap() {
+            map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.5665, 126.9780),
+                zoom: 15
+            });
 
-        if (navigator.geolocation) {
+            if (navigator.geolocation) {
+                moveToCurrentLocation();
+                showPlaces('mudang');
+            } else {
+                showPlaces('mudang');
+            }
+        }
+
+        // ===== 내 위치로 이동 =====
+        function moveToCurrentLocation() {
             navigator.geolocation.getCurrentPosition(pos => {
                 const userPos = new naver.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
                 map.setCenter(userPos);
+                map.setZoom(15);
 
-                new naver.maps.Marker({
-                    position: userPos,
+                if (!userMarker) {
+                    userMarker = new naver.maps.Marker({
+                        position: userPos,
+                        map: map,
+                        icon: {
+                            url: 'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23ffcc00"/><text x="50" y="60" font-size="60" text-anchor="middle" fill="%23000">You</text></svg>',
+                            scaledSize: new naver.maps.Size(40,40)
+                        },
+                        title: "내 위치"
+                    });
+                } else {
+                    userMarker.setPosition(userPos);
+                }
+
+            }, () => {
+                alert('현재 위치를 가져올 수 없습니다. 위치 권한을 확인해주세요.');
+            });
+        }
+
+        // "내 위치로" 버튼 이벤트
+        document.getElementById('myLocationBtn').addEventListener('click', moveToCurrentLocation);
+
+        // ===== 장소 표시 =====
+        function showPlaces(type) {
+            markers.forEach(m => m.setMap(null));
+            markers = [];
+
+            places[type].forEach(p => {
+                const marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(p.lat, p.lng),
                     map: map,
-                    icon: {
-                        url: 'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23ffcc00"/><text x="50" y="60" font-size="60" text-anchor="middle" fill="%23000">You</text></svg>',
-                        scaledSize: new naver.maps.Size(40,40)
-                    },
-                    title: "내 위치"
+                    title: p.name
                 });
 
-                document.getElementById('info').innerHTML = `현재 위치 기준으로 표시중입니다`;
-                showPlaces('mudang'); // 처음엔 무당
-            }, () => {
-                document.getElementById('info').innerHTML = `위치 정보 허용 후 새로고침해주세요`;
-                showPlaces('mudang'); // 위치 없어도 샘플은 보여주기
+                markers.push(marker);
+
+                marker.addListener('click', () => {
+                    new naver.maps.InfoWindow({
+                        content: `
+                            <div style="padding:12px 15px;background:#fff;color:#000;border-radius:10px;font-weight:bold;min-width:180px;">
+                                <div style="margin-bottom:6px;">${p.name}</div>
+                                <div style="font-size:0.9rem;color:#555;margin-bottom:8px;">${p.addr}</div>
+                                <div style="margin-bottom:8px;">${p.tel}</div>
+                                <a href="tel:${p.tel}" style="color:#ff6b6b;text-decoration:none;font-weight:bold;">전화하기</a>
+                            </div>`
+                    }).open(map, marker);
+                });
             });
-        } else {
-            showPlaces('mudang');
         }
-    }
 
-    document.querySelectorAll('.category').forEach(el => {
-        el.addEventListener('click', function() {
-            document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            showPlaces(this.dataset.type);
-        });
-    });
-
-    function showPlaces(type) {
-        // 기존 마커 삭제
-        markers.forEach(m => m.setMap(null));
-        markers = [];
-
-        places[type].forEach(p => {
-            const marker = new naver.maps.Marker({
-                position: new naver.maps.LatLng(p.lat, p.lng),
-                map: map,
-                title: p.name
-            });
-
-            markers.push(marker);
-
-            marker.addListener('click', () => {
-                new naver.maps.InfoWindow({
-                    content: `<div style="padding:12px 15px;background:#fff;color:#000;border-radius:10px;font-weight:bold;min-width:180px;">
-                        <div style="margin-bottom:6px;">${p.name}</div>
-                        <div style="font-size:0.9rem;color:#555;margin-bottom:8px;">${p.addr}</div>
-                        <div style="margin-bottom:8px;">${p.tel}</div>
-                        <a href="tel:${p.tel}" style="color:#ff6b6b;text-decoration:none;font-weight:bold;">전화하기</a>
-                    </div>`
-                }).open(map, marker);
+        // 카테고리 클릭 이벤트
+        document.querySelectorAll('.category').forEach(el => {
+            el.addEventListener('click', function () {
+                document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                showPlaces(this.dataset.type);
             });
         });
-    }
 
-    // 페이지 로드되자마자 지도 초기화
-    initMap();
-       // 화면 크기 바뀔 때 지도도 다시 그리기
-    window.addEventListener('resize', () => {
-        if (map) {
-            naver.maps.Event.trigger(map, 'resize');
-        }
-    });
-</script>
+        initMap();
+    </script>
 </body>
 </html>
