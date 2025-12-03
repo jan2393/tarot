@@ -17,10 +17,15 @@
         .luckey {font-size:3rem;color:#ffcc00;margin:20px 0;}
         @media (max-width:480px) {.result{font-size:1.6rem;} .section{padding:20px;}}
 
-        #unseBtn {
-    opacity: 0.5;
-    pointer-events: none;
-    cursor: not-allowed;
+  
+#unseBtn {
+    padding:16px 50px;
+    font-size:2rem;
+    background:#666 !important;
+    color:#ccc !important;
+    cursor:not-allowed;
+    opacity:0.6;
+    transition:all 0.4s;
 }
 
 input:focus, select:focus {
@@ -34,16 +39,17 @@ input:focus, select:focus {
     <p style="font-size:1.8rem;color:#ffccff;margin:20px;">생년월일과 성별만 입력하면<br>총운·연애·재물·직장·인간관계까지 세세하게 알려드려요</p>
     
     <div class="input-area">
-        <input type="date" id="birth" required>
-        <select id="gender">
-            <option value="남">남자</option>
-            <option value="여">여자</option>
-        </select>
-        <br><button id="unseBtn" onclick="showUnse()">운세 보기</button>
-    </div>
+    <input type="date" id="birth" required>
+    <select id="gender">
+        <option value="">성별 선택</option>
+        <option value="남">남자</option>
+        <option value="여">여자</option>
+    </select>
+    <br>
+    <button id="unseBtn" onclick="showUnse()">운세 보기</button>
+</div>
 
-    <div id="result" class="result" style="display:none;"></div>
-
+<div id="result" class="result" style="display:none;"></div>
     <button onclick="location.href='index.html'" style="margin-top:50px;">홈으로 돌아가기</button>
 
     <script>
@@ -202,23 +208,38 @@ input:focus, select:focus {
     "당신 주변에 좋은 사람만 가득",
     "오늘은 인간관계로 행복 충전"];
 
-        function showUnse() {
-        const birthInput = document.getElementById('birth').value;
-        const genderSelect = document.getElementById('gender').value;
+        // 입력 감지해서 버튼 활성화
+    function checkInput() {
+        const birth = document.getElementById('birth').value;
+        const gender = document.getElementById('gender').value;
+        const btn = document.getElementById('unseBtn');
 
-        // 입력 안 했을 때 막기 + 친절한 안내
-        if (!birthInput) {
-            alert('생년월일을 선택해주세요');
-            document.getElementById('birth').focus();
+        if (birth && gender && gender !== "") {
+            btn.style.background = '#ffcc00';
+            btn.style.color = '#000';
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+            btn.disabled = false;
+        } else {
+            btn.style.background = '#666';
+            btn.style.color = '#ccc';
+            btn.style.opacity = '0.6';
+            btn.style.cursor = 'not-allowed';
+            btn.disabled = true;
+        }
+    }
+
+    // 실시간 감지
+    document.getElementById('birth').addEventListener('change', checkInput);
+    document.getElementById('gender').addEventListener('change', checkInput);
+
+    function showUnse() {
+        // 마지막 안전장치
+        if (!document.getElementById('birth').value || !document.getElementById('gender').value || document.getElementById('gender').value === "") {
+            alert('생년월일과 성별을 모두 선택해주세요');
             return;
         }
-        if (!genderSelect) {
-            alert('성별을 선택해주세요');
-            document.getElementById('gender').focus();
-            return;
-        }
 
-        // 입력 다 했으면 운세 보여주기
         const r = (arr) => arr[Math.floor(Math.random() * arr.length)];
         const result = document.getElementById('result');
         result.innerHTML = `
@@ -231,22 +252,13 @@ input:focus, select:focus {
             <p style="margin-top:50px;color:#ffccff;font-size:1.8rem;">내일도 올베스트에서 꼭 다시 만나요</p>
         `;
         result.style.display = 'block';
-        window.scrollTo({top: result.offsetTop - 100, behavior: 'smooth'});
+        window.scrollTo({top: result.offsetTop - 100, behavior:'smooth'});
     }
-        // 입력 감지해서 버튼 활성화
-document.getElementById('birth').addEventListener('change', checkInput);
-document.getElementById('gender').addEventListener('change', checkInput);
 
-function checkInput() {
-    const birth = document.getElementById('birth').value;
-    const gender = document.getElementById('gender').value;
-    const btn = document.getElementById('unseBtn');
-    if (birth && gender) {
-        btn.style.opacity = '1';
-        btn.style.pointerEvents = 'auto';
-        btn.style.cursor = 'pointer';
-    }
-}
+    // 페이지 로드 시 버튼 비활성화 초기화
+    window.onload = function() {
+        document.getElementById('unseBtn').disabled = true;
+    };
 </script>
 </body>
 </html>
