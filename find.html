@@ -5,202 +5,197 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>올베스트 내 주변 무당·타로·사주 찾기</title>
     <meta name="description" content="내 위치 기준으로 가장 가까운 무당집, 타로카페, 사주 명당 바로 찾기">
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
 
-        /* === 공통 레이아웃 === */
+        /* ===== PC 기준 원래 레이아웃 복구 ===== */
         body {
-            margin: 0;
-            background: linear-gradient(135deg, #1a0033, #330066);
-            color: #fff;
-            font-family: 'Gowun Dodum', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            margin:0;
+            background:linear-gradient(135deg,#1a0033,#330066);
+            color:#fff;
+            font-family:'Gowun Dodum',sans-serif;
+            overflow:hidden;
+            height:100vh;
+            display:flex;
+            flex-direction:column;
         }
 
         h1 {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: 3.5rem;
-            text-align: center;
-            margin: 15px 0;
-            text-shadow: 0 0 40px #ffcc00;
+            font-family:'Nanum Pen Script',cursive;
+            font-size:3.5rem;
+            text-align:center;
+            margin:15px 0;
+            text-shadow:0 0 40px #ffcc00;
         }
 
         .container {
-            flex: 1;
-            display: flex;
-            height: 60vh;        /* PC 기준 지도+사이드 높이 */
-            min-height: 400px;   /* 너무 작아지지 않도록 */
+            flex:1;
+            display:flex;
+            height:calc(100vh - 180px); /* PC에서 지도 높이 확보 */
         }
 
         .sidebar {
-            width: 100%;
-            max-width: 380px;
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255,255,255,0.2);
-            overflow-y: auto;
+            width:100%;
+            max-width:380px;
+            background:rgba(255,255,255,0.1);
+            padding:20px;
+            backdrop-filter:blur(10px);
+            border-right:1px solid rgba(255,255,255,0.2);
+            overflow-y:auto;
         }
 
         .category {
-            padding: 20px;
-            margin: 15px 0;
-            background: rgba(255,255,255,0.15);
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 1.8rem;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            padding:20px;
+            margin:15px 0;
+            background:rgba(255,255,255,0.15);
+            border-radius:16px;
+            cursor:pointer;
+            font-size:1.8rem;
+            text-align:center;
+            transition:0.3s;
+            box-shadow:0 8px 20px rgba(0,0,0,0.3);
         }
 
         .category.active,
         .category:hover {
-            background: #ffcc00;
-            color: #000;
-            transform: scale(1.05);
+            background:#ffcc00;
+            color:#000;
+            transform:scale(1.05);
         }
 
         .info {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            font-size: 1.4rem;
-            line-height: 1.7;
+            margin-top:20px;
+            padding:15px;
+            background:rgba(255,255,255,0.1);
+            border-radius:12px;
+            font-size:1.4rem;
+            line-height:1.7;
         }
 
-        /* 지도 래퍼 */
+        /* ===== 지도 래퍼 + 내 위치 버튼 ===== */
         .map-wrap {
-            flex: 1;
-            position: relative;
-            width: 100%;
-            height: 100%;
+            flex:1;
+            position:relative;
+            width:100%;
+            height:100%;
         }
 
         #map {
-            width: 100%;
-            height: 100%;
-            min-height: 300px;
+            width:100%;
+            height:100%;
         }
 
-        /* 내 위치 버튼 */
         .my-location-btn {
-            position: absolute;
-            right: 16px;
-            top: 16px;
-            z-index: 1000;
-            padding: 10px 16px;
-            background: rgba(255,255,255,0.95);
-            color: #000;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.35);
-            user-select: none;
+            position:absolute;
+            right:16px;
+            top:16px;
+            z-index:1000;
+            padding:8px 14px;
+            background:rgba(255,255,255,0.95);
+            color:#000;
+            border-radius:20px;
+            font-size:0.95rem;
+            font-weight:bold;
+            cursor:pointer;
+            box-shadow:0 4px 10px rgba(0,0,0,0.35);
+            user-select:none;
         }
 
         .my-location-btn:active {
-            transform: scale(0.96);
+            transform:scale(0.96);
         }
 
-        /* 하단 고정 영역 */
+        /* ===== 하단 고정 버튼 & 광고문의 ===== */
         .bottom-bar {
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(15px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 10px 0 20px;
-            border-top: 1px solid rgba(255,255,255,0.15);
+            height:120px;
+            background:rgba(0,0,0,0.4);
+            backdrop-filter:blur(15px);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:12px;
+            padding:10px 0;
+            border-top:1px solid rgba(255,255,255,0.15);
         }
 
         .home-btn {
-            padding: 14px 50px;
-            background: #ffcc00;
-            color: #000;
-            font-size: 2rem;
-            border-radius: 50px;
-            font-family: 'Nanum Pen Script', cursive;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            padding:14px 50px;
+            background:#ffcc00;
+            color:#000;
+            font-size:2rem;
+            border-radius:50px;
+            font-family:'Nanum Pen Script',cursive;
+            cursor:pointer;
+            box-shadow:0 8px 25px rgba(0,0,0,0.5);
         }
 
         .ad-text {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: 1.9rem;
-            color: #ffcc00;
+            font-family:'Nanum Pen Script',cursive;
+            font-size:1.9rem;
+            color:#ffcc00;
         }
 
         .ad-email {
-            font-size: 1.5rem;
-            color: #fff;
-            opacity: 0.9;
+            font-size:1.5rem;
+            color:#fff;
+            opacity:0.9;
         }
 
-        /* === 모바일 최적화 === */
-        @media (max-width: 768px) {
+        /* ===== 모바일 전용 수정 (PC는 그대로 유지) ===== */
+        @media (max-width:768px) {
+            body {
+                height:auto;          /* 모바일에서는 100vh 강제 X */
+                overflow:visible;     /* 스크롤 가능 */
+            }
 
             .container {
-                display: block;    /* flex 해제 → 겹침 방지 */
-                height: auto;
+                flex-direction:column;
+                height:auto;          /* 높이 자동 */
             }
 
             .sidebar {
-                max-width: 100%;
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.2);
+                max-width:100%;
+                height:auto;
+                border-right:none;
+                border-bottom:1px solid rgba(255,255,255,0.2);
             }
 
             .map-wrap {
-                width: 100%;
-                height: 60vh;      /* 모바일 지도 높이 */
-                min-height: 300px;
-                margin-top: 10px;
+                height:450px;         /* 모바일 지도의 세로 크기 확보 */
             }
 
             #map {
-                height: 100%;
-                min-height: 300px;
+                height:100%;
             }
 
             .bottom-bar {
-                padding-bottom: 25px;
+                height:140px;
             }
         }
     </style>
 </head>
-
 <body>
     <h1>내 주변 무당·타로·사주</h1>
-
     <div class="container">
         <div class="sidebar">
             <div class="category active" data-type="mudang">무당 / 굿</div>
             <div class="category" data-type="tarot">타로카페</div>
             <div class="category" data-type="saju">사주 / 관상</div>
-
             <div class="info" id="info">
-                원하시는 종류를 선택하면<br>
-                현재 위치 기준으로 가까운 곳을 지도에 표시해드려요<br><br>
+                원하시는 종류를 선택하면<br>현재 위치 기준으로 가까운 곳을 지도에 표시해드려요<br><br>
                 위치 정보 허용 후 새로고침해주세요
             </div>
         </div>
 
-        <!-- 지도 + 내 위치 버튼 -->
+        <!-- 지도 영역: 래퍼 + 내 위치 버튼 -->
         <div class="map-wrap">
             <div id="map"></div>
             <div id="myLocationBtn" class="my-location-btn">내 위치로</div>
         </div>
     </div>
 
-    <!-- 하단 영역 -->
+    <!-- 하단 고정 영역 -->
     <div class="bottom-bar">
         <div class="home-btn" onclick="location.href='index.html'">홈으로 가기</div>
         <div>
@@ -210,13 +205,12 @@
     </div>
 
     <!-- 네이버 지도 API (ncpKeyId 사용) -->
-    <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=5c48rfrsdf&ver=3.19.1"></script>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=5c48rfrsdf&ver=3.19.1"></script>
 
     <script>
         let map, markers = [];
         let userMarker = null;
 
-        // 샘플 데이터
         const places = {
             mudang: [
                 {name:"강남 보살", addr:"서울 강남구 역삼동", lat:37.5008, lng:127.0369, tel:"010-1111-2222"},
@@ -243,7 +237,7 @@
 
             if (navigator.geolocation) {
                 moveToCurrentLocation();
-                showPlaces('mudang');
+                showPlaces('mudang'); // 처음엔 무당
             } else {
                 showPlaces('mudang');
             }
@@ -276,10 +270,10 @@
             });
         }
 
-        // "내 위치로" 버튼 이벤트
+        // 내 위치 버튼
         document.getElementById('myLocationBtn').addEventListener('click', moveToCurrentLocation);
 
-        // 장소 표시
+        // 마커 표시
         function showPlaces(type) {
             markers.forEach(m => m.setMap(null));
             markers = [];
@@ -307,9 +301,9 @@
             });
         }
 
-        // 카테고리 클릭 이벤트
+        // 카테고리 클릭
         document.querySelectorAll('.category').forEach(el => {
-            el.addEventListener('click', function () {
+            el.addEventListener('click', function() {
                 document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
                 showPlaces(this.dataset.type);
