@@ -16,6 +16,17 @@
         .section {margin:40px 0;padding:25px;background:rgba(255,255,255,0.08);border-radius:18px;border-left:6px solid #ffcc00;}
         .luckey {font-size:3rem;color:#ffcc00;margin:20px 0;}
         @media (max-width:480px) {.result{font-size:1.6rem;} .section{padding:20px;}}
+
+        #unseBtn {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+input:focus, select:focus {
+    outline: 3px solid #ffcc00;
+}
+       
     </style>
 </head>
 <body>
@@ -28,7 +39,7 @@
             <option value="남">남자</option>
             <option value="여">여자</option>
         </select>
-        <br><button onclick="showUnse()">운세 보기</button>
+        <br><button id="unseBtn" onclick="showUnse()">운세 보기</button>
     </div>
 
     <div id="result" class="result" style="display:none;"></div>
@@ -192,20 +203,50 @@
     "오늘은 인간관계로 행복 충전"];
 
         function showUnse() {
-            const r = (arr) => arr[Math.floor(Math.random() * arr.length)];
-            const result = document.getElementById('result');
-            result.innerHTML = `
-                <div class="luckey">★★★★★</div>
-                <div class="section"><strong>총운</strong><br>${r(total)}</div>
-                <div class="section"><strong>연애운</strong><br>${r(love)} 오늘 하루만 믿고 행동해보세요 ♡</div>
-                <div class="section"><strong>재물운</strong><br>${r(money)} 돈 냄새가 납니다!</div>
-                <div class="section"><strong>직장/학업운</strong><br>${r(work)} 오늘은 열심히 해도 피곤하지 않아요</div>
-                <div class="section"><strong>인간관계운</strong><br>${r(human)} 사람 때문에 행복한 하루</div>
-                <p style="margin-top:50px;color:#ffccff;font-size:1.8rem;">내일도 올베스트에서 꼭 다시 만나요</p>
-            `;
-            result.style.display = 'block';
-            window.scrollTo({top: result.offsetTop-100, behavior:'smooth'});
+        const birthInput = document.getElementById('birth').value;
+        const genderSelect = document.getElementById('gender').value;
+
+        // 입력 안 했을 때 막기 + 친절한 안내
+        if (!birthInput) {
+            alert('생년월일을 선택해주세요');
+            document.getElementById('birth').focus();
+            return;
         }
-    </script>
+        if (!genderSelect) {
+            alert('성별을 선택해주세요');
+            document.getElementById('gender').focus();
+            return;
+        }
+
+        // 입력 다 했으면 운세 보여주기
+        const r = (arr) => arr[Math.floor(Math.random() * arr.length)];
+        const result = document.getElementById('result');
+        result.innerHTML = `
+            <div class="luckey">★★★★★</div>
+            <div class="section"><strong>총운</strong><br>${r(total)}</div>
+            <div class="section"><strong>연애운</strong><br>${r(love)} 오늘 하루만 믿고 행동해보세요</div>
+            <div class="section"><strong>재물운</strong><br>${r(money)} 돈 냄새가 납니다!</div>
+            <div class="section"><strong>직장/학업운</strong><br>${r(work)} 오늘은 열심히 해도 피곤하지 않아요</div>
+            <div class="section"><strong>인간관계운</strong><br>${r(human)} 사람 때문에 행복한 하루</div>
+            <p style="margin-top:50px;color:#ffccff;font-size:1.8rem;">내일도 올베스트에서 꼭 다시 만나요</p>
+        `;
+        result.style.display = 'block';
+        window.scrollTo({top: result.offsetTop - 100, behavior: 'smooth'});
+    }
+        // 입력 감지해서 버튼 활성화
+document.getElementById('birth').addEventListener('change', checkInput);
+document.getElementById('gender').addEventListener('change', checkInput);
+
+function checkInput() {
+    const birth = document.getElementById('birth').value;
+    const gender = document.getElementById('gender').value;
+    const btn = document.getElementById('unseBtn');
+    if (birth && gender) {
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = 'auto';
+        btn.style.cursor = 'pointer';
+    }
+}
+</script>
 </body>
 </html>
