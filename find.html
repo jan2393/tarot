@@ -7,13 +7,38 @@
     <meta name="description" content="내 위치 기준으로 가장 가까운 무당집, 타로카페, 사주 명당 바로 찾기">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
-        body {margin:0;background:linear-gradient(135deg,#1a0033,#330066);color:#fff;font-family:'Gowun Dodum',sans-serif;overflow:hidden;height:100vh;display:flex;flex-direction:column;}
+        
+        body {
+    margin:0;
+    background:linear-gradient(135deg,#1a0033,#330066);
+    color:#fff;
+    font-family:'Gowun Dodum',sans-serif;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;         
+}
+
+        
         h1 {font-family:'Nanum Pen Script',cursive;font-size:3.5rem;text-align:center;margin:15px 0;text-shadow:0 0 40px #ffcc00;}
-        .container {flex:1;display:flex;height:calc(100vh - 180px);}
+        
+        .container {
+    flex:1;
+    display:flex;
+    min-height:0;
+}
+        
         .sidebar {width:100%;max-width:380px;background:rgba(255,255,255,0.1);padding:20px;backdrop-filter:blur(10px);border-right:1px solid rgba(255,255,255,0.2);}
         .category {padding:20px;margin:15px 0;background:rgba(255,255,255,0.15);border-radius:16px;cursor:pointer;font-size:1.8rem;text-align:center;transition:0.3s;box-shadow:0 8px 20px rgba(0,0,0,0.3);}
+    
         .category.active, .category:hover {background:#ffcc00;color:#000;transform:scale(1.05);}
-        #map {flex:1;height:100%;}
+        
+        #map {
+    flex:1 0 auto;   
+    width:100%;
+    height:100%;
+    min-height:350px;
+}
+        
         .info {margin-top:20px;padding:15px;background:rgba(255,255,255,0.1);border-radius:12px;font-size:1.4rem;line-height:1.7;}
         
         /* 하단 고정 버튼 & 광고문의 */
@@ -23,11 +48,25 @@
         .ad-email {font-size:1.5rem;color:#fff;opacity:0.9;}
 
         @media (max-width:768px) {
-            .container {flex-direction:column;}
-            .sidebar {max-width:100%;height:auto;}
-            #map {height:450px;}
-            .bottom-bar {height:140px;}
-        }
+    .container {
+        flex-direction:column;
+        height:auto;           /* 컬럼일 땐 높이 고정 X */
+    }
+    .sidebar {
+        max-width:100%;
+        height:auto;
+        flex-shrink:0;
+    }
+    #map {
+        flex:0 0 auto;
+        width:100%;
+        height:60vh;          /* 화면의 60% 정도를 지도에 할당 */
+        min-height:320px;     /* 너무 작아지지 않게 */
+    }
+    .bottom-bar {
+        height:140px;
+    }
+}
     </style>
 </head>
 <body>
@@ -148,6 +187,12 @@
 
     // 페이지 로드되자마자 지도 초기화
     initMap();
+       // 화면 크기 바뀔 때 지도도 다시 그리기
+    window.addEventListener('resize', () => {
+        if (map) {
+            naver.maps.Event.trigger(map, 'resize');
+        }
+    });
 </script>
 </body>
 </html>
