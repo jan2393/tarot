@@ -7,261 +7,334 @@
     <meta name="description" content="생년월일 입력하면 오늘의 총운·연애운·재물운·직장운·인간관계운까지 세부적으로 알려드려요">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
-        body {background:linear-gradient(135deg,#0a001f,#2a0066);color:#fff;font-family:'Gowun Dodum',sans-serif;text-align:center;padding:20px;min-height:100vh;display:flex;flex-direction:column;align-items:center;}
-        h1 {font-family:'Nanum Pen Script',cursive;font-size:3.8rem;margin:20px;text-shadow:0 0 40px #ffcc00;}
+        body {
+            background:linear-gradient(135deg,#0a001f,#2a0066);
+            color:#fff;
+            font-family:'Gowun Dodum',sans-serif;
+            text-align:center;
+            padding:20px;
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+        h1 {
+            font-family:'Nanum Pen Script',cursive;
+            font-size:3.8rem;
+            margin:20px;
+            text-shadow:0 0 40px #ffcc00;
+        }
         .input-area {margin:40px 0;}
-        input, select {padding:14px;margin:8px;width:80%;max-width:320px;border-radius:12px;border:none;font-size:1.3rem;}
-        button {padding:16px 50px;font-size:2rem;background:#ffcc00;color:#000;border:none;border-radius:50px;margin:30px;cursor:pointer;font-family:'Nanum Pen Script',cursive;}
-        .result {margin:50px auto;padding:35px;background:rgba(255,255,255,0.12);border-radius:24px;backdrop-filter:blur(12px);max-width:92%;line-height:2.1;font-size:1.75rem;border:2px solid rgba(255,204,0,0.3);}
-        .section {margin:40px 0;padding:25px;background:rgba(255,255,255,0.08);border-radius:18px;border-left:6px solid #ffcc00;}
-        .luckey {font-size:3rem;color:#ffcc00;margin:20px 0;}
-        @media (max-width:480px) {.result{font-size:1.6rem;} .section{padding:20px;}}
+        input, select {
+            padding:14px;
+            margin:8px;
+            width:80%;
+            max-width:320px;
+            border-radius:12px;
+            border:none;
+            font-size:1.3rem;
+        }
+        button {
+            padding:16px 50px;
+            font-size:2rem;
+            background:#ffcc00;
+            color:#000;
+            border:none;
+            border-radius:50px;
+            margin:30px;
+            cursor:pointer;
+            font-family:'Nanum Pen Script',cursive;
+        }
+        .result {
+            margin:50px auto;
+            padding:35px;
+            background:rgba(255,255,255,0.12);
+            border-radius:24px;
+            backdrop-filter:blur(12px);
+            max-width:92%;
+            line-height:2.1;
+            font-size:1.75rem;
+            border:2px solid rgba(255,204,0,0.3);
+        }
+        .section {
+            margin:40px 0;
+            padding:25px;
+            background:rgba(255,255,255,0.08);
+            border-radius:18px;
+            border-left:6px solid #ffcc00;
+        }
+        .luckey {
+            font-size:3rem;
+            color:#ffcc00;
+            margin:20px 0;
+        }
+        @media (max-width:480px) {
+            .result{font-size:1.6rem;}
+            .section{padding:20px;}
+        }
 
-  
-#unseBtn {
-    padding:16px 50px;
-    font-size:2rem;
-    background:#666;
-    color:#ccc;
-    cursor:not-allowed;
-    opacity:0.6;
-    transition:all 0.4s;
-}
+        #unseBtn {
+            padding:16px 50px;
+            font-size:2rem;
+            background:#666;
+            color:#ccc;
+            cursor:not-allowed;
+            opacity:0.6;
+            transition:all 0.4s;
+        }
 
-input:focus, select:focus {
-    outline: 3px solid #ffcc00;
-}
-       
+        input:focus, select:focus {
+            outline: 3px solid #ffcc00;
+        }
     </style>
 </head>
 <body>
     <h1>올베스트 오늘의 운세</h1>
-    <p style="font-size:1.8rem;color:#ffccff;margin:20px;">생년월일과 성별만 입력하면<br>총운·연애·재물·직장·인간관계까지 세세하게 알려드려요</p>
+    <p style="font-size:1.8rem;color:#ffccff;margin:20px;">
+        생년월일과 성별만 입력하면<br>
+        총운·연애·재물·직장·인간관계까지 세세하게 알려드려요
+    </p>
     
     <div class="input-area">
-    <input type="date" id="birth" required>
-    <select id="gender">
-        <option value="">성별 선택</option>
-        <option value="남">남자</option>
-        <option value="여">여자</option>
-    </select>
-    <br>
-    <button id="unseBtn" onclick="showUnse()">운세 보기</button>
-</div>
+        <!-- 여기만 변경됨: 직접 입력 형식 -->
+        <input
+            type="text"
+            id="birth"
+            required
+            maxlength="8"
+            placeholder="생년월일 8자리 (예: 19900101)"
+            inputmode="numeric"
+        >
+        <select id="gender">
+            <option value="">성별 선택</option>
+            <option value="남">남자</option>
+            <option value="여">여자</option>
+        </select>
+        <br>
+        <button id="unseBtn" onclick="showUnse()">운세 보기</button>
+    </div>
 
-<div id="result" class="result" style="display:none;"></div>
+    <div id="result" class="result" style="display:none;"></div>
     <button onclick="location.href='index.html'" style="margin-top:50px;">홈으로 돌아가기</button>
 
     <script>
         const total = ["오늘은 당신에게 행운이 깃든 하루! 모든 일이 술술 풀려요","조금은 느리게 가더라도 끝내 대박 나는 날","작은 실수 가능성 있으니 꼼꼼히 확인하세요","기분 좋은 소식이 두 번 이상 들어올 거예요","오늘은 당신이 주인공인 날!","오늘은 당신이 빛나는 날! 어디를 가든 주목받아요",
-    "하늘이 당신 편이에요. 모든 일이 술술 풀립니다",
-    "작은 행복이 연속으로 찾아오는 하루",
-    "오늘은 당신이 주인공인 드라마 같은 날",
-    "운이 하늘을 뚫을 기세! 대박 조짐 보입니다",
-    "오랜 고민이 오늘 해결될 가능성 99%",
-    "기분 좋은 소식이 최소 3번 이상 들어올 거예요",
-    "웃음이 끊이지 않는 하루가 될 거예요",
-    "오늘은 모든 선택이 정답인 날",
-    "당신을 향한 행운의 화살이 날아오고 있어요",
-    "평소보다 200% 더 예뻐 보이는 날",
-    "오늘 한 행동이 앞으로 3개월을 결정해요",
-    "오랜만에 마음이 따뜻해지는 일이 생깁니다",
-    "우연이 필연으로 바뀌는 마법 같은 하루",
-    "오늘은 후회 없는 선택만 하게 될 거예요",
-    "당신을 응원하는 기운이 사방에서 느껴져요",
-    "오늘 시작한 일은 반드시 성공으로 이어져요",
-    "하루 종일 기분 좋은 냄새가 날 거예요",
-    "오늘은 당신에게 선물이 준비된 날",
-    "모든 게 잘 풀려서 깜짝 놀랄 수도 있어요",
-    "오늘은 당신이 원하던 그 일이 현실이 돼요",
-    "운이 폭발하는 날! 로또 사도 될 뻔",
-    "하루가 너무 행복해서 시간이 아쉬울 거예요",
-    "오늘은 실수해도 귀엽게 봐주는 날",
-    "당신을 위한 특별한 이벤트가 기다리고 있어요",
-    "오늘은 그냥 집에만 있어도 좋은 일이 생겨요",
-    "웃는 얼굴로 하루를 시작하면 대박 나요",
-    "당신의 매력이 오늘 최고조에 달해요",
-    "오늘은 모든 문이 열려 있는 날",
-    "당신을 향한 하늘의 응원이 느껴지는 하루"];
+        "하늘이 당신 편이에요. 모든 일이 술술 풀립니다",
+        "작은 행복이 연속으로 찾아오는 하루",
+        "오늘은 당신이 주인공인 드라마 같은 날",
+        "운이 하늘을 뚫을 기세! 대박 조짐 보입니다",
+        "오랜 고민이 오늘 해결될 가능성 99%",
+        "기분 좋은 소식이 최소 3번 이상 들어올 거예요",
+        "웃음이 끊이지 않는 하루가 될 거예요",
+        "오늘은 모든 선택이 정답인 날",
+        "당신을 향한 행운의 화살이 날아오고 있어요",
+        "평소보다 200% 더 예뻐 보이는 날",
+        "오늘 한 행동이 앞으로 3개월을 결정해요",
+        "오랜만에 마음이 따뜻해지는 일이 생깁니다",
+        "우연이 필연으로 바뀌는 마법 같은 하루",
+        "오늘은 후회 없는 선택만 하게 될 거예요",
+        "당신을 응원하는 기운이 사방에서 느껴져요",
+        "오늘 시작한 일은 반드시 성공으로 이어져요",
+        "하루 종일 기분 좋은 냄새가 날 거예요",
+        "오늘은 당신에게 선물이 준비된 날",
+        "모든 게 잘 풀려서 깜짝 놀랄 수도 있어요",
+        "오늘은 당신이 원하던 그 일이 현실이 돼요",
+        "운이 폭발하는 날! 로또 사도 될 뻔",
+        "하루가 너무 행복해서 시간이 아쉬울 거예요",
+        "오늘은 실수해도 귀엽게 봐주는 날",
+        "당신을 위한 특별한 이벤트가 기다리고 있어요",
+        "오늘은 그냥 집에만 있어도 좋은 일이 생겨요",
+        "웃는 얼굴로 하루를 시작하면 대박 나요",
+        "당신의 매력이 오늘 최고조에 달해요",
+        "오늘은 모든 문이 열려 있는 날",
+        "당신을 향한 하늘의 응원이 느껴지는 하루"];
+
         const love = ["갑작스러운 고백 받을 확률 87%","오늘 만난 사람이 운명의 상대일 수 있어요","연락 없는 그 사람이 오늘 밤 연락 올 확률 높음","데이트 신청 들어와요! OK 누르세요","짝사랑하던 그 사람이 먼저 다가와요",
-                     "오늘 갑작스러운 고백 받을 확률 200%",
-    "연락 끊은 그 사람이 오늘 밤 11시쯤 연락 올 확률 92%",
-    "오늘 만난 사람이 3년 뒤 결혼 상대일 수도",
-    "썸 타던 사람이 오늘 고백할 가능성 극대",
-    "데이트 신청 2건 이상 들어와요. 선택은 당신 몫",
-    "짝사랑하던 사람이 먼저 연락 올 확률 88%",
-    "전 애인이 오늘 꿈에 나올 확률 95%",
-    "오늘 사진 찍으면 인생샷 건질 확률 100%",
-    "상대방이 당신 생각만 하고 있는 날",
-    "오늘 소개팅 들어오면 무조건 OK 누르세요",
-    "당신을 짝사랑하는 사람이 2명 이상 존재",
-    "오늘 커플 성사 확률 87%",
-    "오늘 밤 10시~12시 사이 중요한 메시지 옴",
-    "오늘은 당신이 사랑받는 날",
-    "운명의 상대와 눈 마주칠 확률 90%",
-    "오늘 SNS에 올린 사진에 좋아요 폭발",
-    "누군가 당신에게 꽃을 선물하고 싶어해요",
-    "오늘은 연애세포가 폭발하는 날",
-    "짝사랑 상대가 오늘 당신을 떠올려요",
-    "오늘 만난 사람과 3개월 뒤 재회 확률 높음",
-    "당신을 좋아하는 사람이 지금 용기 내고 있어요",
-    "오늘은 사랑에 서툴러도 괜찮은 날",
-    "상대방이 당신에게 미친 듯이 끌리고 있어요",
-    "오늘은 키스할 기회가 생길 수도",
-    "연애운 대박! 솔로 탈출 타이밍",
-    "오늘은 사랑 고백해도 100% 성공",
-    "누군가 당신 이름 저장할 때 하트 넣어요",
-    "오늘은 연애운이 터지는 날",
-    "당신을 기다리는 사람이 있어요",
-    "오늘은 사랑이 공기처럼 느껴지는 하루"
-                     ];
+        "오늘 갑작스러운 고백 받을 확률 200%",
+        "연락 끊은 그 사람이 오늘 밤 11시쯤 연락 올 확률 92%",
+        "오늘 만난 사람이 3년 뒤 결혼 상대일 수도",
+        "썸 타던 사람이 오늘 고백할 가능성 극대",
+        "데이트 신청 2건 이상 들어와요. 선택은 당신 몫",
+        "짝사랑하던 사람이 먼저 연락 올 확률 88%",
+        "전 애인이 오늘 꿈에 나올 확률 95%",
+        "오늘 사진 찍으면 인생샷 건질 확률 100%",
+        "상대방이 당신 생각만 하고 있는 날",
+        "오늘 소개팅 들어오면 무조건 OK 누르세요",
+        "당신을 짝사랑하는 사람이 2명 이상 존재",
+        "오늘 커플 성사 확률 87%",
+        "오늘 밤 10시~12시 사이 중요한 메시지 옴",
+        "오늘은 당신이 사랑받는 날",
+        "운명의 상대와 눈 마주칠 확률 90%",
+        "오늘 SNS에 올린 사진에 좋아요 폭발",
+        "누군가 당신에게 꽃을 선물하고 싶어해요",
+        "오늘은 연애세포가 폭발하는 날",
+        "짝사랑 상대가 오늘 당신을 떠올려요",
+        "오늘 만난 사람과 3개월 뒤 재회 확률 높음",
+        "당신을 좋아하는 사람이 지금 용기 내고 있어요",
+        "오늘은 사랑에 서툴러도 괜찮은 날",
+        "상대방이 당신에게 미친 듯이 끌리고 있어요",
+        "오늘은 키스할 기회가 생길 수도",
+        "연애운 대박! 솔로 탈출 타이밍",
+        "오늘은 사랑 고백해도 100% 성공",
+        "누군가 당신 이름 저장할 때 하트 넣어요",
+        "오늘은 연애운이 터지는 날",
+        "당신을 기다리는 사람이 있어요",
+        "오늘은 사랑이 공기처럼 느껴지는 하루"];
+
         const money = ["횡재수 대박! 로또 사세요","지갑 열 일이 생김 (좋은 의미로!)","투자한 게 오늘 빛을 발해요","용돈, 선물, 보너스 중 하나는 무조건","절약만 하면 이번 달 통장 두둑",
-                      "오늘 로또 1등 당첨 확률 0.0001% 증가",
-    "지갑 열 일이 3번 이상 생김 (다 좋은 의미)",
-    "오늘 떨어뜨린 돈 주울 확률 85%",
-    "횡재수 대박! 용돈 들어올 수도",
-    "오늘 투자하면 3개월 뒤 대박",
-    "통장에 들어올 돈이 나갈 돈보다 많아요",
-    "오늘 쇼핑해도 통장 잔고 늘어남",
-    "오늘은 돈이 저절로 굴러들어와요",
-    "보너스, 선물, 경품 중 하나는 무조건",
-    "오늘 시작한 재테크가 대박 날 징조",
-    "오늘은 돈 걱정 없이 쓸 수 있는 날",
-    "당신을 위해 돈 쓰고 싶은 사람이 있어요",
-    "오늘은 돈이 샘솟는 날",
-    "작은 돈이라도 오늘은 주워야 대박",
-    "오늘은 돈 냄새가 진하게 나요",
-    "이번 달 용돈 두 배 받을 가능성",
-    "오늘은 돈이 들어오는 문이 열려 있어요",
-    "오늘 산 물건이 나중에 두 배 가격 됨",
-    "재물운 대박! 통장 잔고 폭발 예고",
-    "오늘은 돈이 당신을 따라다녀요",
-    "오늘 시작한 부업이 대박 날 수도",
-    "오늘은 돈이 복사되는 날",
-    "당신을 부자로 만들어줄 기회가 와요",
-    "오늘은 돈이 하늘에서 떨어질 수도",
-    "재물운 최고조! 돈 모을 절호의 타이밍",
-    "오늘은 돈이 알아서 불어남",
-    "당신 통장이 오늘 기뻐할 거예요",
-    "오늘은 돈 걱정 없는 하루",
-    "재물의 신이 오늘 당신 곁에 있어요",
-    "오늘은 돈이 당신을 좋아하는 날"];
+        "오늘 로또 1등 당첨 확률 0.0001% 증가",
+        "지갑 열 일이 3번 이상 생김 (다 좋은 의미)",
+        "오늘 떨어뜨린 돈 주울 확률 85%",
+        "횡재수 대박! 용돈 들어올 수도",
+        "오늘 투자하면 3개월 뒤 대박",
+        "통장에 들어올 돈이 나갈 돈보다 많아요",
+        "오늘 쇼핑해도 통장 잔고 늘어남",
+        "오늘은 돈이 저절로 굴러들어와요",
+        "보너스, 선물, 경품 중 하나는 무조건",
+        "오늘 시작한 재테크가 대박 날 징조",
+        "오늘은 돈 걱정 없이 쓸 수 있는 날",
+        "당신을 위해 돈 쓰고 싶은 사람이 있어요",
+        "오늘은 돈이 샘솟는 날",
+        "작은 돈이라도 오늘은 주워야 대박",
+        "오늘은 돈 냄새가 진하게 나요",
+        "이번 달 용돈 두 배 받을 가능성",
+        "오늘은 돈이 들어오는 문이 열려 있어요",
+        "오늘 산 물건이 나중에 두 배 가격 됨",
+        "재물운 대박! 통장 잔고 폭발 예고",
+        "오늘은 돈이 당신을 따라다녀요",
+        "오늘 시작한 부업이 대박 날 수도",
+        "오늘은 돈이 복사되는 날",
+        "당신을 부자로 만들어줄 기회가 와요",
+        "오늘은 돈이 하늘에서 떨어질 수도",
+        "재물운 최고조! 돈 모을 절호의 타이밍",
+        "오늘은 돈이 알아서 불어남",
+        "당신 통장이 오늘 기뻐할 거예요",
+        "오늘은 돈 걱정 없는 하루",
+        "재물의 신이 오늘 당신 곁에 있어요",
+        "오늘은 돈이 당신을 좋아하는 날"];
+
         const work = ["상사 눈에 확 띄는 날! 칭찬 받음","프로젝트 대성공 확정","동료가 도와줘서 일이 수월해져요","승진/연봉인상 얘기 나올 수 있음","오늘 제출한 기획안 통과 확률 95%",
-                     "오늘 상사님이 당신 이름 3번 이상 언급",
-    "오늘 제출한 기획안 99% 통과",
-    "승진 명단에 당신 이름 올라갈 가능성",
-    "오늘 실수해도 칭찬으로 바뀜",
-    "동료가 커피 사줄 확률 95%",
-    "오늘 야근 없고 칼퇴 보장",
-    "연봉 인상 얘기 슬쩍 나올 수도",
-    "오늘은 당신이 팀의 히어로",
-    "오늘 시작한 일이 대성공으로 이어져요",
-    "상사 눈에 확 띄는 날! 보너스 기대",
-    "오늘은 일이 손에 착착 붙어요",
-    "오늘 회의에서 당신 말에 다 고개 끄덕임",
-    "프로젝트 성공 확정! 축하받을 준비",
-    "오늘은 실수해도 귀엽게 봐줌",
-    "동료가 당신 도와주려고 난리",
-    "오늘은 당신이 직장 운의 중심",
-    "오늘 한 일이 1년 뒤 승진으로 돌아와요",
-    "상사님이 오늘 당신 칭찬 5번 이상",
-    "오늘은 일 운이 터지는 날",
-    "팀원들이 당신 말에 다 따름",
-    "오늘은 당신이 리더 역할을 하게 됨",
-    "성과급 들어올 징조 보입니다",
-    "오늘은 일이 술술 풀려서 놀람",
-    "직장운 대박! 좋은 소식 기다려져요",
-    "오늘은 당신이 회사에서 제일 빛남",
-    "승진/이직 제안 들어올 수도",
-    "오늘은 당신이 직장의 스타",
-    "일 운 최고조! 오늘만 잘하면 대박",
-    "오늘은 당신을 응원하는 동료 많음",
-    "오늘 하루만 버티면 대박 터짐"];
-        const human = ["오랜만에 연락 온 친구와 재회","모임에서 인기 폭발","누군가 당신을 진심으로 도와주고 싶어해요","오해 풀리고 관계 회복","새로운 인연 2명 이상 생김","오늘 오랜만에 연락 온 친구와 재회",
-    "모임에서 당신이 인기 폭발",
-    "누군가 당신에게 진심으로 고마워해요",
-    "오해 풀리고 관계 완벽 회복",
-    "새로운 인연 3명 이상 생김",
-    "오늘은 사람 때문에 행복한 하루",
-    "당신을 도와주고 싶은 사람이 나타남",
-    "오늘은 인간관계 대박 나는 날",
-    "오랜 친구가 연락 올 확률 90%",
-    "오늘 만난 사람이 평생 인연 될 수도",
-    "사람들이 당신을 진심으로 좋아해요",
-    "오늘은 오해가 풀리는 날",
-    "당신을 응원하는 사람이 주변에 가득",
-    "오늘은 인간관계 운이 터짐",
-    "누군가 당신 생각하며 연락하려고 해요",
-    "오늘은 사람 냄새 나는 하루",
-    "오랜만에 가족과 따뜻한 시간",
-    "당신을 기다리는 사람이 있어요",
-    "오늘은 인간관계 꽃길만 걸어요",
-    "누군가 당신에게 선물하고 싶어해요",
-    "오늘은 사람 때문에 웃는 날",
-    "당신을 진심으로 아끼는 사람 많음",
-    "오늘은 인간관계 대박 조짐",
-    "오랜 친구와의 재회가 기다려져요",
-    "사람들이 당신을 부러워해요",
-    "오늘은 인간관계 최고의 날",
-    "누군가 당신 이름 부르며 웃고 있어요",
-    "오늘은 사람 운이 대박",
-    "당신 주변에 좋은 사람만 가득",
-    "오늘은 인간관계로 행복 충전"];
+        "오늘 상사님이 당신 이름 3번 이상 언급",
+        "오늘 제출한 기획안 99% 통과",
+        "승진 명단에 당신 이름 올라갈 가능성",
+        "오늘 실수해도 칭찬으로 바뀜",
+        "동료가 커피 사줄 확률 95%",
+        "오늘 야근 없고 칼퇴 보장",
+        "연봉 인상 얘기 슬쩍 나올 수도",
+        "오늘은 당신이 팀의 히어로",
+        "오늘 시작한 일이 대성공으로 이어져요",
+        "상사 눈에 확 띄는 날! 보너스 기대",
+        "오늘은 일이 손에 착착 붙어요",
+        "오늘 회의에서 당신 말에 다 고개 끄덕임",
+        "프로젝트 성공 확정! 축하받을 준비",
+        "오늘은 실수해도 귀엽게 봐줌",
+        "동료가 당신 도와주려고 난리",
+        "오늘은 당신이 직장 운의 중심",
+        "오늘 한 일이 1년 뒤 승진으로 돌아와요",
+        "상사님이 오늘 당신 칭찬 5번 이상",
+        "오늘은 일 운이 터지는 날",
+        "팀원들이 당신 말에 다 따름",
+        "오늘은 당신이 리더 역할을 하게 됨",
+        "성과급 들어올 징조 보입니다",
+        "오늘은 일이 술술 풀려서 놀람",
+        "직장운 대박! 좋은 소식 기다려져요",
+        "오늘은 당신이 회사에서 제일 빛남",
+        "승진/이직 제안 들어올 수도",
+        "오늘은 당신이 직장의 스타",
+        "일 운 최고조! 오늘만 잘하면 대박",
+        "오늘은 당신을 응원하는 동료 많음",
+        "오늘 하루만 버티면 대박 터짐"];
+
+        const human = ["오랜만에 연락 온 친구와 재회","모임에서 인기 폭발","누군가 당신을 진심으로 도와주고 싶어해요","오해 풀리고 관계 회복","새로운 인연 2명 이상 생김",
+        "오늘 오랜만에 연락 온 친구와 재회",
+        "모임에서 당신이 인기 폭발",
+        "누군가 당신에게 진심으로 고마워해요",
+        "오해 풀리고 관계 완벽 회복",
+        "새로운 인연 3명 이상 생김",
+        "오늘은 사람 때문에 행복한 하루",
+        "당신을 도와주고 싶은 사람이 나타남",
+        "오늘은 인간관계 대박 나는 날",
+        "오랜 친구가 연락 올 확률 90%",
+        "오늘 만난 사람이 평생 인연 될 수도",
+        "사람들이 당신을 진심으로 좋아해요",
+        "오늘은 오해가 풀리는 날",
+        "당신을 응원하는 사람이 주변에 가득",
+        "오늘은 인간관계 운이 터짐",
+        "누군가 당신 생각하며 연락하려고 해요",
+        "오늘은 사람 냄새 나는 하루",
+        "오랜만에 가족과 따뜻한 시간",
+        "당신을 기다리는 사람이 있어요",
+        "오늘은 인간관계 꽃길만 걸어요",
+        "누군가 당신에게 선물하고 싶어해요",
+        "오늘은 사람 때문에 웃는 날",
+        "당신을 진심으로 아끼는 사람 많음",
+        "오늘은 인간관계 대박 조짐",
+        "오랜 친구와의 재회가 기다려져요",
+        "사람들이 당신을 부러워해요",
+        "오늘은 인간관계 최고의 날",
+        "누군가 당신 이름 부르며 웃고 있어요",
+        "오늘은 사람 운이 대박",
+        "당신 주변에 좋은 사람만 가득",
+        "오늘은 인간관계로 행복 충전"];
 
         // 입력 감지해서 버튼 활성화
-    function checkInput() {
-        const birth = document.getElementById('birth').value;
-        const gender = document.getElementById('gender').value;
-        const btn = document.getElementById('unseBtn');
+        function checkInput() {
+            const birth = document.getElementById('birth').value.trim();
+            const btn = document.getElementById('unseBtn');
 
-        if (birth) {   // 생년월일만 있으면 활성화
-        btn.style.background = '#ffcc00';
-        btn.style.color = '#000';
-        btn.style.opacity = '1';
-        btn.style.cursor = 'pointer';
-        btn.disabled = false;
-    } else {
-        btn.style.background = '#666';
-        btn.style.color = '#ccc';
-        btn.style.opacity = '0.6';
-        btn.style.cursor = 'not-allowed';
-        btn.disabled = true;
-       }
-     }
-
-    // 실시간 감지
-    document.getElementById('birth').addEventListener('change', checkInput);
-    document.getElementById('gender').addEventListener('change', checkInput);
-
-    function showUnse() {
-        // 마지막 안전장치
-        if (!document.getElementById('birth').value || !document.getElementById('gender').value || document.getElementById('gender').value === "") {
-            alert('생년월일과 성별을 모두 선택해주세요');
-            return;
+            if (birth) {   // 생년월일만 있으면 활성화
+                btn.style.background = '#ffcc00';
+                btn.style.color = '#000';
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+                btn.disabled = false;
+            } else {
+                btn.style.background = '#666';
+                btn.style.color = '#ccc';
+                btn.style.opacity = '0.6';
+                btn.style.cursor = 'not-allowed';
+                btn.disabled = true;
+            }
         }
 
-        const r = (arr) => arr[Math.floor(Math.random() * arr.length)];
-        const result = document.getElementById('result');
-        result.innerHTML = `
-            <div class="luckey">${randomStars()}</div>
-            <div class="section"><strong>총운</strong><br>${r(total)}</div>
-            <div class="section"><strong>연애운</strong><br>${r(love)} </div>
-            <div class="section"><strong>재물운</strong><br>${r(money)} </div>
-            <div class="section"><strong>직장/학업운</strong><br>${r(work)} </div>
-            <div class="section"><strong>인간관계운</strong><br>${r(human)} </div>
-            <p style="margin-top:50px;color:#ffccff;font-size:1.8rem;">내일도 올베스트에서 꼭 다시 만나요</p>
-        `;
-        result.style.display = 'block';
-        window.scrollTo({top: result.offsetTop - 100, behavior:'smooth'});
-    }
+        // 실시간 감지
+        document.getElementById('birth').addEventListener('input', checkInput);
+        document.getElementById('gender').addEventListener('change', checkInput);
+
+        function showUnse() {
+            const birthVal = document.getElementById('birth').value.trim();
+            const genderVal = document.getElementById('gender').value;
+
+            // 마지막 안전장치
+            if (!birthVal || !genderVal || genderVal === "") {
+                alert('생년월일과 성별을 모두 선택해주세요');
+                return;
+            }
+
+            const r = (arr) => arr[Math.floor(Math.random() * arr.length)];
+            const result = document.getElementById('result');
+            result.innerHTML = `
+                <div class="luckey">${randomStars()}</div>
+                <div class="section"><strong>총운</strong><br>${r(total)}</div>
+                <div class="section"><strong>연애운</strong><br>${r(love)} </div>
+                <div class="section"><strong>재물운</strong><br>${r(money)} </div>
+                <div class="section"><strong>직장/학업운</strong><br>${r(work)} </div>
+                <div class="section"><strong>인간관계운</strong><br>${r(human)} </div>
+                <p style="margin-top:50px;color:#ffccff;font-size:1.8rem;">내일도 올베스트에서 꼭 다시 만나요</p>
+            `;
+            result.style.display = 'block';
+            window.scrollTo({top: result.offsetTop - 100, behavior:'smooth'});
+        }
+
         function randomStars() {
-    const count = Math.floor(Math.random() * 5) + 1;  // 1~5개
-    return "★".repeat(count) + "☆".repeat(5 - count); // 예: ★★★☆☆
-}
-    // 페이지 로드 시 버튼 비활성화 초기화
-    window.onload = function() {
-        document.getElementById('unseBtn').disabled = true;
-    };
-</script>
+            const count = Math.floor(Math.random() * 5) + 1;  // 1~5개
+            return "★".repeat(count) + "☆".repeat(5 - count); // 예: ★★★☆☆
+        }
+
+        // 페이지 로드 시 버튼 비활성화 초기화
+        window.onload = function() {
+            document.getElementById('unseBtn').disabled = true;
+        };
+    </script>
 </body>
 </html>
