@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올베스트 내 주변 무당·타로·사주 찾기</title>
+    <meta name="description" content="지금 내 위치에서 가장 가까운 무당집, 타로카페, 사주 명당 바로 찾기">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
+        body {margin:0;background:linear-gradient(135deg,#1a0033,#330066);color:#fff;font-family:'Gowun Dodum',sans-serif;overflow:hidden;height:100vh;display:flex;flex-direction:column;}
+        h1 {font-family:'Nanum Pen Script',cursive;font-size:3.5rem;text-align:center;margin:20px;text-shadow:0 0 40px #ffcc00;}
+        .container {flex:1;display:flex;height:100%;}
+        .sidebar {width:100%;max-width:380px;background:rgba(255,255,255,0.1);padding:20px;backdrop-filter:blur(10px);border-right:1px solid rgba(255,255,255,0.2);}
+        .category {padding:20px;margin:15px 0;background:rgba(255,255,255,0.15);border-radius:16px;cursor:pointer;font-size:1.8rem;text-align:center;transition:0.3s;box-shadow:0 8px 20px rgba(0,0,0,0.3);}
+        .category.active, .category:hover {background:#ffcc00;color:#000;transform:scale(1.05);}
+        #map {flex:1;height:100%;}
+        .info {margin-top:20px;padding:15px;background:rgba(255,255,255,0.1);border-radius:12px;font-size:1.4rem;line-height:1.7;}
+        @media (max-width:768px) {.container {flex-direction:column;}.sidebar {max-width:100%;height:auto;}#map {height:500px;}}
+    </style>
+</head>
+<body>
+    <h1>내 주변 무당·타로·사주</h1>
+    <div class="container">
+        <div class="sidebar">
+            <div class="category active" data-type="mudang">무당 / 굿</div>
+            <div class="category" data-type="tarot">타로카페</div>
+            <div class="category" data-type="saju">사주 / 관상</div>
+            <div class="info" id="info">
+                원하시는 종류를 선택하면<br>현재 위치 기준으로 가까운 곳을 지도에 표시해드려요<br><br>
+                위치 정보 허용 후 새로고침해주세요
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <!-- 네이버 지도 API 로드 (YOUR_CLIENT_ID를 발급받은 클라이언트 ID로 교체하세요!) -->
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ttidmw4jgl"></script>
+
+    <script>
+        let map, markers = [];
+
+        // 샘플 데이터 (실제 운영 시에는 네이버 장소 검색 API로 실시간 불러오세요)
+        const places = {
+            mudang: [
+                {name:"강남 용한 무당", addr:"서울 강남구", lat:37.4979, lng:127.0276, tel:"010-1234-5678"},
+                {name:"홍대 유명 점집", addr:"서울 마포구", lat:37.5565, lng:126.9237, tel:"02-333-4444"},
+                {name:"부산 서면 굿당", addr:"부산 부산진구", lat:35.1587, lng:129.0565, tel:"051-888-9999"}
+            ],
+            tarot: [
+                {name:"연남동 타로신", addr:"서울 마포구 연남동", lat:37.5596, lng:126.9217, tel:"010-2222-3333"},
+                {name:"이태원 타로카페", addr:"서울 용산구", lat:37.5345, lng:126.9946, tel:"010-4444-5555"},
+                {name:"강남 타로명당", addr:"서울 강남구 역삼동", lat:37.5006, lng:127.0369, tel:"02-555-6666"}
+            ],
+            saju: [
+                {name:"종로 사주명당", addr:"서울 종로구", lat:37.5720, lng:126.9794, tel:"02-777-8888"},
+                {name:"신촌 관상집", addr:"서울 서대문구", lat:37.5584, lng:126.9368, tel:"010-9999-0000"},
+                {name:"명동 사주카페", addr:"서울 중구 명동", lat:37.5638, lng:126.9828, tel:"02-111-2222"}
+            ]
+        };
+
+        function initMap() {
+            map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.5665, 126.9780), // 서울 중심
+                zoom: 15,
+                mapTypeId: naver.maps.MapTypeId.NORMAL
+            });
+
+            // 위치 정보 요청
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    const userPos = new naver.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                    map.setCenter(userPos);
+                    new naver.maps.Marker({
+                        position: userPos,
+                        map: map,
+                        icon: {
+                            url: 'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23ffcc00"/><text x="50" y="60" font-size="60" text-anchor="middle" fill="%23000">You</text></svg>',
+                            scaledSize: new naver.maps.Size(40,40)
+                        },
+                        title: "현재 위치"
+                    });
+                    document.getElementById('info').innerHTML = `현재 위치 기준으로 표시중입니다`;
+                    showPlaces('mudang'); // 기본 무당
+                }, () => {
+                    document.getElementById('info').innerHTML = `위치 정보 허용 후 새로고침해주세요`;
+                });
+            }
+        }
+
+        // 카테고리 클릭
+        document.querySelectorAll('.category').forEach(el => {
+            el.addEventListener('click', function() {
+                document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                showPlaces(this.dataset.type);
+            });
+        });
+
+        function showPlaces(type) {
+            // 기존 마커 삭제
+            markers.forEach(m => m.setMap(null));
+            markers = [];
+
+            places[type].forEach(p => {
+                const marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(p.lat, p.lng),
+                    map: map,
+                    title: p.name
+                });
+                markers.push(marker);
+
+                marker.addListener('click', () => {
+                    new naver.maps.InfoWindow({
+                        content: `
+                            <div style="color:#000;font-weight:bold;padding:10px;background:#fff;border-radius:8px;">
+                                ${p.name}<br>
+                                ${p.addr}<br>
+                                ${p.tel}<br>
+                                <a href="tel:${p.tel}" style="color:#ff6b6b;">전화하기</a>
+                            </div>
+                        `
+                    }).open(map, marker);
+                });
+            });
+        }
+
+        // 지도 초기화
+        initMap();
+    </script>
+</body>
+</html>
