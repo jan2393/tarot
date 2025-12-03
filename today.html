@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올베스트 오늘의 운세 무료 - 연애운 재물운 직장운</title>
+    <style>
+        body {background:linear-gradient(135deg,#120028,#2a0066);color:#fff;font-family:'Gowun Dodum',sans-serif;text-align:center;padding:20px;min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+        h1 {font-family:'Nanum Pen Script',cursive;font-size:3.8rem;margin:20px;text-shadow:0 0 40px #ffcc00;}
+        input {padding:12px;margin:10px;width:80%;max-width:300px;border-radius:10px;border:none;font-size:1.2rem;}
+        button {padding:15px 40px;font-size:2rem;background:#ffcc00;color:#000;border:none;border-radius:50px;margin:30px;cursor:pointer;}
+        .result {margin-top:50px;padding:30px;background:rgba(255,255,255,0.1);border-radius:20px;max-width:90%;font-size:1.8rem;line-height:2;}
+    </style>
+</head>
+<body>
+    <h1>오늘의 운세</h1>
+    <p style="font-size:1.6rem;">생년월일과 성별 입력하고 바로 확인!</p>
+    <input type="date" id="birth" required>
+    <select id="gender"><option value="남">남자</option><option value="여">여자</option></select>
+    <button onclick="showUnse()">운세 보기</button>
+    <div id="result" class="result" style="display:none;"></div>
+    <button onclick="location.href='index.html'" style="margin-top:40px;">홈으로</button>
+
+    <script>
+        function showUnse() {
+            const msgs = {
+                love: ["연애운 대박! 운명의 상대 만남", "짝사랑 성공 확률 90%", "오늘 고백 타이밍!"],
+                work: ["승진 기회! 상사 눈에 띔", "프로젝트 대성공", "동료 도움 받음"],
+                money: ["횡재수! 돈 들어올 징조", "투자 성공", "절약하면 더 모임"]
+            };
+            const result = document.getElementById('result');
+            result.innerHTML = `
+                <p style="font-size:2.5rem;color:#ffcc00;margin:20px;">오늘 대박 운세!</p>
+                <p>연애운: ${msgs.love[Math.floor(Math.random()*3)]}</p>
+                <p>직장운: ${msgs.work[Math.floor(Math.random()*3)]}</p>
+                <p>재물운: ${msgs.money[Math.floor(Math.random()*3)]}</p>
+                <p style="margin-top:40px;color:#ffccff;">내일도 올베스트에서 확인하세요 ♡</p>
+            `;
+            result.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
