@@ -143,7 +143,7 @@ function getFortuneBySeed(seed) {
   return fortunes[index];
 }
 
-// ---- TAROT CARD DATA ----
+// ---- TAROT CARD DATA (메이저 아르카나 22장) ----
 const tarotDeck = [
   {
     name: "0. 광대 (The Fool)",
@@ -201,11 +201,22 @@ const tarotDeck = [
       "당신이 세운 기준은, 앞으로의 삶을 지탱해 줄 든든한 기둥이 됩니다."
   },
   {
+    name: "5. 교황 (The Hierophant)",
+    subtitle: "전통 · 가치 · 배움",
+    keywords: ["조언자", "기본기", "가치관"],
+    story:
+      "교황 카드는 전통과 배움을 상징합니다. 지금의 당신은 누군가의 조언이 필요하거나, 이미 신뢰하는 기준과 규칙에 기대고 싶어질 수 있습니다.",
+    advice:
+      "완전히 새로운 길만이 항상 정답은 아닙니다. 이미 검증된 방법과 경험 많은 사람의 조언이 도움이 될 수 있습니다. 다만, 그 안에서 나만의 해석을 잊지 마세요.",
+    oneLine:
+      "남의 지혜를 빌리되, 결국 삶을 살아가는 사람은 나 자신입니다."
+  },
+  {
     name: "6. 연인 (The Lovers)",
     subtitle: "관계 · 선택 · 진심",
     keywords: ["관계", "진실된 마음", "중요한 선택"],
     story:
-      "연인 카드는 사랑뿐 아니라, ‘마음이 향하는 선택’을 상징합니다. 지금의 당신은 관계 혹은 중요한 선택의 기로에 서 있을 가능성이 큽니다. 머리가 아닌 마음이 어디를 향하고 있는지 살펴볼 때입니다.",
+      "연인 카드는 사랑뿐 아니라, ‘마음이 향하는 선택’을 상징합니다. 지금의 당신은 관계 혹은 중요한 선택의 기로에 서 있을 가능성이 큽니다.",
     advice:
       "타인의 기대보다, 내가 진짜 원하는 방향이 어디인지 솔직해져 보세요. 관계든 일이든, 진심이 담기지 않은 선택은 오래 버티기 어렵습니다.",
     oneLine:
@@ -221,6 +232,17 @@ const tarotDeck = [
       "속도만 중요한 것은 아닙니다. 내가 어디로 가고 있는지, 방향을 점검하면서 달려야 합니다. 목표를 한 번 더 정리한 뒤, 그 방향으로 에너지를 모아보세요.",
     oneLine:
       "당신이 집중한 방향으로, 삶의 에너지 또한 함께 모이게 됩니다."
+  },
+  {
+    name: "8. 힘 (Strength)",
+    subtitle: "내적 강인함 · 인내 · 따뜻한 용기",
+    keywords: ["인내", "부드러운 통제", "용기"],
+    story:
+      "힘 카드는 물리적인 힘보다, 자신과 상황을 다루는 부드러운 강인함을 상징합니다. 지금의 당신은 큰 소리를 내기보다, 묵묵히 버티며 상황을 조절하고 있을 수 있습니다.",
+    advice:
+      "억지로 밀어붙이기보다, 스스로를 다독이며 한 걸음씩 나아가 보세요. 진짜 힘은 소리보다 태도에서 드러납니다.",
+    oneLine:
+      "지금까지 버텨온 것만으로도, 이미 당신은 충분히 강한 사람입니다."
   },
   {
     name: "9. 은둔자 (The Hermit)",
@@ -245,6 +267,72 @@ const tarotDeck = [
       "지금의 변화는, 당신이 다음 장으로 넘어가기 위한 자연스러운 흐름일 수 있습니다."
   },
   {
+    name: "11. 정의 (Justice)",
+    subtitle: "균형 · 공정함 · 선택의 결과",
+    keywords: ["균형", "공정한 판단", "원인과 결과"],
+    story:
+      "정의 카드는 저울과 검을 든 사람처럼, 공정한 시선과 냉정한 판단을 상징합니다. 지금의 선택은 이후에 분명한 결과로 돌아올 가능성이 큽니다.",
+    advice:
+      "감정에 치우치기보다, 사실과 책임을 기준으로 판단해 보세요. 나와 상대 모두에게 공정한 선택이 무엇인지 스스로에게 물어보는 것이 중요합니다.",
+    oneLine:
+      "오늘의 선택은, 언젠가 돌아올 내일의 결과로 이어집니다."
+  },
+  {
+    name: "12. 매달린 사람 (The Hanged Man)",
+    subtitle: "관점의 전환 · 일시 정지",
+    keywords: ["멈춤", "다른 시각", "수용"],
+    story:
+      "매달린 사람 카드는 일부러 멈춰 선 상태를 의미합니다. 겉으로 보면 답답해 보이지만, 사실은 새로운 관점을 얻기 위한 ‘잠깐의 멈춤’일 수 있습니다.",
+    advice:
+      "지금 당장 해결되지 않는 일이라면, 애써 끌고 가기보다 한 발 물러서 보는 것도 방법입니다. 같은 문제도, 다른 각도에서 보면 전혀 다르게 보일 수 있습니다.",
+    oneLine:
+      "잠시 멈춘 시간 속에서, 전혀 새로운 길이 보이기도 합니다."
+  },
+  {
+    name: "13. 죽음 (Death)",
+    subtitle: "끝맺음 · 종료 · 새로운 시작의 준비",
+    keywords: ["종결", "정리", "재시작"],
+    story:
+      "죽음 카드는 실제 죽음이 아니라, 어떤 국면의 ‘완전한 끝’을 상징합니다. 지금의 당신은 더 이상 예전 방식으로는 이어갈 수 없는 지점에 와 있을 수 있습니다.",
+    advice:
+      "억지로 붙잡고 있는 것이 있다면, 이제는 놓아줄 시기일지도 모릅니다. 끝내야 할 것을 끝내야 새로운 시작을 위한 자리가 생깁니다.",
+    oneLine:
+      "한 장의 마지막 페이지가 있어야, 새로운 책을 펼칠 수 있습니다."
+  },
+  {
+    name: "14. 절제 (Temperance)",
+    subtitle: "조화 · 균형 · 적당함",
+    keywords: ["적당한 거리", "균형", "조율"],
+    story:
+      "절제 카드는 두 가지를 적당히 섞어내는 능력을 상징합니다. 지금의 당신에게는 과한 것과 부족한 것 사이의 균형이 중요한 주제일 수 있습니다.",
+    advice:
+      "한쪽으로 치우치기보다, 내 몸과 마음이 편안한 지점을 찾아보세요. ‘이 정도면 괜찮다’고 느껴지는 선을 스스로 정하는 것이 필요합니다.",
+    oneLine:
+      "지나치지도 모자라지도 않은 지점에서, 삶은 가장 편안하게 흐릅니다."
+  },
+  {
+    name: "15. 악마 (The Devil)",
+    subtitle: "집착 · 유혹 · 패턴",
+    keywords: ["집착", "중독", "끊기 어려운 습관"],
+    story:
+      "악마 카드는 나를 묶고 있는 습관, 관계, 생각을 상징합니다. 벗어나고 싶다고 느끼면서도, 동시에 익숙해서 손을 놓기 어려운 것들이 있을 수 있습니다.",
+    advice:
+      "스스로도 알고 있는 ‘나에게 좋지 않은 무언가’가 있다면, 오늘 하루만이라도 그 강도를 조금 줄여보세요. 완전한 단절이 아니어도, 줄이는 첫걸음이 중요합니다.",
+    oneLine:
+      "나를 묶고 있는 줄의 끝을 쥐고 있는 사람도, 결국 나 자신입니다."
+  },
+  {
+    name: "16. 탑 (The Tower)",
+    subtitle: "붕괴 · 충격 · 재구성",
+    keywords: ["예상 밖의 변화", "깨달음", "새로운 기반"],
+    story:
+      "탑 카드는 갑작스러운 충격과 구조의 붕괴를 상징합니다. 믿고 있던 무언가가 흔들리거나, 예상치 못한 일이 벌어질 수 있습니다. 하지만 그 과정에서 진짜 단단한 것이 무엇인지 드러나기도 합니다.",
+    advice:
+      "무너지는 것에만 집중하지 말고, 그 안에서 무엇을 새로 세울 수 있을지 생각해 보세요. 오래된 틀을 깨야만, 나에게 맞는 구조를 다시 지을 수 있습니다.",
+    oneLine:
+      "낡은 탑이 무너진 자리에서, 나에게 맞는 집을 새로 지을 수 있습니다."
+  },
+  {
     name: "17. 별 (The Star)",
     subtitle: "희망 · 치유 · 영감",
     keywords: ["회복", "희망", "영감"],
@@ -256,6 +344,17 @@ const tarotDeck = [
       "당신이 버티며 지나온 시간들 위에, 이제는 작은 빛이 하나둘 켜지고 있습니다."
   },
   {
+    name: "18. 달 (The Moon)",
+    subtitle: "불안 · 상상 · 흐릿한 경계",
+    keywords: ["불안", "혼란", "예민함"],
+    story:
+      "달 카드는 또렷한 태양빛이 아닌, 흐릿한 달빛 아래의 풍경을 보여줍니다. 사실보다 상상이 더 크게 느껴지고, 작은 일에도 마음이 예민해질 수 있는 시기입니다.",
+    advice:
+      "모든 것을 지금 확실히 정하려 하지 말고, ‘아직은 잘 모른다’는 상태를 잠시 허용해 주세요. 감정이 가라앉은 뒤에 다시 보면, 훨씬 명확하게 보이는 것들이 있습니다.",
+    oneLine:
+      "달빛 아래에서는 모든 것이 흐릿해 보이지만, 그렇다고 길이 사라진 것은 아닙니다."
+  },
+  {
     name: "19. 태양 (The Sun)",
     subtitle: "성취 · 기쁨 · 자신감",
     keywords: ["성취", "명확함", "즐거움"],
@@ -265,6 +364,28 @@ const tarotDeck = [
       "성과를 과하게 축소하지 말고, 내가 해낸 것을 인정해 주세요. 스스로를 격려하는 태도가 앞으로의 도전에도 큰 힘이 됩니다.",
     oneLine:
       "당신이 빛을 내기 시작하면, 주변의 풍경도 함께 밝아집니다."
+  },
+  {
+    name: "20. 심판 (Judgement)",
+    subtitle: "깨달음 · 부름 · 재시작",
+    keywords: ["각성", "결산", "새로운 부름"],
+    story:
+      "심판 카드는 과거의 시간들을 정리하고, 새로운 부름을 받아들이는 순간을 상징합니다. 그동안의 선택과 경험이 하나의 의미로 묶여 보이기 시작할 수 있습니다.",
+    advice:
+      "지나온 시간을 후회만 하기보다, 그 안에서 내가 배운 것들을 정리해 보세요. 이제는 새로운 방식으로 다시 시작할 수 있는 기회가 열리고 있습니다.",
+    oneLine:
+      "당신을 부르는 목소리는, 어쩌면 오랫동안 묵혀 두었던 진짜 나의 바람일지도 모릅니다."
+  },
+  {
+    name: "21. 세계 (The World)",
+    subtitle: "완성 · 통합 · 하나의 사이클",
+    keywords: ["완성", "성취", "마무리와 출발"],
+    story:
+      "세계 카드는 하나의 큰 여정이 완성되는 순간을 상징합니다. 지금의 당신은 어떤 사이클을 마무리하고, 다음 단계로 나아갈 준비를 하고 있을 수 있습니다.",
+    advice:
+      "여기까지 온 나 자신을 충분히 축하해 주세요. 끝은 곧 새로운 시작의 문턱입니다. 다음 여정에서 무엇을 가져가고, 무엇을 내려놓을지 정해보는 시간도 필요합니다.",
+    oneLine:
+      "당신의 한 챕터가 끝났습니다. 그리고 새로운 이야기가 조용히 문을 두드리고 있습니다."
   }
 ];
 
@@ -283,17 +404,23 @@ function renderTarotResult(card) {
   const adviceEl = document.getElementById("tarot-card-advice");
   const oneLineEl = document.getElementById("tarot-card-one-line");
 
+  const flipCardEl = document.getElementById("tarot-flip-card");
+  const backNameEl = document.getElementById("tarot-back-name");
+  const backSubEl = document.getElementById("tarot-back-sub");
+
   if (!nameEl || !subEl || !keywordsEl || !storyEl || !adviceEl || !oneLineEl) {
     // 타로 페이지가 아닐 때
     return;
   }
 
+  // 텍스트 먼저 세팅
   nameEl.textContent = card.name;
   subEl.textContent = card.subtitle || "";
   storyEl.textContent = card.story;
   adviceEl.textContent = card.advice;
   oneLineEl.textContent = card.oneLine;
 
+  // 키워드 칩
   keywordsEl.innerHTML = "";
   (card.keywords || []).forEach((kw) => {
     const span = document.createElement("span");
@@ -301,6 +428,20 @@ function renderTarotResult(card) {
     span.textContent = kw;
     keywordsEl.appendChild(span);
   });
+
+  // 플립 카드 뒷면 텍스트
+  if (backNameEl) backNameEl.textContent = card.name;
+  if (backSubEl) backSubEl.textContent = card.subtitle || "";
+
+  // 플립 애니메이션: 클래스를 잠깐 제거했다가 다시 추가
+  if (flipCardEl) {
+    flipCardEl.classList.remove("is-flipped");
+    // 리플로우 강제 → 애니메이션 재시작 트릭
+    void flipCardEl.offsetWidth;
+    setTimeout(() => {
+      flipCardEl.classList.add("is-flipped");
+    }, 30);
+  }
 }
 
 
