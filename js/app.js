@@ -352,14 +352,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ 3) 타로 카드 페이지 초기화
+    // ✅ 3) 타로 카드 페이지 초기화
   const tarotButtons = document.querySelectorAll(".tarot-pick");
   const tarotRedrawBtn = document.getElementById("tarot-redraw");
 
   const handleDraw = (event) => {
     event.preventDefault();
     const card = pickRandomTarotCard();
-    renderTarotResult(card);
+    const clickedBtn = event.currentTarget && event.currentTarget.classList.contains("tarot-pick")
+      ? event.currentTarget
+      : null;
+    renderTarotResult(card, clickedBtn);
   };
 
   if (tarotButtons && tarotButtons.length > 0) {
@@ -369,6 +372,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (tarotRedrawBtn) {
-    tarotRedrawBtn.addEventListener("click", handleDraw);
+    tarotRedrawBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      const card = pickRandomTarotCard();
+      renderTarotResult(card, null); // 재뽑기는 선택 버튼 강조 없음
+    });
   }
+
 });
