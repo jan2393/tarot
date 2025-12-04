@@ -1,278 +1,106 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-   <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="https://gi.esmplus.com/vovs123/app/251202/icon192png.png" type="image/png">
-    <link rel="apple-touch-icon" href="/favicon.png">
-    <meta charset="UTF-8">
-    <meta name="google-adsense-account" content="ca-pub-7346804428435887">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="google-site-verification" content="qLhZvZUDh2qoB1D0RgJy_2Bkfqyyh7EuqeutOAKE90Q" />
-    <title>올베스트 - 오늘의 무료 운세 타로 | 행운의 숫자</title>
-    <meta name="description" content="매일 무료로 타로 3장 + 행운의 숫자 + 색깔까지! 2025년 오늘의 운세 가장 정확한 올베스트">
-    <meta name="keywords" content="무료운세,숫자운세,오늘운세,타로, 타로카드, 오늘의타로, 무료타로, 타로점, 운세, 연애운, 타로뽑기">
-   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script:wght@400;700&family=Gowun+Dodum&display=swap');
-    
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-        background: linear-gradient(135deg, #0f0020, #2a0066, #120028);
-        color: #fff;
-        font-family: 'Gowun Dodum', sans-serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow-y: auto;
-        overflow-x: hidden;
-        position: relative;
-        padding: 30px 20px;
-    }
-    body::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: radial-gradient(circle at 20% 80%, rgba(120,60,255,0.25) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(255,100,200,0.15) 0%, transparent 50%);
-        animation: twinkle 10s infinite alternate;
-        pointer-events: none;
-    }
-    @keyframes twinkle { 0% { opacity: 0.6; } 100% { opacity: 1; } }
-
-    .logo {
-        font-family: 'Nanum Pen Script', cursive;
-        font-size: clamp(6rem, 17vw, 10rem);
-        font-weight: 700;
-        letter-spacing: 6px;
-        background: linear-gradient(90deg, #ffdd00, #ff99dd);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 70px rgba(255,204,100,0.8);
-        animation: glow 4s infinite alternate;
-        margin-bottom: 0.5rem;
-    }
-    @keyframes glow { from { text-shadow: 0 0 50px #ffcc00; } to { text-shadow: 0 0 110px #ff66cc; } }
-
-    .sub-text {
-        font-family: 'Nanum Pen Script', cursive;
-        font-size: clamp(1.9rem, 5.5vw, 2.8rem);
-        color: #ffccff;
-        margin: 16px 0 50px;
-        text-shadow: 0 0 30px #ff66cc;
-        opacity: 0;
-        animation: fadeInUp 1.8s 0.8s forwards;
-    }
-    @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
-
-    /* 버튼 그리드 */
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));  /* PC에서 4열 */
-    gap: 20px;
-    max-width: 1040px;  /* 4열이 들어가도록 넓혀줌 */
-    margin: 0 auto;
-    padding: 20px 10px;
-}
-
-
-    .btn {
-    width: 100%;                 /* 그리드가 나누는 폭을 그대로 사용 */
-    max-width: 260px;            /* 너무 커지지 않게 상한만 설정 */
-    height: 240px;
-    border-radius: 40px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(18px);
-    border: 2px solid rgba(255,255,255,0.18);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.4s;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-    padding: 18px;
-    justify-self: center;        /* 각 카드 가운데 정렬 */
-}
-.btn:hover {
-    transform: translateY(-15px) scale(1.04);
-    background: rgba(255,255,255,0.22);
-    box-shadow: 0 25px 60px rgba(255,102,204,0.35);
-}
-.btn span {
-    font-size: 3.6rem;
-    color: #ffffff88;
-    margin-bottom: 8px;
-}
-.btn div {
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #ffffff;
-    letter-spacing: 1px;
-    white-space: nowrap;   /* ← 여기서 줄바꿈을 완전히 차단 */
-}
-
-    /* 모바일 세로 화면 (480px 이하) */
-@media (max-width: 480px) {
-    .buttons {
-        grid-template-columns: repeat(2, minmax(0, 1fr));  /* 모바일에서 2열 유지 */
-        gap: 14px;
-        max-width: 360px;
-        padding: 10px 0;
-    }
-
-    .buttons .btn:nth-child(3) {
-        grid-column: auto;
-        justify-self: center;
-    }
-
-    .btn {
-        max-width: 100%;
-        height: 200px;
-        padding: 14px 8px;
-        border-radius: 28px;
-    }
-    .btn span {
-        font-size: 2.4rem !important;
-        margin-bottom: 6px;
-    }
-    .btn div {
-       font-size: 1.6rem !important;
-    }
-}
-
-    footer {
-        margin-top: 80px;
-        font-size: 0.95rem;
-        color: #aaa;
-    }
-</style>
-
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7346804428435887"
-     crossorigin="anonymous"></script>
-
-<script>
-// 우클릭, F12, Ctrl+U, Ctrl+Shift+I, Ctrl+S 전부 차단
-document.onkeydown = function(e) {
-    if(e.keyCode == 123 || // F12
-       (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I
-       (e.ctrlKey && e.shiftKey && e.keyCode == 67) || // Ctrl+Shift+C
-       (e.ctrlKey && e.keyCode == 85) || // Ctrl+U
-       (e.ctrlKey && e.keyCode == 83)) { // Ctrl+S
-        return false;
-    }
-};
-document.oncontextmenu = function() { return false; }; // 우클릭 차단
-</script>
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>올베스트 - 오늘을 밝히는 감성 운세</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
-    <div class="logo">올베스트</div>
-    
-    <!-- 새로 추가된 문구 -->
-    <div class="sub-text">무료 운세로 기분 좋은 하루 맞이하세요</div>
-
-    <div class="buttons">
-        <div class="btn" onclick="location.href='today.html'">
-         <span>Star</span>
-         <div>오늘의 운세</div>
-          </div>
-        <div class="btn" onclick="location.href='tarot.html'">
-            <span>Card</span>
-            <div>오늘의 타로</div>
+<div class="site-wrapper">
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">올베스트</div>
+          <div class="logo-text-sub">오늘의 감성 운세</div>
         </div>
-     <!-- SALE 최저가 버튼 (새창 열림) -->
-         <div class="btn"
-     onclick="window.open('https://link.coupang.com/a/damBpr', '_blank')"
-     style="background: linear-gradient(135deg, #fffa65, #ffb300);
-            box-shadow: 0 20px 45px rgba(255, 200, 0, 0.45);
-            transform: scale(1.04);">
-    <span style="color:#fff700;">Sale</span>
-    <div style="color:#4a3000; font-weight:700;">최저가 쇼핑</div>
-        </div>
-       
-        <div class="btn" onclick="location.href='number.html'">
-            <span>Number</span>
-            <div>행운의 숫자</div>
-        </div>
-        <!-- 연애운 타로 버튼 추가 -->
-       <div class="btn" onclick="location.href='love.html'" 
-             style="background:linear-gradient(135deg, #ff6ec4, #ff99cc); 
-                    transform:scale(1.03); 
-                    box-shadow:0 15px 35px rgba(255,105,180,0.4);">
-            <span style="color:#ffe6f2;">Love</span>
-            <div style="font-weight:bold;">연애운 타로</div>
-        </div>
-        <div class="btn" onclick="location.href='lotto.html'">
-            <span>lotto</span>
-            <div>로또 추천</div>
-        </div>
-        <div class="btn" onclick="location.href='today-quote.html'">
-        <span>Quote</span>
-        <div>오늘의 명언</div>
-       </div>
-        <div class="btn" onclick="location.href='fortune-cookie.html'">
-    <span>Cookie</span>
-         <div>1일 포춘쿠키</div>
-        </div>
-        <div class="btn" onclick="location.href='game.html'">
-    <span>Game</span>
-    <div>무료 게임</div>
-     </div>   
-    <div class="btn" onclick="location.href='find.html'">
-    <span>Map</span>
-    <div>내 주변 점집</div>
-     </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">홈</a></li>
+          <li><a href="today.html">오늘의 운세</a></li>
+          <li><a href="tarot.html">타로</a></li>
+          <li><a href="lucky-number.html">행운의 숫자</a></li>
+          <li><a href="archive.html">운세 아카이브</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="how-to.html">이용안내</a></li>
+          <li><a href="contact.html">문의</a></li>
+        </ul>
+      </nav>
     </div>
-   
-<!-- 쿠팡 광고 영역 -->
-<div class="ad-banner" 
-     style="margin:60px auto 40px; max-width:420px; padding:18px; 
-            background:rgba(255,255,255,0.12); 
-            backdrop-filter:blur(12px); 
-            border-radius:16px;
-            text-align:center;">
+  </header>
 
-    <iframe 
-        src="https://coupa.ng/ckUlA3" 
-        width="100%" 
-        height="75"
-        frameborder="0" 
-        scrolling="no" 
-        referrerpolicy="unsafe-url" 
-        browsingtopics>
-    </iframe>
+  <main>
+    <div class="container">
+      <section class="hero">
+        <div class="hero-text">
+          <h1><span>당신의 하루를 밝히는 작은 신호,</span><br />올베스트</h1>
+          <p>
+            어쩌면 오늘, 당신에게 필요한 건<br />
+            단 한 줄의 따뜻한 안내일지도 모릅니다.<br />
+            타로와 행운의 숫자, 데일리 메시지로<br />
+            당신의 하루에 은은한 빛을 더해보세요.
+          </p>
+          <div class="hero-cta">
+            <a href="today.html" class="btn-primary">오늘의 운세 바로 보기</a>
+            <a href="tarot.html" class="btn-secondary">타로 리딩 살펴보기</a>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="badge">오늘의 한 줄</div>
+            <p style="font-size:14px;">
+              “당신이 내딛는 작은 걸음은<br />
+              생각보다 멀리 데려다 줄 거예요.”
+            </p>
+          </div>
+          <div class="card" style="margin-top:14px;">
+            <h3>오늘의 키워드</h3>
+            <div class="chip-list">
+              <span class="chip">정리</span>
+              <span class="chip">작은 용기</span>
+              <span class="chip">보류된 일 마무리</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top:12px;">
+        <h2 class="section-title">올베스트에서는 이런 것들을 만날 수 있어요</h2>
+        <p class="section-sub">오늘의 흐름부터, 한 주의 리듬까지 차분히 살펴보세요.</p>
+        <div class="card-grid">
+          <div class="card">
+            <h3>오늘의 타로</h3>
+            <p>하루의 흐름을 감정·상황·조언으로 나누어 깊이 있게 읽어드립니다.</p>
+          </div>
+          <div class="card">
+            <h3>행운의 숫자 & 컬러</h3>
+            <p>오늘의 선택에 작은 힌트가 되어 줄 숫자와 색을 추천해 드립니다.</p>
+          </div>
+          <div class="card">
+            <h3>데일리 메시지</h3>
+            <p>마음을 정리하고 하루를 시작할 수 있는 짧은 문장을 전해드립니다.</p>
+          </div>
+          <div class="card">
+            <h3>주간·월간 운세</h3>
+            <p>조금 더 긴 호흡으로, 당신의 리듬과 흐름을 바라보는 시간입니다.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 올베스트 Allbest. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="terms.html">이용약관</a>
+      </div>
+    </div>
+  </footer>
 </div>
-<div style="padding:20px 10px; line-height:1.8; font-size:1.1rem; color:#fff;">
-  <h2 style="font-size:2rem; color:#ffcc00;">올베스트 - 대한민국 No.1 무료 운세 사이트</h2>
-  <p>매일 업데이트되는 오늘의 운세, 연애운, 재물운, 직장운까지 무료로 확인하세요.<br>
-  생년월일만 입력하면 정확한 사주 분석과 오늘의 운세를 바로 알려드립니다.</p>
-  
-  <h3 style="color:#ffcc00;">왜 올베스트일까요?</h3>
-  <ul style="text-align:left; margin:20px auto; max-width:600px;">
-    <li>매일 새로운 운세 메시지 150개 이상 업데이트</li>
-    <li>전국 무당, 타로카페, 사주카페 실시간 지도 검색</li>
-    <li>오늘의 성경구절로 마음의 평안까지</li>
-    <li>100% 무료, 회원가입 없이 바로 사용 가능</li>
-  </ul>
-  
-  <p>지금 바로 아래 버튼을 눌러 오늘의 운세를 확인해보세요!<br>
-  당신의 하루를 더 행복하게 만들어줄 올베스트와 함께하세요 💫</p>
-</div>
-
-
-   
-    <footer>© 2025 올베스트 allbest.kr</footer>
-    
-<script>
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('beforeend', data);
-        });
-</script>
 </body>
 </html>
