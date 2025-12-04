@@ -1,6 +1,6 @@
 // js/app.js
 
-// 1. 운세 데이터 여러 개 만들어두기
+// 1. 운세 데이터 여러 개 (필요하면 계속 추가 가능)
 const fortunes = [
   {
     summary: "당신의 마음은 오늘, 조용하지만 강한 힘을 품고 있습니다. 미묘한 설렘과 불안이 공존하지만, 결국 좋은 선택으로 이어지는 하루입니다.",
@@ -37,17 +37,20 @@ const fortunes = [
   }
 ];
 
-// 2. 랜덤으로 하나 뽑는 함수
-function pickRandomFortune() {
-  const index = Math.floor(Math.random() * fortunes.length);
+// 2. 오늘 날짜를 기반으로 "하루에 하나" 운세 선택
+function pickTodayFortune() {
+  const today = new Date();
+  // 연+월+일 더해서 fortunes 길이로 나눈 나머지 → 날짜가 바뀌면 인덱스도 바뀜
+  const seed = today.getFullYear() + (today.getMonth() + 1) + today.getDate();
+  const index = seed % fortunes.length;
   return fortunes[index];
 }
 
-// 3. DOM에 채워 넣기
-function renderFortune() {
-  const f = pickRandomFortune();
-
+// 3. 오늘의 운세 페이지(today.html)에 렌더링
+function renderTodayPage(f) {
   const summaryEl = document.getElementById("summary-text");
+  if (!summaryEl) return; // 오늘의 운세 페이지가 아니면 스킵
+
   const flowEl = document.getElementById("flow-text");
   const emotionEl = document.getElementById("emotion-text");
   const externalEl = document.getElementById("external-text");
@@ -56,18 +59,13 @@ function renderFortune() {
   const luckyInfoEl = document.getElementById("lucky-info");
   const oneLineEl = document.getElementById("one-line");
 
-  if (!summaryEl) {
-    // 오늘의 운세 페이지가 아닐 때는 그냥 종료
-    return;
-  }
-
   summaryEl.textContent = f.summary;
   flowEl.textContent = f.flow;
   emotionEl.textContent = f.emotion;
   externalEl.textContent = f.external;
   adviceEl.textContent = f.advice;
 
-  // 키워드 chips 비우고 다시 채우기
+  // 키워드 초기화 후 채우기
   keywordListEl.innerHTML = "";
   f.keywords.forEach(keyword => {
     const span = document.createElement("span");
@@ -83,5 +81,30 @@ function renderFortune() {
   oneLineEl.textContent = f.oneLine;
 }
 
-// 4. 페이지 로드 시 실행
-document.addEventListener("DOMContentLoaded", renderFortune);
+// 4. 홈(index.html)에도 오늘의 한 줄/키워드 동기화
+function renderHomePage(f) {
+  const oneLineHome = document.getElementById("home-one-line");
+  const keywordHome = document.getElementById("home-keywords");
+  if (!oneLineHome && !keywordHome) return; // 홈이 아니면 스킵
+
+  if (oneLineHome) {
+    oneLineHome.innerHTML = f.oneLine.replace(/\\n/g, "<br>");
+  }
+
+  if (keywordHome) {
+    keywordHome.innerHTML = "";
+    f.keywords.forEach(keyword => {
+      const span = document.createElement("span");
+      span.className = "chip";
+      span.textContent = keyword;
+      keywordHome.appendChild(span);
+    });
+  }
+}
+
+// 5. DOM 로드 후 실행
+document.addEventListener("DOMContentLoaded", () => {
+  const todayFortune = pickTodayFortune();
+  renderTodayPage(todayFortune);
+  renderHomePage(todayFortune);
+});
