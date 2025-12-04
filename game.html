@@ -36,16 +36,7 @@
 
     <div class="container">
 
-        <!-- 운세 룰렛 -->
-        <div class="game-box">
-            <div class="game-title">운세 룰렛 돌리기</div>
-            <div class="wheel-container">
-                <div class="arrow">Down Arrow</div>
-                <div class="wheel" id="wheel"></div>
-            </div>
-            <button class="spin-btn" onclick="spin()">룰렛 돌리기!</button>
-            <div class="result-text" id="rouletteResult">결과가 여기에 나와요!</div>
-        </div>
+       
 
         <!-- 숫자 퍼즐 -->
         <div class="game-box">
@@ -60,21 +51,7 @@
     <a href="index.html" class="home-btn">홈으로 돌아가기</a>
 
     <script>
-        // 운세 룰렛
-        const results = ["대박운 ★★★★★","연애운 최고","재물운 폭발","인기 폭발","로또 사세요!","솔로 탈출","승진 확정","오늘은 조심하세요"];
-        function spin() {
-            const wheel = document.getElementById('wheel');
-            const resultText = document.getElementById('rouletteResult');
-            resultText.textContent = "돌리는 중...";
-            const deg = Math.floor(4000 + Math.random() * 4000);
-            wheel.style.transition = 'all 4s cubic-bezier(0.22, 0.61, 0.36, 1)';
-            wheel.style.transform = `rotate(${deg}deg)`;
-            setTimeout(() => {
-                const idx = Math.floor(((deg % 360) + 22.5) / 45) % 8;
-                resultText.innerHTML = `<strong style="color:#ffcc00;font-size:3rem;">${results[idx]}</strong><br>오늘 하루 화이팅!`;
-            }, 4200);
-        }
-
+       
         // 숫자 퍼즐
         let tiles = [];
         const puzzle = document.getElementById('puzzle');
