@@ -388,6 +388,53 @@ footer {
   box-shadow: 0 20px 38px rgba(0, 0, 0, 0.85);
 }
 
+/* ---- TAROT MINI CARDS (선택용) ---- */
+.tarot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px;
+  margin: 16px 0 22px;
+}
+
+.tarot-card-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+}
+
+.tarot-mini-card {
+  position: relative;
+  width: 100%;
+  padding-top: 160%; /* 세로 비율 (카드 비율) */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("img/tarot/back.png"); /* 공통 뒷면 */
+  transition:
+    transform 0.25s ease-out,
+    box-shadow 0.25s ease-out,
+    border-color 0.25s ease-out;
+}
+
+.tarot-card-btn:hover .tarot-mini-card {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.9);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.tarot-card-btn.selected .tarot-mini-card {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(140,96,255,0.9);
+  border-color: #d6c3ff;
+}
+
+
 .tarot-card-label {
   font-size: 11px;
   opacity: 0.8;
