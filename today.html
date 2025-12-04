@@ -75,7 +75,22 @@
             border-left:6px solid #ffcc00;
         }
         .luckey {font-size:3rem;color:#ffcc00;margin:20px 0;}
-        @media (max-width:480px) {.result{font-size:1.6rem;}.section{padding:20px;}}
+
+        .home-btn {
+            margin-top:50px;
+            padding:12px 35px;
+            font-size:1.6rem;
+            border:none;
+            border-radius:12px;
+            background:#fff;
+            color:#2a0066;
+            cursor:pointer;
+        }
+
+        @media (max-width:480px) {
+            .result {font-size:1.6rem;}
+            .section{padding:20px;}
+        }
     </style>
 </head>
 <body>
@@ -97,10 +112,11 @@
     </div>
 
     <div id="result" class="result"></div>
-    <button onclick="location.href='index.html'" style="margin-top:50px;">홈으로 돌아가기</button>
+
+    <!-- 홈으로 돌아가기 버튼 추가 -->
+    <button class="home-btn" onclick="location.href='index.html'">홈으로 돌아가기</button>
 
     <script>
-        // 당신이 원래 쓰던 운세 데이터 100% 그대로
         const total = ["오늘은 당신에게 행운이 깃든 하루! 모든 일이 술술 풀려요","조금은 느리게 가더라도 끝내 대박 나는 날","작은 실수 가능성 있으니 꼼꼼히 확인하세요","기분 좋은 소식이 두 번 이상 들어올 거예요","오늘은 당신이 주인공인 날!","오늘은 당신이 빛나는 날! 어디를 가든 주목받아요",
         "하늘이 당신 편이에요. 모든 일이 술술 풀립니다","작은 행복이 연속으로 찾아오는 하루","오늘은 당신이 주인공인 드라마 같은 날","운이 하늘을 뚫을 기세! 대박 조짐 보입니다","오랜 고민이 오늘 해결될 가능성 99%","기분 좋은 소식이 최소 3번 이상 들어올 거예요","웃음이 끊이지 않는 하루가 될 거예요","오늘은 모든 선택이 정답인 날","당신을 향한 행운의 화살이 날아오고 있어요","평소보다 200% 더 예뻐 보이는 날","오늘 한 행동이 앞으로 3개월을 결정해요","오랜만에 마음이 따뜻해지는 일이 생깁니다","우연이 필연으로 바뀌는 마법 같은 하루","오늘은 후회 없는 선택만 하게 될 거예요","당신을 응원하는 기운이 사방에서 느껴져요","오늘 시작한 일은 반드시 성공으로 이어져요","하루 종일 기분 좋은 냄새가 날 거예요","오늘은 당신에게 선물이 준비된 날","모든 게 잘 풀려서 깜짝 놀랄 수도 있어요","오늘은 당신이 원하던 그 일이 현실이 돼요","운이 폭발하는 날! 로또 사도 될 뻔","하루가 너무 행복해서 시간이 아쉬울 거예요","오늘은 실수해도 귀엽게 봐주는 날","당신을 위한 특별한 이벤트가 기다리고 있어요","오늘은 그냥 집에만 있어도 좋은 일이 생겨요","웃는 얼굴로 하루를 시작하면 대박 나요","당신의 매력이 오늘 최고조에 달해요","오늘은 모든 문이 열려 있는 날","당신을 향한 하늘의 응원이 느껴지는 하루"];
         const love = ["갑작스러운 고백 받을 확률 87%","오늘 만난 사람이 운명의 상대일 수 있어요","연락 없는 그 사람이 오늘 밤 연락 올 확률 높음","데이트 신청 들어와요! OK 누르세요","짝사랑하던 그 사람이 먼저 다가와요",
@@ -112,15 +128,18 @@
         const human = ["오랜만에 연락 온 친구와 재회","모임에서 인기 폭발","누군가 당신을 진심으로 도와주고 싶어해요","오해 풀리고 관계 회복","새로운 인연 2명 이상 생김",
         "오늘 오랜만에 연락 온 친구와 재회","모임에서 당신이 인기 폭발","누군가 당신에게 진심으로 고마워해요","오해 풀리고 관계 완벽 회복","새로운 인연 3명 이상 생김","오늘은 사람 때문에 행복한 하루","당신을 도와주고 싶은 사람이 나타남","오늘은 인간관계 대박 나는 날","오랜 친구가 연락 올 확률 90%","오늘 만난 사람이 평생 인연 될 수도","사람들이 당신을 진심으로 좋아해요","오늘은 오해가 풀리는 날","당신을 응원하는 사람이 주변에 가득","오늘은 인간관계 운이 터짐","누군가 당신 생각하며 연락하려고 해요","오늘은 사람 냄새 나는 하루","오랜만에 가족과 따뜻한 시간","당신을 기다리는 사람이 있어요","오늘은 인간관계 꽃길만 걸어요","누군가 당신에게 선물하고 싶어해요","오늘은 사람 때문에 웃는 날","당신을 진심으로 아끼는 사람 많음","오늘은 인간관계 대박 조짐","오랜 친구와의 재회가 기다려져요","사람들이 당신을 부러워해요","오늘은 인간관계 최고의 날","누군가 당신 이름 부르며 웃고 있어요","오늘은 사람 운이 대박","당신 주변에 좋은 사람만 가득","오늘은 인간관계로 행복 충전"];
 
+
         const birthInput = document.getElementById('birth');
         const genderSelect = document.getElementById('gender');
         const btn = document.getElementById('unseBtn');
+        const resultBox = document.getElementById('result');
 
-        // 입력 실시간 체크 (생년월일 8자리 다 채워야 활성화)
+        /** 입력 조건 체크 */
         function checkInput() {
-            const birth = birthInput.value.replace(/[^0-9]/g, ''); // 숫자만
-            birthInput.value = birth; // 자동 필터링
+            const birth = birthInput.value.replace(/[^0-9]/g, '');
+            birthInput.value = birth;
 
+            // 생년월일 8자리 + 성별 선택 완료 시 버튼 활성화
             if (birth.length === 8 && genderSelect.value !== "") {
                 btn.classList.add('active');
             } else {
@@ -131,13 +150,13 @@
         birthInput.addEventListener('input', checkInput);
         genderSelect.addEventListener('change', checkInput);
 
-        // 버튼 클릭
-        btn.addEventListener('click', function() {
+        /** 버튼 클릭 시 결과 출력 */
+        btn.addEventListener('click', function () {
             if (!btn.classList.contains('active')) return;
 
             const r = (arr) => arr[Math.floor(Math.random() * arr.length)];
-            const result =33 document.getElementById('result');
-            result.innerHTML = `
+
+            resultBox.innerHTML = `
                 <div class="luckey">${randomStars()}</div>
                 <div class="section"><strong>총운</strong><br>${r(total)}</div>
                 <div class="section"><strong>연애운</strong><br>${r(love)}</div>
@@ -146,8 +165,9 @@
                 <div class="section"><strong>인간관계운</strong><br>${r(human)}</div>
                 <p style="margin-top:50px;color:#ffccff;font-size:1.8rem;">내일도 올베스트에서 꼭 다시 만나요</p>
             `;
-            result.style.display = 'block';
-            window.scrollTo({top: result.offsetTop - 100, behavior:'smooth'});
+            resultBox.style.display = 'block';
+
+            window.scrollTo({ top: resultBox.offsetTop - 100, behavior: 'smooth' });
         });
 
         function randomStars() {
@@ -155,7 +175,6 @@
             return "★".repeat(count) + "☆".repeat(5 - count);
         }
 
-        // 엔터키로도 가능
         birthInput.addEventListener('keypress', e => {
             if (e.key === 'Enter' && btn.classList.contains('active')) btn.click();
         });
