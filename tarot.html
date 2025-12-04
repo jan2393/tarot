@@ -91,8 +91,27 @@
       </div>
 
       <!-- ✔ 결과 영역 -->
+            <!-- ✔ 결과 영역 -->
       <div class="card tarot-result" style="margin-top:18px;">
         <div class="badge">3단계 · 카드 해석 보기</div>
+
+        <!-- 🔮 뒤집히는 메인 카드 -->
+        <div class="tarot-display">
+          <div class="tarot-flip-card" id="tarot-flip-card">
+            <div class="tarot-face tarot-front">
+              <div class="tarot-front-title">ALLBEST TAROT</div>
+              <div class="tarot-front-sub">마음속 질문을 떠올리고 카드를 선택해 주세요</div>
+            </div>
+            <div class="tarot-face tarot-back">
+              <div class="tarot-back-title" id="tarot-back-name">카드를 선택해 주세요</div>
+              <div class="tarot-back-sub" id="tarot-back-sub">
+                선택한 카드의 이름과 에너지가 여기에 나타납니다.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 텍스트 해석 영역 -->
         <h2 id="tarot-card-name" class="tarot-card-name">아직 카드를 선택하지 않았어요.</h2>
         <p id="tarot-card-sub" class="tarot-card-sub">
           마음속으로 질문을 떠올리고 위 카드 중 한 장을 선택해 주세요.
@@ -117,6 +136,7 @@
           “당신의 질문은 이미, 당신이 어떤 삶을 살고 싶은지 말해주고 있습니다.”
         </p>
       </div>
+
     </div>
   </main>
 
@@ -134,3 +154,4 @@
 <script src="js/app.js"></script>
 </body>
 </html>
+
