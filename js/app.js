@@ -362,6 +362,107 @@ function renderHomePage(f) {
   }
 }
 
+// ---- TAROT: 서로 다른 3장의 타로 카드 뽑기 ----
+function pickThreeTarotCards() {
+  const indices = [];
+  while (indices.length < 3) {
+    const idx = Math.floor(Math.random() * tarotDeck.length);
+    if (!indices.includes(idx)) {
+      indices.push(idx);
+    }
+  }
+  return indices.map(i => tarotDeck[i]);
+}
+
+// cards: [카드1, 카드2, 카드3], clickedButton: 사용자가 클릭한 버튼 (선택 하이라이트용)
+function renderTarotResult(cards, clickedButton) {
+  if (!cards || cards.length < 3) return;
+
+  const card1 = cards[0]; // 현재의 나
+  const card2 = cards[1]; // 오늘의 흐름 (메인 카드)
+  const card3 = cards[2]; // 오늘의 조언
+
+  const nameEl = document.getElementById("tarot-card-name");
+  const subEl = document.getElementById("tarot-card-sub");
+  const keywordsEl = document.getElementById("tarot-card-keywords");
+  const storyEl = document.getElementById("tarot-card-story");
+  const adviceEl = document.getElementById("tarot-card-advice");
+  const oneLineEl = document.getElementById("tarot-card-one-line");
+
+  const flipCardEl = document.getElementById("tarot-flip-card");
+  const backNameEl = document.getElementById("tarot-back-name");
+  const backSubEl = document.getElementById("tarot-back-sub");
+  const backThumbEl = document.getElementById("tarot-back-thumb");
+
+  const pos1Thumb = document.getElementById("tarot-pos1-thumb");
+  const pos2Thumb = document.getElementById("tarot-pos2-thumb");
+  const pos3Thumb = document.getElementById("tarot-pos3-thumb");
+  const pos1Name = document.getElementById("tarot-pos1-name");
+  const pos2Name = document.getElementById("tarot-pos2-name");
+  const pos3Name = document.getElementById("tarot-pos3-name");
+
+  if (!nameEl || !subEl || !keywordsEl || !storyEl || !adviceEl || !oneLineEl) {
+    return; // 타로 페이지가 아닐 때
+  }
+
+  // 🔹 메인 카드(카드2)를 상단 제목으로 사용
+  nameEl.textContent = card2.name;
+  subEl.textContent = card2.subtitle || "";
+
+  // 🔹 키워드는 카드2 기준
+  keywordsEl.innerHTML = "";
+  (card2.keywords || []).forEach((kw) => {
+    const span = document.createElement("span");
+    span.className = "chip";
+    span.textContent = kw;
+    keywordsEl.appendChild(span);
+  });
+
+  // 🔹 텍스트 해석 구성
+  storyEl.textContent =
+    `【카드 1 · 현재의 나】 ${card1.name}\n` +
+    `${card1.story}`;
+
+  adviceEl.textContent =
+    `【카드 3 · 오늘의 조언】 ${card3.name}\n` +
+    `${card3.advice}`;
+
+  oneLineEl.textContent = card2.oneLine;
+
+  // 🔹 플립 카드 뒷면에는 메인 카드(2번) 정보 + 썸네일
+  if (backNameEl) backNameEl.textContent = card2.name;
+  if (backSubEl) backSubEl.textContent = card2.subtitle || "";
+  if (backThumbEl) {
+    backThumbEl.src = card2.image || "img/tarot/back.png";
+    backThumbEl.alt = card2.name;
+  }
+
+  // 🔹 아래 3장 썸네일/이름 세팅
+  if (pos1Thumb) pos1Thumb.src = card1.image || "img/tarot/back.png";
+  if (pos2Thumb) pos2Thumb.src = card2.image || "img/tarot/back.png";
+  if (pos3Thumb) pos3Thumb.src = card3.image || "img/tarot/back.png";
+
+  if (pos1Name) pos1Name.textContent = card1.name;
+  if (pos2Name) pos2Name.textContent = card2.name;
+  if (pos3Name) pos3Name.textContent = card3.name;
+
+  // 🔹 선택한 버튼 하이라이트
+  const allButtons = document.querySelectorAll(".tarot-card-btn");
+  allButtons.forEach((b) => b.classList.remove("selected"));
+  if (clickedButton) {
+    clickedButton.classList.add("selected");
+  }
+
+  // 🔹 플립 애니메이션
+  if (flipCardEl) {
+    flipCardEl.classList.remove("is-flipped");
+    void flipCardEl.offsetWidth; // 리셋 트릭
+    setTimeout(() => {
+      flipCardEl.classList.add("is-flipped");
+    }, 30);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // ✅ 1) 오늘의 운세 (홈 + today.html)
   const dateSeed = getDateSeed();
@@ -388,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-       // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
+  // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
   const tarotButtons = document.querySelectorAll(".tarot-pick");
   const tarotRedrawBtn = document.getElementById("tarot-redraw");
 
@@ -415,7 +516,5 @@ document.addEventListener("DOMContentLoaded", () => {
       renderTarotResult(cards, null); // 다시 뽑기는 버튼 하이라이트 변경 없음
     });
   }
-
-
-
 });
+
