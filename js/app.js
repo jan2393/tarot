@@ -208,9 +208,10 @@ function renderTarotResult(cards, clickedButton) {
   const nameEl = document.getElementById("tarot-card-name");
   const subEl = document.getElementById("tarot-card-sub");
   const keywordsEl = document.getElementById("tarot-card-keywords");
-  const storyEl = document.getElementById("tarot-card-story");
-  const adviceEl = document.getElementById("tarot-card-advice");
-  const oneLineEl = document.getElementById("tarot-card-one-line");
+
+  const card1TextEl = document.getElementById("tarot-card1-text");
+  const card2TextEl = document.getElementById("tarot-card2-text");
+  const card3TextEl = document.getElementById("tarot-card3-text");
 
   const flipCardEl = document.getElementById("tarot-flip-card");
   const backNameEl = document.getElementById("tarot-back-name");
@@ -224,7 +225,7 @@ function renderTarotResult(cards, clickedButton) {
   const pos2Name = document.getElementById("tarot-pos2-name");
   const pos3Name = document.getElementById("tarot-pos3-name");
 
-  if (!nameEl || !subEl || !keywordsEl || !storyEl || !adviceEl || !oneLineEl) {
+  if (!nameEl || !subEl || !keywordsEl || !card1TextEl || !card2TextEl || !card3TextEl) {
     return; // 타로 페이지가 아닐 때
   }
 
@@ -241,16 +242,10 @@ function renderTarotResult(cards, clickedButton) {
     keywordsEl.appendChild(span);
   });
 
-  // 🔹 텍스트 해석 구성
-  storyEl.textContent =
-    `【카드 1 · 현재의 나】 ${card1.name}\n` +
-    `${card1.story}`;
-
-  adviceEl.textContent =
-    `【카드 3 · 오늘의 조언】 ${card3.name}\n` +
-    `${card3.advice}`;
-
-  oneLineEl.textContent = card2.oneLine;
+  // 🔹 3장 각각에 대한 설명
+  card1TextEl.textContent = card1.story;       // 현재의 나
+  card2TextEl.textContent = card2.story;       // 오늘의 흐름
+  card3TextEl.textContent = card3.advice;      // 오늘의 조언
 
   // 🔹 플립 카드 뒷면에는 메인 카드(2번) 정보 + 썸네일
   if (backNameEl) backNameEl.textContent = card2.name;
@@ -285,6 +280,7 @@ function renderTarotResult(cards, clickedButton) {
     }, 30);
   }
 }
+
 
 
 // 3. 날짜 기반 시드 생성 (하루에 하나 고정)
@@ -489,13 +485,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
+    // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
   const tarotButtons = document.querySelectorAll(".tarot-pick");
   const tarotRedrawBtn = document.getElementById("tarot-redraw");
 
   const handleDraw = (event) => {
     event.preventDefault();
-    const cards = pickThreeTarotCards();
+    const cards = pickThreeTarotCards();  // ← 여기!
     const clickedBtn =
       event.currentTarget && event.currentTarget.classList.contains("tarot-pick")
         ? event.currentTarget
@@ -516,5 +512,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderTarotResult(cards, null); // 다시 뽑기는 버튼 하이라이트 변경 없음
     });
   }
+
 });
 
