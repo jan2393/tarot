@@ -262,17 +262,12 @@ document.oncontextmenu = function() { return false; }; // 우클릭 차단
    
     <footer>© 2025 올베스트 allbest.kr</footer>
     
-<!-- 하단 광고 문의 배너 -->
-<div style="margin: 80px auto 40px; text-align:center; padding:20px 0; border-top:1px solid rgba(255,255,255,0.15);">
-    <p style="font-family:'Nanum Pen Script',cursive; font-size:1.8rem; color:#ffcc00; margin-bottom:8px;">
-        광고·제휴 문의
-    </p>
-    <p style="font-size:1.4rem; color:#fff; margin:5px 0; opacity:0.9;">
-        vovs123@naver.com
-    </p>
-    <p style="font-size:1.1rem; color:#ccc; margin-top:12px;">
-        빠른 답변 보장 ♡
-    </p>
-</div>
+<script>
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+</script>
 </body>
 </html>
