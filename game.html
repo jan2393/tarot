@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올베스트 무료 게임 - 운세 룰렛 & 숫자 퍼즐</title>
+    <meta name="description" content="운세 룰렛 돌리고, 숫자 퍼즐도 맞춰보세요! 재미보장 중독성 100%">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
+        body {margin:0;background:linear-gradient(135deg,#0a001f,#2a0066);color:#fff;font-family:'Gowun Dodum',sans-serif;padding:20px;min-height:100vh;}
+        h1 {font-family:'Nanum Pen Script',cursive;font-size:4.5rem;text-align:center;margin:30px 0;text-shadow:0 0 60px #ffcc00;}
+        .container {max-width:1000px;margin:0 auto;}
+        .game-box {background:rgba(255,255,255,0.1);border-radius:25px;padding:40px;margin:40px 0;backdrop-filter:blur(15px);border:2px solid rgba(255,204,0,0.3);text-align:center;}
+        .game-title {font-family:'Nanum Pen Script',cursive;font-size:3.5rem;color:#ffcc00;margin-bottom:20px;}
+        
+        /* 운세 룰렛 */
+        .wheel-container {margin:40px 0;}
+        .wheel {width:280px;height:280px;border-radius:50%;background:conic-gradient(#ff6b6b 0% 12.5%,#ffcc00 12.5% 25%,#8b00ff 25% 37.5%,#00ff88 37.5% 50%,#ff6b6b 50% 62.5%,#ffcc00 62.5% 75%,#8b00ff 75% 87.5%,#00ff88 87.5% 100%);margin:0 auto;position:relative;box-shadow:0 0 60px rgba(255,204,0,0.8);}
+        .arrow {position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-size:5rem;z-index:10;}
+        .spin-btn {padding:18px 60px;background:#ffcc00;color:#000;border:none;border-radius:50px;font-size:2rem;margin:30px;cursor:pointer;font-family:'Nanum Pen Script';box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+        .result-text {font-size:2.2rem;margin:30px 0;color:#ffccff;}
+
+        /* 숫자 퍼즐 */
+        .puzzle-container {margin:60px 0;}
+        .puzzle {display:grid;grid-template-columns:repeat(4,90px);gap:8px;margin:30px auto;width:fit-content;background:rgba(0,0,0,0.3);padding:15px;border-radius:20px;}
+        .tile {width:90px;height:90px;background:#ffcc00;color:#000;font-size:2.5rem;display:flex;align-items:center;justify-content:center;border-radius:15px;cursor:pointer;transition:0.3s;font-weight:bold;}
+        .tile.empty {background:transparent;cursor:default;}
+        .reset-btn {padding:15px 40px;background:#ff6b6b;color:#fff;border:none;border-radius:50px;font-size:1.8rem;margin-top:20px;cursor:pointer;}
+
+        .home-btn {display:block;margin:60px auto;padding:18px 80px;background:#ffcc00;color:#000;border-radius:50px;font-size:2.5rem;text-decoration:none;font-family:'Nanum Pen Script';width:fit-content;}
+    </style>
+</head>
+<body>
+    <h1>올베스트 게임존</h1>
+    <p style="text-align:center;font-size:1.8rem;margin:30px;color:#ffccff;">재미있는 게임으로 심심풀이 해보세요!</p>
+
+    <div class="container">
+
+        <!-- 운세 룰렛 -->
+        <div class="game-box">
+            <div class="game-title">운세 룰렛 돌리기</div>
+            <div class="wheel-container">
+                <div class="arrow">Down Arrow</div>
+                <div class="wheel" id="wheel"></div>
+            </div>
+            <button class="spin-btn" onclick="spin()">룰렛 돌리기!</button>
+            <div class="result-text" id="rouletteResult">결과가 여기에 나와요!</div>
+        </div>
+
+        <!-- 숫자 퍼즐 -->
+        <div class="game-box">
+            <div class="game-title">숫자 퍼즐 맞추기</div>
+            <p style="font-size:1.5rem;margin:20px;">빈칸 옆의 숫자를 클릭해서 1~15 순서대로 맞춰보세요!</p>
+            <div class="puzzle" id="puzzle"></div>
+            <button class="reset-btn" onclick="initPuzzle()">다시 섞기</button>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="home-btn">홈으로 돌아가기</a>
+
+    <script>
+        // 운세 룰렛
+        const results = ["대박운 ★★★★★","연애운 최고","재물운 폭발","인기 폭발","로또 사세요!","솔로 탈출","승진 확정","오늘은 조심하세요"];
+        function spin() {
+            const wheel = document.getElementById('wheel');
+            const resultText = document.getElementById('rouletteResult');
+            resultText.textContent = "돌리는 중...";
+            const deg = Math.floor(4000 + Math.random() * 4000);
+            wheel.style.transition = 'all 4s cubic-bezier(0.22, 0.61, 0.36, 1)';
+            wheel.style.transform = `rotate(${deg}deg)`;
+            setTimeout(() => {
+                const idx = Math.floor(((deg % 360) + 22.5) / 45) % 8;
+                resultText.innerHTML = `<strong style="color:#ffcc00;font-size:3rem;">${results[idx]}</strong><br>오늘 하루 화이팅!`;
+            }, 4200);
+        }
+
+        // 숫자 퍼즐
+        let tiles = [];
+        const puzzle = document.getElementById('puzzle');
+        
+        function initPuzzle() {
+            tiles = [...Array(15).keys()].map(n => n + 1);
+            tiles.push(null);
+            for (let i = tiles.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+            }
+            renderPuzzle();
+        }
+        
+        function renderPuzzle() {
+            puzzle.innerHTML = '';
+            tiles.forEach((num, i) => {
+                const tile = document.createElement('div');
+                tile.className = 'tile' + (num === null ? ' empty' : '');
+                tile.textContent = num || '';
+                tile.onclick = () => moveTile(i);
+                puzzle.appendChild(tile);
+            });
+        }
+        
+        function moveTile(pos) {
+            const emptyIdx = tiles.indexOf(null);
+            const diff = Math.abs(pos - emptyIdx);
+            if (diff === 1 || diff === 4) {
+                [tiles[pos], tiles[emptyIdx]] = [tiles[emptyIdx], tiles[pos]];
+                renderPuzzle();
+            }
+        }
+        
+        initPuzzle(); // 페이지 로드 시 자동 시작
+    </script>
+
+    <script>
+        fetch('footer.html')
+            .then(r => r.text())
+            .then(d => document.body.insertAdjacentHTML('beforeend', d));
+    </script>
+</body>
+</html>
