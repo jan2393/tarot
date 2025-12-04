@@ -464,5 +464,12 @@
     generateBtn.addEventListener("click", handleGenerate);
     clearHistoryBtn.addEventListener("click", handleClearHistory);
   </script>
+  <script>
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+</script>
 </body>
 </html>
