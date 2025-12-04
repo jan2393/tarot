@@ -33,71 +33,50 @@
   </header>
 
   <main>
-    <div class="container text-page">
-      <h1>오늘의 운세</h1>
-      <p style="color:#b9bcff; font-size:13px; margin-bottom:14px;">
-        오늘 하루를 시작하기 전에, 마음을 차분히 가다듬고 이 글을 읽어보세요.
-      </p>
+  <div class="container text-page">
+    <h1>오늘의 운세</h1>
+    <p style="color:#b9bcff; font-size:13px; margin-bottom:14px;">
+      오늘 하루를 시작하기 전에, 마음을 차분히 가다듬고 이 글을 읽어보세요.
+    </p>
 
-      <div class="fortune-summary">
-        <div class="badge">오늘의 흐름 요약</div>
-        <p style="font-size:14px;">
-          당신의 마음은 오늘, 조용하지만 강한 힘을 품고 있습니다.<br />
-          미묘한 설렘과 불안이 공존하지만, 결국 좋은 선택으로 이어지는 하루입니다.
-        </p>
+    <div class="fortune-summary">
+      <div class="badge">오늘의 흐름 요약</div>
+      <p id="summary-text" style="font-size:14px;">
+        <!-- JS에서 자동으로 채워질 영역 -->
+      </p>
+    </div>
+
+    <div class="fortune-detail">
+      <div class="fortune-block">
+        <h3>현재의 흐름</h3>
+        <p id="flow-text"></p>
+
+        <h3 style="margin-top:12px;">감정 상태</h3>
+        <p id="emotion-text"></p>
+
+        <h3 style="margin-top:12px;">외부 영향</h3>
+        <p id="external-text"></p>
+
+        <h3 style="margin-top:12px;">오늘의 조언</h3>
+        <p id="advice-text"></p>
       </div>
 
-      <div class="fortune-detail">
-        <div class="fortune-block">
-          <h3>현재의 흐름</h3>
-          <p>
-            당신은 지금 안정과 균형을 찾으려는 과정에 있습니다.<br />
-            혼자 정리하고 싶은 마음과, 누군가와 나누고 싶은 마음이 함께 움직입니다.
-          </p>
-
-          <h3 style="margin-top:12px;">감정 상태</h3>
-          <p>
-            작은 걱정이 머릿속을 맴돌지만, 그만큼 오늘의 당신은 신중합니다.<br />
-            감정에 휘둘리기보다는, 한 번 더 생각한 뒤 움직이게 되는 날입니다.
-          </p>
-
-          <h3 style="margin-top:12px;">외부 영향</h3>
-          <p>
-            예상하지 못했던 제안이나 연락이 들어올 수 있습니다.<br />
-            가볍게 거절하기보다는, 한 번쯤은 들어보고 판단해도 괜찮습니다.
-          </p>
-
-          <h3 style="margin-top:12px;">오늘의 조언</h3>
-          <p>
-            너무 많은 것을 한 번에 해결하려 하지 않아도 됩니다.<br />
-            얽힌 실타래처럼 보이는 일도, 하나씩 잡아당기면 천천히 풀려갑니다.<br />
-            오늘의 당신에게 필요한 건 ‘완벽함’이 아니라 ‘작은 진행’입니다.
-          </p>
+      <div class="fortune-block">
+        <h3>오늘의 행동 키워드</h3>
+        <div class="chip-list" id="keyword-list">
+          <!-- JS에서 chip들을 만들어 넣을 예정 -->
         </div>
 
-        <div class="fortune-block">
-          <h3>오늘의 행동 키워드</h3>
-          <div class="chip-list">
-            <span class="chip">정리</span>
-            <span class="chip">작은 용기</span>
-            <span class="chip">보류된 일 마무리</span>
-          </div>
+        <h3 style="margin-top:14px;">행운 요소</h3>
+        <p id="lucky-info" style="font-size:13px; margin-bottom:6px;"></p>
 
-          <h3 style="margin-top:14px;">행운 요소</h3>
-          <p style="font-size:13px; margin-bottom:6px;">
-            숫자: <strong>7 · 12 · 24</strong><br />
-            컬러: <strong>버건디 · 네이비</strong>
-          </p>
-
-          <h3 style="margin-top:14px;">오늘을 위한 한 줄</h3>
-          <p style="font-size:13px;">
-            “당신이 내딛는 작은 걸음은,<br />
-            생각보다 멀리 데려다 줄 거예요.”
-          </p>
-        </div>
+        <h3 style="margin-top:14px;">오늘을 위한 한 줄</h3>
+        <p id="one-line" style="font-size:13px;"></p>
       </div>
     </div>
-  </main>
+  </div>
+</main>
+
 
   <footer>
     <div class="container footer-inner">
