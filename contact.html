@@ -1,28 +1,83 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의하기 - 올베스트</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap');
-        body {margin:0;background:linear-gradient(135deg,#1a0033,#330066);color:#fff;font-family:'Gowun Dodum',sans-serif;line-height:1.8;padding:20px;min-height:100vh;display:flex;align-items:center;justify-content:center;}
-        .box {background:rgba(255,255,255,0.1);padding:50px 40px;border-radius:25px;backdrop-filter:blur(15px);text-align:center;max-width:600px;width:100%;}
-        h1 {font-family:'Nanum Pen Script',cursive;font-size:4rem;color:#ffcc00;margin-bottom:30px;text-shadow:0 0 40px #ffcc00;}
-        p {font-size:1.3rem;margin:20px 0;}
-        .email {font-size:2.5rem;font-weight:bold;color:#ffcc00;margin:40px 0;word-break:break-all;}
-        .btn {display:inline-block;padding:18px 60px;background:#ffcc00;color:#000;font-size:2rem;border-radius:50px;margin-top:40px;text-decoration:none;font-family:'Nanum Pen Script';box-shadow:0 10px 30px rgba(0,0,0,0.5);}
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>문의하기 - 올베스트</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<div class="box">
-    <h1>문의하기</h1>
-    <p>제휴, 광고, 협업, 오류 신고 등<br>어떤 문의든 환영합니다</p>
-    <div class="email">vovs123@naver.com</div>
-    <p>빠르고 친절하게 답변드릴게요!</p>
-    <a href="mailto:vovs123@naver.com" class="btn">메일 보내기</a>
-    <br><br>
-    <a href="index.html" style="color:#aaa;font-size:1.1rem;">← 홈으로 돌아가기</a>
+<div class="site-wrapper">
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">올베스트</div>
+          <div class="logo-text-sub">오늘의 감성 운세</div>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="today.html">오늘의 운세</a></li>
+          <li><a href="tarot.html">타로</a></li>
+          <li><a href="lucky-number.html">행운의 숫자</a></li>
+          <li><a href="archive.html">운세 아카이브</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="how-to.html">이용안내</a></li>
+          <li><a href="contact.html" class="active">문의</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container text-page">
+      <h1>문의하기</h1>
+      <p>
+        서비스에 대한 의견, 제휴, 개선 제안 등은 아래 이메일로 보내주세요.<br />
+        모든 메시지는 감사한 마음으로 읽겠습니다.
+      </p>
+      <p style="margin-top:8px; font-size:14px;">
+        📩 <strong>contact@allbest.kr</strong>
+      </p>
+
+      <!-- 실제 메일 전송 기능을 붙이기 전까지는 안내문만 있어도 충분 -->
+      <div class="card" style="margin-top:18px;">
+        <div class="badge">참고</div>
+        <p style="font-size:13px;">
+          추후에는 아래와 같은 폼을 통해 직접 사이트에서 문의를 받을 수 있습니다.<br />
+          (현재는 예시 레이아웃만 제공됩니다.)
+        </p>
+        <form class="form">
+          <div>
+            <label>이름</label>
+            <input type="text" placeholder="이름을 입력하세요" />
+          </div>
+          <div>
+            <label>이메일</label>
+            <input type="email" placeholder="답변을 받을 이메일 주소" />
+          </div>
+          <div>
+            <label>문의 내용</label>
+            <textarea placeholder="문의·제안·피드백을 자유롭게 적어주세요."></textarea>
+          </div>
+          <button type="button" class="btn-primary">예시 버튼 (실제 전송 기능 없음)</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 올베스트 Allbest. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="terms.html">이용약관</a>
+      </div>
+    </div>
+  </footer>
 </div>
 </body>
 </html>
