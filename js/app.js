@@ -1,6 +1,6 @@
 // js/app.js
 
-// 1. 운세 데이터 여러 개 (필요하면 계속 추가 가능)
+// 1. 운세 데이터 여러 개 (계속 추가 가능)
 const fortunes = [
   {
     summary: "당신의 마음은 오늘, 조용하지만 강한 힘을 품고 있습니다. 미묘한 설렘과 불안이 공존하지만, 결국 좋은 선택으로 이어지는 하루입니다.",
@@ -37,16 +37,33 @@ const fortunes = [
   }
 ];
 
-// 2. 오늘 날짜를 기반으로 "하루에 하나" 운세 선택
-function pickTodayFortune() {
-  const today = new Date();
-  // 연+월+일 더해서 fortunes 길이로 나눈 나머지 → 날짜가 바뀌면 인덱스도 바뀜
-  const seed = today.getFullYear() + (today.getMonth() + 1) + today.getDate();
-  const index = seed % fortunes.length;
+// 2. 공통: 시드(seed) 기반으로 운세 하나 고르는 함수
+function getFortuneBySeed(seed) {
+  const safeSeed = Math.abs(seed || 0);
+  const index = safeSeed % fortunes.length;
   return fortunes[index];
 }
 
-// 3. 오늘의 운세 페이지(today.html)에 렌더링
+// 3. 날짜 기반 시드 생성 (하루에 하나 고정)
+function getDateSeed() {
+  const d = new Date();
+  // YYYYMMDD 형식으로 하나의 숫자를 만듦
+  return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+}
+
+// 4. 이름 + 생년월일 기반 개인 시드 생성
+function getPersonalSeed(name, birth) {
+  let base = getDateSeed();
+  const str = (name || "").trim() + (birth || "").trim();
+
+  for (let i = 0; i < str.length; i++) {
+    base += str.charCodeAt(i) * (i + 1);
+  }
+
+  return base;
+}
+
+// 5. 오늘의 운세 페이지 렌더링
 function renderTodayPage(f) {
   const summaryEl = document.getElementById("summary-text");
   if (!summaryEl) return; // 오늘의 운세 페이지가 아니면 스킵
@@ -81,14 +98,14 @@ function renderTodayPage(f) {
   oneLineEl.textContent = f.oneLine;
 }
 
-// 4. 홈(index.html)에도 오늘의 한 줄/키워드 동기화
+// 6. 홈(index.html) 오늘의 한 줄/키워드 렌더링
 function renderHomePage(f) {
   const oneLineHome = document.getElementById("home-one-line");
   const keywordHome = document.getElementById("home-keywords");
   if (!oneLineHome && !keywordHome) return; // 홈이 아니면 스킵
 
   if (oneLineHome) {
-    oneLineHome.innerHTML = f.oneLine.replace(/\\n/g, "<br>");
+    oneLineHome.textContent = f.oneLine;
   }
 
   if (keywordHome) {
@@ -102,9 +119,31 @@ function renderHomePage(f) {
   }
 }
 
-// 5. DOM 로드 후 실행
+// 7. DOM 로드 후 초기 렌더링 + 개인화 버튼 이벤트
 document.addEventListener("DOMContentLoaded", () => {
-  const todayFortune = pickTodayFortune();
+  // ① 기본: 날짜만 기준으로 한 오늘의 운세
+  const dateSeed = getDateSeed();
+  const todayFortune = getFortuneBySeed(dateSeed);
+
+  // 오늘의 운세 페이지/홈 공통 초기 렌더
   renderTodayPage(todayFortune);
   renderHomePage(todayFortune);
+
+  // ② 개인화 버튼 (today.html 전용)
+  const btn = document.getElementById("personalize-btn");
+  if (btn) {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const nameInput = document.getElementById("personal-name");
+      const birthInput = document.getElementById("personal-birth");
+      const name = nameInput ? nameInput.value : "";
+      const birth = birthInput ? birthInput.value : "";
+
+      const personalSeed = getPersonalSeed(name, birth);
+      const personalFortune = getFortuneBySeed(personalSeed);
+
+      renderTodayPage(personalFortune);
+    });
+  }
 });
