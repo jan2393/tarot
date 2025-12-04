@@ -336,5 +336,12 @@
             document.getElementById('unseBtn').disabled = true;
         };
     </script>
+    <script>
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+</script>
 </body>
 </html>
