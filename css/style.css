@@ -408,6 +408,75 @@ footer {
   color: #b9bcff;
   margin-bottom: 10px;
 }
+/* ---- TAROT FLIP CARD ---- */
+.tarot-display {
+  margin: 14px auto 10px;
+  display: flex;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.tarot-flip-card {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  height: 160px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.23, 0.74, 0.18, 1);
+}
+
+.tarot-flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.tarot-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  backface-visibility: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+
+.tarot-front {
+  background: radial-gradient(circle at 20% 0, #ffb7ff 0, #7b4bff 40%, #17092b 80%);
+}
+
+.tarot-back {
+  background: radial-gradient(circle at 10% 0, #2f3a76 0, #101425 40%, #05040f 80%);
+  transform: rotateY(180deg);
+}
+
+.tarot-front-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tarot-front-sub {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #f4dcff;
+}
+
+.tarot-back-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.tarot-back-sub {
+  font-size: 12px;
+  color: #c9cff9;
+  text-align: center;
+}
 
 
 /* 반응형 */
