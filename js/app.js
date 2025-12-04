@@ -197,7 +197,6 @@ function pickThreeTarotCards() {
 }
 
 
-
 // cards: [카드1, 카드2, 카드3], clickedButton: 사용자가 클릭한 버튼 (선택 하이라이트용)
 function renderTarotResult(cards, clickedButton) {
   if (!cards || cards.length < 3) return;
@@ -286,7 +285,6 @@ function renderTarotResult(cards, clickedButton) {
     }, 30);
   }
 }
-
 
 
 // 3. 날짜 기반 시드 생성 (하루에 하나 고정)
@@ -390,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-      // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
+       // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
   const tarotButtons = document.querySelectorAll(".tarot-pick");
   const tarotRedrawBtn = document.getElementById("tarot-redraw");
 
@@ -414,9 +412,10 @@ document.addEventListener("DOMContentLoaded", () => {
     tarotRedrawBtn.addEventListener("click", (event) => {
       event.preventDefault();
       const cards = pickThreeTarotCards();
-      renderTarotResult(cards, null); // 다시 뽑기에서는 버튼 하이라이트 유지 X
+      renderTarotResult(cards, null); // 다시 뽑기는 버튼 하이라이트 변경 없음
     });
   }
+
 
 
 });
