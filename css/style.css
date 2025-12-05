@@ -417,6 +417,7 @@ footer {
   perspective: 1200px;
 }
 
+/* 카드 뒤집기 애니메이션 */
 .tarot-flip-card {
   position: relative;
   width: 100%;
@@ -434,7 +435,7 @@ footer {
   position: absolute;
   inset: 0;
   border-radius: 18px;
-  backface-visibility: hidden;
+  backface-visibility: hidden;  /* 뒷면 숨기기 */
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.12);
   display: flex;
@@ -450,7 +451,7 @@ footer {
 
 .tarot-back {
   background: radial-gradient(circle at 10% 0, #2f3a76 0, #101425 40%, #05040f 80%);
-  transform: rotateY(180deg);
+  transform: rotateY(180deg); /* 뒷면 회전 */
 }
 
 .tarot-front-title {
