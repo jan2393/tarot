@@ -25,8 +25,8 @@ body {
 }
 
 .tarot-flip-card {
-  width: 120px; /* 카드 가로 크기 */
-  height: 180px; /* 카드 세로 크기 */
+  width: 140px;  /* 카드 가로 크기 */
+  height: 200px;  /* 카드 세로 크기 */
   perspective: 1000px; /* 3D 공간 깊이 설정 */
   margin: 10px;
   transform-style: preserve-3d; /* 3D 효과 보존 */
