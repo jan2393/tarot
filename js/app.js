@@ -309,15 +309,11 @@ function flipAllCards() {
   });
 }
 
-// 3. 서로 다른 3장의 타로 카드 뽑기
-function pickThreeTarotCards() {
-  // 3장 뽑기
-  const shuffled = [...tarotDeck].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 3).map((card, i) => ({
-    ...card,
-    position: i === 0 ? "현재" : i === 1 ? "조언" : "미래",
-    isReversed: Math.random() < 0.5
-  }));
+ // 카드 뽑기 함수
+  function pickThreeTarotCards() {
+    const shuffledDeck = [...tarotDeck].sort(() => Math.random() - 0.5);  // 덱 섞기
+    return shuffledDeck.slice(0, 3);  // 첫 3장 반환
+  }
   
   const indices = [];
   while (indices.length < 3) {
@@ -366,6 +362,12 @@ function renderTarotResult(cards, clickedButton) {
   nameEl.textContent = card2.name;
   subEl.textContent = card2.subtitle || "";
 
+// 카드 뽑기 버튼 클릭 이벤트
+  document.getElementById("tarot-redraw").addEventListener("click", function () {
+    const cards = pickThreeTarotCards();
+    renderTarotResult(cards);
+  });
+  
   // 🔹 키워드는 카드2 기준
   keywordsEl.innerHTML = "";
   (card2.keywords || []).forEach((kw) => {
