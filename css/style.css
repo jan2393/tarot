@@ -117,9 +117,12 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 16px 0 22px; 
   transition: transform 0.6s; /* 뒤집기 애니메이션 */
 .tarot-flip-card.is-flipped { transform: rotateY(180deg); }
 .tarot-face { position: absolute; inset: 0; border-radius: 18px; backface-visibility: hidden; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7); 
-             border: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; } .tarot-front { background: radial-gradient(circle at 20% 0, #ffb7ff 0, #7b4bff 40%, #17092b 80%); } 
+             border: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; } 
+.tarot-front { background: radial-gradient(circle at 20% 0, #ffb7ff 0, #7b4bff 40%, #17092b 80%); } 
 .tarot-back { background: radial-gradient(circle at 10% 0, #2f3a76 0, #101425 40%, #05040f 80%); 
-             transform: rotateY(180deg); } 
+             transform: rotateY(180deg); background-image: url('https://gi.esmplus.com/vovs123/app/tarot/back.png'); /* 뒷면 이미지 */
+  background-size: cover;
+  background-position: center; } 
 .tarot-front-title { font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; } 
 .tarot-front-sub { margin-top: 6px; font-size: 11px; color: #f4dcff; } 
 .tarot-back-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; text-align: center; } 
