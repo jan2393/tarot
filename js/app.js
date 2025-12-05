@@ -158,9 +158,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const tarotButtons = document.querySelectorAll(".tarot-pick");
   const tarotRedrawBtn = document.getElementById("tarot-redraw");
 
-// 카드 선택 시 카드 뒷면/앞면 전환
+let selectedCards = []; // 선택된 카드들을 저장할 배열
+  
+// 카드 선택 시 처리
   tarotButtons.forEach((btn, index) => {
     btn.addEventListener("click", () => {
+      if (selectedCards.length >= 3) return; // 3장만 선택하도록 제한
+
+const card = tarotDeck[index];  // 클릭된 카드 정보 가져오기
+      selectedCards.push(card);  // 선택된 카드 배열에 추가
+      
       const flipCard = btn.querySelector(".tarot-flip-card");
       flipCard.classList.toggle("is-flipped");
 
@@ -171,6 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // 3장 선택한 카드 결과 렌더링
       const selectedCards = getSelectedCards();
       renderTarotResult(selectedCards);
+      // 선택한 카드를 UI에서 하이라이트 처리
+      btn.classList.add("selected");
     });
   });
 
@@ -192,8 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // 다시 뽑기 버튼 클릭 시
   if (tarotRedrawBtn) {
     tarotRedrawBtn.addEventListener("click", () => {
-      const newCards = pickThreeTarotCards();
-      renderTarotResult(newCards);
+      selectedCards = []; // 선택된 카드 초기화
+      renderTarotResult(selectedCards);
+      // UI에서 하이라이트 처리 초기화
+      tarotButtons.forEach(btn => btn.classList.remove("selected"));
     });
   }
 });
@@ -385,7 +396,7 @@ function pickRandomTarotCard() {
   return tarotDeck[index];
 }
 
-// 3개의 카드를 선택하고 그에 대한 운세를 출력하는 함수
+// 3장의 카드에 대한 운세 결과를 렌더링
 function renderTarotResult(cards) {
   const nameEl = document.getElementById("tarot-card-name");
   const subEl = document.getElementById("tarot-card-sub");
@@ -394,19 +405,27 @@ function renderTarotResult(cards) {
   const adviceEl = document.getElementById("tarot-card-advice");
   const oneLineEl = document.getElementById("tarot-card-one-line");
 
-  if (!nameEl || !subEl || !keywordsEl || !storyEl || !adviceEl || !oneLineEl) {
-    return; // 타로 페이지가 아닐 때
+
+  if (!cards || cards.length < 3) {
+    nameEl.textContent = "아직 카드를 선택하지 않았어요.";
+    subEl.textContent = "마음속으로 질문을 떠올리고 카드를 선택해 주세요.";
+    return;
   }
 
-   // 카드 1, 2, 3에 대한 운세 출력
-  nameEl.textContent = cards[1].name;  // 카드 2: 오늘의 흐름
-  subEl.textContent = cards[1].subtitle || "";
-  storyEl.textContent = cards[0].story;  // 카드 1: 현재의 나
-  adviceEl.textContent = cards[2].advice;  // 카드 3: 오늘의 조언
-  oneLineEl.textContent = cards[1].oneLine;  // 카드 2: 오늘의 메시지
+const card1 = cards[0]; // 첫 번째 카드
+  const card2 = cards[1]; // 두 번째 카드
+  const card3 = cards[2]; // 세 번째 카드
 
+  
+   nameEl.textContent = card2.name;  // 카드 2: 오늘의 흐름
+  subEl.textContent = card2.subtitle || "";
+  storyEl.textContent = card1.story;  // 카드 1: 현재의 나
+  adviceEl.textContent = card3.advice;  // 카드 3: 오늘의 조언
+  oneLineEl.textContent = card2.oneLine;  // 카드 2: 오늘의 메시지
+
+// 키워드 렌더링
   keywordsEl.innerHTML = "";
-  cards[1].keywords.forEach((kw) => {
+  (card2.keywords || []).forEach(kw => {
     const span = document.createElement("span");
     span.className = "chip";
     span.textContent = kw;
