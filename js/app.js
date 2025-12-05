@@ -329,6 +329,7 @@ function pickThreeTarotCards() {
   return indices.map(i => tarotDeck[i]);
 }
 
+
 // cards: [카드1, 카드2, 카드3], clickedButton: 사용자가 클릭한 버튼 (선택 하이라이트용)
 function renderTarotResult(cards, clickedButton) {
   if (!cards || cards.length < 3) return;
