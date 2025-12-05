@@ -42,6 +42,38 @@ main { flex: 1; padding: 40px 0 60px; }
 .card p { font-size: 13px; color: #d3d5ff; } 
 .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: 11px; background: rgba(255, 255, 255, 0.07); color: #e5e5ff; margin-bottom: 8px; } 
 
+.card.flipped {
+    transform: rotateY(180deg);
+}
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s;
+}
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.card-front {
+    transform: rotateY(180deg);
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-back {
+    background: linear-gradient(45deg, #4a0b4e, #8b00a8);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="15" fill="%23ffcc00"/></svg>');
+    background-size: cover;
+}
+
 /* 섹션 타이틀 */ 
 .section-title { font-size: 20px; margin-bottom: 10px; } 
 .section-sub { font-size: 13px; color: #b9bcff; margin-bottom: 18px; } 
@@ -75,4 +107,16 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 16px 0 22px; 
 .tarot-intro strong { color: #ffb7ff; } .tarot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin: 16px 0 22px; } 
 .tarot-card-btn { border: none; outline: none; cursor: pointer; border-radius: 16px; padding: 26px 8px; font-size: 13px; font-weight: 500; text-align: center; color: #fdf5ff; background: radial-gradient(circle at top, #3e2a6e 0, #140a2b 55%, #05030d 100%); box-shadow: 0 14px 26px rgba(0, 0, 0, 0.65); border: 1px solid rgba(255, 255, 255, 0.08); position: relative; overflow: hidden; } .tarot-card-btn::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 0, rgba(255, 189, 255, 0.6), transparent 55%); opacity: 0.6; pointer-events: none; } .tarot-card-btn span { position: relative; } .tarot-card-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 38px rgba(0, 0, 0, 0.85); } /* ---- TAROT MINI CARDS (선택용) ---- */ .tarot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 12px; margin: 16px 0 22px; } 
 
-.tarot-card-btn { border: none; outline: none; cursor: pointer; background: none; padding: 0; } .tarot-mini-card { position: relative; width: 100%; padding-top: 160%; /* 세로 비율 (카드 비율) */ border-radius: 12px; overflow: hidden; box-shadow: 0 10px 24px rgba(0,0,0,0.75); border: 1px solid rgba(255,255,255,0.12); background-size: cover; background-position: center; background-repeat: no-repeat; background-image: url("img/tarot/back.png"); /* 공통 뒷면 */ transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out; } .tarot-card-btn:hover .tarot-mini-card { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,0.9); border-color: rgba(255,255,255,0.25); } .tarot-card-btn.selected .tarot-mini-card { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 36px rgba(140,96,255,0.9); border-color: #d6c3ff; } .tarot-card-label { font-size: 11px; opacity: 0.8; display: block; } .tarot-result { margin-top: 10px; } .tarot-card-name { font-size: 18px; margin-bottom: 6px; } .tarot-card-sub { font-size: 13px; color: #b9bcff; margin-bottom: 10px; } /* ---- TAROT FLIP CARD ---- */ .tarot-display { margin: 14px auto 10px; display: flex; justify-content: center; perspective: 1200px; } /* 카드의 기본 스타일 */ .tarot-flip-card { width: 100px; /* 카드 가로 크기 */ height: 150px; /* 카드 세로 크기 */ perspective: 1000px; /* 3D 공간 깊이 설정 */ margin: 10px; } .tarot-flip-card.is-flipped { transform: rotateY(180deg); } .tarot-face { position: absolute; inset: 0; border-radius: 18px; backface-visibility: hidden; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; } .tarot-front { background: radial-gradient(circle at 20% 0, #ffb7ff 0, #7b4bff 40%, #17092b 80%); } .tarot-back { background: radial-gradient(circle at 10% 0, #2f3a76 0, #101425 40%, #05040f 80%); transform: rotateY(180deg); } .tarot-front-title { font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; } .tarot-front-sub { margin-top: 6px; font-size: 11px; color: #f4dcff; } .tarot-back-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; text-align: center; } .tarot-back-sub { font-size: 12px; color: #c9cff9; text-align: center; } /* ---- TAROT THREE CARDS RESULT ---- */ .tarot-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 10px 0 14px; } .tarot-three-item { text-align: center; } .badge.small { font-size: 10px; padding: 2px 8px; border-radius: 999px; } /* 반응형 */ @media (max-width: 768px) { .hero { grid-template-columns: minmax(0, 1fr); } nav ul { flex-wrap: wrap; gap: 10px; justify-content: flex-end; } .fortune-detail { grid-template-columns: minmax(0, 1fr); } }
+.tarot-card-btn { border: none; outline: none; cursor: pointer; background: none; padding: 0; } .tarot-mini-card { position: relative; width: 100%; padding-top: 160%; /* 세로 비율 (카드 비율) */ border-radius: 12px; overflow: hidden; box-shadow: 0 10px 24px rgba(0,0,0,0.75); border: 1px solid rgba(255,255,255,0.12); background-size: cover; background-position: center; background-repeat: no-repeat; background-image: url("img/tarot/back.png"); /* 공통 뒷면 */ transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out; } .tarot-card-btn:hover .tarot-mini-card { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,0.9); border-color: rgba(255,255,255,0.25); } .tarot-card-btn.selected .tarot-mini-card { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 36px rgba(140,96,255,0.9); border-color: #d6c3ff; } .tarot-card-label { font-size: 11px; opacity: 0.8; display: block; } .tarot-result { margin-top: 10px; } .tarot-card-name { font-size: 18px; margin-bottom: 6px; } .tarot-card-sub { font-size: 13px; color: #b9bcff; margin-bottom: 10px; } /* ---- TAROT FLIP CARD ---- */ .tarot-display { margin: 14px auto 10px; display: flex; justify-content: center; perspective: 1200px; } /* 카드의 기본 스타일 */ .tarot-flip-card { width: 100px; /* 카드 가로 크기 */ height: 150px; /* 카드 세로 크기 */ perspective: 1000px; /* 3D 공간 깊이 설정 */ margin: 10px; } .tarot-flip-card.is-flipped { transform: rotateY(180deg); } .tarot-face { position: absolute; inset: 0; border-radius: 18px; backface-visibility: hidden; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; } .tarot-front { background: radial-gradient(circle at 20% 0, #ffb7ff 0, #7b4bff 40%, #17092b 80%); } 
+.tarot-back { background: radial-gradient(circle at 10% 0, #2f3a76 0, #101425 40%, #05040f 80%); 
+             transform: rotateY(180deg); } 
+.tarot-front-title { font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; } 
+.tarot-front-sub { margin-top: 6px; font-size: 11px; color: #f4dcff; } 
+.tarot-back-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; text-align: center; } 
+.tarot-back-sub { font-size: 12px; color: #c9cff9; text-align: center; }
+/* ---- TAROT THREE CARDS RESULT ---- */ 
+.tarot-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 10px 0 14px; } 
+.tarot-three-item { text-align: center; } .badge.small { font-size: 10px; padding: 2px 8px; border-radius: 999px; } 
+/* 반응형 */ 
+@media (max-width: 768px) { .hero { grid-template-columns: minmax(0, 1fr); } nav ul { flex-wrap: wrap; gap: 10px; justify-content: flex-end; } 
+                           .fortune-detail { grid-template-columns: minmax(0, 1fr); } }
