@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
       flipCard.classList.toggle("is-flipped"); // 카드 뒤집기
 
       const cards = pickThreeTarotCards();
-      renderTarotResult(cards);
+      renderTarotResult(cards); // 뽑힌 카드 결과 렌더링
     });
   });
 
