@@ -57,6 +57,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// 카드 클릭 연결 (app.js에 있는 함수들 자동 연결)
+  document.addEventListener("DOMContentLoaded", function() {
+    const deck = document.getElementById('deck');
+    if (!deck) return;
+
+    // 기존 카드들 클릭 이벤트 연결
+    deck.querySelectorAll('.card').forEach((cardEl, index) => {
+      cardEl.onclick = () => {
+        if (cardEl.classList.contains('flipped') || selectedCards.length >= 3) return;
+        flipCard(cardEl, tarotDeck[index % tarotDeck.length]); // 안전하게 카드 전달
+      };
+    });
+
+    // 새로고침해도 카드 다시 생성 (필수!)
+    createDeck();
+  });
+
+
 // 1. 운세 데이터 여러 개 (계속 추가 가능)
 const fortunes = [
   {
