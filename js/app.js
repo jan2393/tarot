@@ -241,8 +241,50 @@ const tarotDeck = [
   }
 ];
 
+// 타로 카드 페이지 초기화
+  initTarotPage();
+});
+
+function initTarotPage() {
+  const tarotButtons = document.querySelectorAll(".tarot-pick");
+  const redrawBtn = document.getElementById("tarot-redraw");
+
+  const handleDraw = () => {
+    const cards = pickThreeTarotCards();
+    renderTarotResult(cards);
+    flipAllCards(); // 카드 뒤집기 애니메이션 실행
+  };
+
+// 카드 뒤집기 애니메이션 실행
+function flipAllCards() {
+  document.querySelectorAll(".tarot-card").forEach((card, i) => {
+    setTimeout(() => {
+      card.classList.add("flipped");
+    }, i * 600);
+  });
+}
+  
+  tarotButtons.forEach(btn => btn.addEventListener("click", handleDraw));
+  if (redrawBtn) redrawBtn.addEventListener("click", handleDraw);
+
+  // 카드 자체 클릭도 가능하게 (중요!)
+  document.querySelectorAll(".tarot-card").forEach((card, index) => {
+    card.addEventListener("click", () => {
+      card.classList.toggle("flipped");
+    });
+  });
+}
+
 // 3. 서로 다른 3장의 타로 카드 뽑기
 function pickThreeTarotCards() {
+  // 3장 뽑기
+  const shuffled = [...tarotDeck].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 3).map((card, i) => ({
+    ...card,
+    position: i === 0 ? "현재" : i === 1 ? "조언" : "미래",
+    isReversed: Math.random() < 0.5
+  }));
+  
   const indices = [];
   while (indices.length < 3) {
     const idx = Math.floor(Math.random() * tarotDeck.length);
