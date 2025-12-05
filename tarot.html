@@ -106,102 +106,25 @@
       <div class="card tarot-result" style="margin-top:18px;">
         <div class="badge">3단계 · 오늘의 3장 타로</div>
 
-        <!-- 🔮 뒤집히는 메인 카드 -->
-<div class="tarot-display">
-  <div class="tarot-flip-card" id="tarot-flip-card">
-    <div class="tarot-face tarot-front">
-      <div class="tarot-front-title">ALLBEST TAROT</div>
-      <div class="tarot-front-sub">마음속 질문을 떠올리고 카드를 선택해 주세요</div>
-    </div>
-    <div class="tarot-face tarot-back">
-      <div class="tarot-back-title" id="tarot-back-name">카드를 선택해 주세요</div>
-      <div class="tarot-back-sub" id="tarot-back-sub">
-        선택한 카드의 이름과 에너지가 여기에 나타납니다.
-      </div>
-      <div style="margin-top:10px;">
-        <img
-          id="tarot-back-thumb"
-          src="https://gi.esmplus.com/vovs123/app/tarot/back.png"
-          alt="타로 카드 이미지"
-          style="width:80px; height:auto; border-radius:8px; box-shadow:0 8px 18px rgba(0,0,0,0.65); border:1px solid rgba(255,255,255,0.35);"
-        />
-      </div>
-    </div>
-  </div>
-</div>
+        <div id="tarot-result">
+          <!-- 카드 1 -->
+          <div id="tarot-pos1">
+            <h3>카드 1: 현재의 나</h3>
+            <p id="tarot-pos1-text">카드를 선택하면, 현재의 상태에 대해 알려줍니다.</p>
+          </div>
 
-<!-- 🔹 오늘의 3장 스프레드 요약 -->
-<div class="tarot-three">
-  <div class="tarot-three-item">
-    <div class="badge small">카드 1 · 현재의 나</div>
-    <img
-      id="tarot-pos1-thumb"
-      src="https://gi.esmplus.com/vovs123/app/tarot/back.png"
-      alt="현재의 나 카드"
-      style="width:70px; height:auto; border-radius:8px; box-shadow:0 8px 18px rgba(0,0,0,0.65); border:1px solid rgba(255,255,255,0.35); margin-top:4px;"
-    />
-    <p id="tarot-pos1-name" style="font-size:12px; margin-top:4px;">-</p>
-  </div>
+          <!-- 카드 2 -->
+          <div id="tarot-pos2">
+            <h3>카드 2: 오늘의 흐름</h3>
+            <p id="tarot-pos2-text">두 번째 카드는 오늘의 흐름을 보여줍니다.</p>
+          </div>
 
-  <div class="tarot-three-item">
-    <div class="badge small">카드 2 · 오늘의 흐름</div>
-    <img
-      id="tarot-pos2-thumb"
-      src="https://gi.esmplus.com/vovs123/app/tarot/back.png"
-      alt="오늘의 흐름 카드"
-      style="width:70px; height:auto; border-radius:8px; box-shadow:0 8px 18px rgba(0,0,0,0.65); border:1px solid rgba(255,255,255,0.35); margin-top:4px;"
-    />
-    <p id="tarot-pos2-name" style="font-size:12px; margin-top:4px;">-</p>
-  </div>
-
-  <div class="tarot-three-item">
-    <div class="badge small">카드 3 · 오늘의 조언</div>
-    <img
-      id="tarot-pos3-thumb"
-      src="https://gi.esmplus.com/vovs123/app/tarot/back.png"
-      alt="오늘의 조언 카드"
-      style="width:70px; height:auto; border-radius:8px; box-shadow:0 8px 18px rgba(0,0,0,0.65); border:1px solid rgba(255,255,255,0.35); margin-top:4px;"
-    />
-    <p id="tarot-pos3-name" style="font-size:12px; margin-top:4px;">-</p>
-  </div>
-</div>
-
-
-        <!-- 텍스트 해석 영역 -->
-        <h2 id="tarot-card-name" class="tarot-card-name">아직 카드를 선택하지 않았어요.</h2>
-        <p id="tarot-card-sub" class="tarot-card-sub">
-          마음속으로 질문을 떠올리고 위 카드 중 한 장을 선택해 주세요.
-        </p>
-
-        <div class="chip-list" id="tarot-card-keywords" style="margin-bottom:10px;">
-          <!-- 키워드가 여기에 표시됩니다 -->
+          <!-- 카드 3 -->
+          <div id="tarot-pos3">
+            <h3>카드 3: 오늘의 조언</h3>
+            <p id="tarot-pos3-text">세 번째 카드는 오늘을 어떻게 보내면 좋을지에 대한 조언을 건네줍니다.</p>
+          </div>
         </div>
-
-                <!-- 텍스트 해석 영역 -->
-        <h2 id="tarot-card-name" class="tarot-card-name">아직 카드를 선택하지 않았어요.</h2>
-        <p id="tarot-card-sub" class="tarot-card-sub">
-          마음속으로 질문을 떠올리고 위 카드 중 한 장을 선택해 주세요.
-        </p>
-
-        <div class="chip-list" id="tarot-card-keywords" style="margin-bottom:10px;">
-          <!-- 키워드가 여기에 표시됩니다 -->
-        </div>
-
-        <h3 style="font-size:15px; margin-top:4px;">카드 1 · 현재의 나</h3>
-        <p id="tarot-card1-text" style="font-size:13px; color:#dddfff; margin-bottom:10px;">
-          카드를 선택하면, 지금 당신의 상태를 보여주는 첫 번째 카드의 이야기가 여기에 나타납니다.
-        </p>
-
-        <h3 style="font-size:15px; margin-top:4px;">카드 2 · 오늘의 흐름</h3>
-        <p id="tarot-card2-text" style="font-size:13px; color:#dddfff; margin-bottom:10px;">
-          두 번째 카드는 오늘 하루의 흐름과 분위기를 비춰줍니다.
-        </p>
-
-        <h3 style="font-size:15px; margin-top:4px;">카드 3 · 오늘의 조언</h3>
-        <p id="tarot-card3-text" style="font-size:13px; color:#dddfff; margin-bottom:10px;">
-          세 번째 카드는 오늘을 어떻게 보내면 좋을지에 대한 조언을 건네줍니다.
-        </p>
-
       </div>
     </div>
   </main>
@@ -220,5 +143,3 @@
 <script src="js/app.js"></script>
 </body>
 </html>
-
-
