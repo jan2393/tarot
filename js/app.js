@@ -37,6 +37,31 @@ const fortunes = [
   }
 ];
 
+// 2. 공통: 시드(seed) 기반으로 운세 하나 고르는 함수
+function getFortuneBySeed(seed) {
+  const safeSeed = Math.abs(seed || 0);
+  const index = safeSeed % fortunes.length;
+  return fortunes[index];
+}
+// 3. 날짜 기반 시드 생성 (하루에 하나 고정)
+function getDateSeed() {
+  const d = new Date();
+  // YYYYMMDD 형식으로 하나의 숫자를 만듦
+  return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+}
+
+// 4. 이름 + 생년월일 기반 개인 시드 생성
+function getPersonalSeed(name, birth) {
+  let base = getDateSeed();
+  const str = (name || "").trim() + (birth || "").trim();
+
+  for (let i = 0; i < str.length; i++) {
+    base += str.charCodeAt(i) * (i + 1);
+  }
+
+  return base;
+}
+
 // 2. 오늘 날짜를 기반으로 "하루에 하나" 운세 선택
 function pickTodayFortune() {
   const today = new Date();
@@ -102,14 +127,35 @@ function renderHomePage(f) {
   }
 }
 
-// 5. DOM 로드 후 실행
+// 7. DOM 로드 후 초기 렌더링 + 개인화 버튼 이벤트
 document.addEventListener("DOMContentLoaded", () => {
-  const todayFortune = pickTodayFortune();
+  // ① 기본: 날짜만 기준으로 한 오늘의 운세
+  const dateSeed = getDateSeed();
+  const todayFortune = getFortuneBySeed(dateSeed);
+
+  // 오늘의 운세 페이지/홈 공통 초기 렌더
   renderTodayPage(todayFortune);
   renderHomePage(todayFortune);
-});
 
+// ② 개인화 버튼 (today.html 전용)
+  const btn = document.getElementById("personalize-btn");
+  if (btn) {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
 
+      const nameInput = document.getElementById("personal-name");
+      const birthInput = document.getElementById("personal-birth");
+      const name = nameInput ? nameInput.value : "";
+      const birth = birthInput ? birthInput.value : "";
+
+      const personalSeed = getPersonalSeed(name, birth);
+      const personalFortune = getFortuneBySeed(personalSeed);
+
+      renderTodayPage(personalFortune);
+    });
+  }
+
+  
 // 2. 랜덤으로 하나 뽑는 함수
 function pickRandomFortune() {
   const index = Math.floor(Math.random() * fortunes.length);
