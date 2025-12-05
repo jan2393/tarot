@@ -158,11 +158,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const tarotButtons = document.querySelectorAll(".tarot-pick");
   const tarotRedrawBtn = document.getElementById("tarot-redraw");
 
+// 카드 선택 시 카드 뒷면/앞면 전환
+  tarotButtons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      const flipCard = btn.querySelector(".tarot-flip-card");
+      flipCard.classList.toggle("is-flipped");
+
+      // 앞면 이미지 업데이트
+      const cardImage = flipCard.querySelector(".tarot-back img");
+      cardImage.src = `https://gi.esmplus.com/vovs123/app/tarot/${tarotDeck[index].name.toLowerCase().replace(' ', '-')}.png`; // 카드 앞면 이미지 변경
+
+      // 3장 선택한 카드 결과 렌더링
+      const selectedCards = getSelectedCards();
+      renderTarotResult(selectedCards);
+    });
+  });
+
+  
   const handleDraw = (event) => {
     event.preventDefault();
     const card = pickRandomTarotCard();
     renderTarotResult(card);
   };
+
+  
 
   if (tarotButtons && tarotButtons.length > 0) {
     tarotButtons.forEach((btn) => {
@@ -170,11 +189,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // 다시 뽑기 버튼 클릭 시
   if (tarotRedrawBtn) {
-    tarotRedrawBtn.addEventListener("click", handleDraw);
+    tarotRedrawBtn.addEventListener("click", () => {
+      const newCards = pickThreeTarotCards();
+      renderTarotResult(newCards);
+    });
   }
 });
-  
+
+// 3개의 카드를 랜덤으로 뽑는 함수
+function pickThreeTarotCards() {
+  const shuffledDeck = [...tarotDeck].sort(() => Math.random() - 0.5);  // 덱 섞기
+  return shuffledDeck.slice(0, 3);  // 첫 3장 반환
+}
+
+
 // 2. 랜덤으로 하나 뽑는 함수
 function pickRandomFortune() {
   const index = Math.floor(Math.random() * fortunes.length);
@@ -355,8 +385,8 @@ function pickRandomTarotCard() {
   return tarotDeck[index];
 }
 
-// 타로 결과 화면에 뿌려주기
-function renderTarotResult(card) {
+// 3개의 카드를 선택하고 그에 대한 운세를 출력하는 함수
+function renderTarotResult(cards) {
   const nameEl = document.getElementById("tarot-card-name");
   const subEl = document.getElementById("tarot-card-sub");
   const keywordsEl = document.getElementById("tarot-card-keywords");
@@ -365,24 +395,23 @@ function renderTarotResult(card) {
   const oneLineEl = document.getElementById("tarot-card-one-line");
 
   if (!nameEl || !subEl || !keywordsEl || !storyEl || !adviceEl || !oneLineEl) {
-    // 타로 페이지가 아닐 때
-    return;
+    return; // 타로 페이지가 아닐 때
   }
 
-  nameEl.textContent = card.name;
-  subEl.textContent = card.subtitle || "";
-  storyEl.textContent = card.story;
-  adviceEl.textContent = card.advice;
-  oneLineEl.textContent = card.oneLine;
+   // 카드 1, 2, 3에 대한 운세 출력
+  nameEl.textContent = cards[1].name;  // 카드 2: 오늘의 흐름
+  subEl.textContent = cards[1].subtitle || "";
+  storyEl.textContent = cards[0].story;  // 카드 1: 현재의 나
+  adviceEl.textContent = cards[2].advice;  // 카드 3: 오늘의 조언
+  oneLineEl.textContent = cards[1].oneLine;  // 카드 2: 오늘의 메시지
 
   keywordsEl.innerHTML = "";
-  (card.keywords || []).forEach((kw) => {
+  cards[1].keywords.forEach((kw) => {
     const span = document.createElement("span");
     span.className = "chip";
     span.textContent = kw;
     keywordsEl.appendChild(span);
   });
 }
-
 
   
