@@ -129,15 +129,15 @@ function renderHomePage(f) {
 
 // 7. DOM 로드 후 초기 렌더링 + 개인화 버튼 이벤트
 document.addEventListener("DOMContentLoaded", () => {
-  // ① 기본: 날짜만 기준으로 한 오늘의 운세
+  // ✅ 1) 오늘의 운세 (홈 + today.html)
   const dateSeed = getDateSeed();
   const todayFortune = getFortuneBySeed(dateSeed);
 
-  // 오늘의 운세 페이지/홈 공통 초기 렌더
+  
   renderTodayPage(todayFortune);
   renderHomePage(todayFortune);
 
-// ② 개인화 버튼 (today.html 전용)
+// ✅ 2) 오늘의 운세 개인화 (이름 + 생년월일)
   const btn = document.getElementById("personalize-btn");
   if (btn) {
     btn.addEventListener("click", (event) => {
@@ -154,7 +154,26 @@ document.addEventListener("DOMContentLoaded", () => {
       renderTodayPage(personalFortune);
     });
   }
+// ✅ 3) 타로 카드 페이지 초기화
+  const tarotButtons = document.querySelectorAll(".tarot-pick");
+  const tarotRedrawBtn = document.getElementById("tarot-redraw");
 
+  const handleDraw = (event) => {
+    event.preventDefault();
+    const card = pickRandomTarotCard();
+    renderTarotResult(card);
+  };
+
+  if (tarotButtons && tarotButtons.length > 0) {
+    tarotButtons.forEach((btn) => {
+      btn.addEventListener("click", handleDraw);
+    });
+  }
+
+  if (tarotRedrawBtn) {
+    tarotRedrawBtn.addEventListener("click", handleDraw);
+  }
+});
   
 // 2. 랜덤으로 하나 뽑는 함수
 function pickRandomFortune() {
@@ -204,3 +223,166 @@ function renderFortune() {
 
 // 4. 페이지 로드 시 실행
 document.addEventListener("DOMContentLoaded", renderFortune);
+
+// ---- TAROT CARD DATA ----
+const tarotDeck = [
+  {
+    name: "0. 광대 (The Fool)",
+    subtitle: "새로운 시작 · 자유 · 모험",
+    keywords: ["새 출발", "용기", "자유로운 선택"],
+    story:
+      "광대 카드는 낯선 길 위에 선 당신을 비춥니다. 아직 모든 것이 정해지지 않았기에, 실수도 가능하지만 그만큼 새로운 가능성도 열려 있습니다. 주변에서는 무모하다고 말할지 몰라도, 당신의 마음은 이미 다음 장으로 넘어갈 준비를 하고 있습니다.",
+    advice:
+      "지금의 나는 완벽한 계획보다 한 걸음의 움직임이 더 필요할 수 있습니다. 너무 많은 가능성을 한 번에 붙잡으려 하지 말고, 오늘 딱 하나의 선택에만 집중해 보세요.",
+    oneLine:
+      "가벼운 발걸음 하나가, 생각보다 멀리 당신을 데려다 줄 수 있습니다."
+  },
+  {
+    name: "1. 마법사 (The Magician)",
+    subtitle: "의지 · 실행력 · 표현",
+    keywords: ["실행", "집중", "능력 발휘"],
+    story:
+      "마법사는 이미 손 안에 필요한 도구들을 쥐고 있는 사람입니다. 당신에게는 이미 충분한 경험과 재능이 있지만, 스스로 그 사실을 잊고 있었을지도 모릅니다. 지금은 ‘할 수 있을까?’가 아니라 ‘어떻게 해볼까?’를 묻는 시점입니다.",
+    advice:
+      "머릿속에서만 맴돌던 생각을 지금 눈앞의 행동으로 옮겨보세요. 완벽한 준비가 아니어도 괜찮습니다. 시작한 사람만이 다음 단계를 볼 수 있습니다.",
+    oneLine:
+      "당신은 이미 준비되어 있습니다. 이제 필요한 건, 첫 번째 주문을 외우는 용기뿐입니다."
+  },
+  {
+    name: "2. 여사제 (The High Priestess)",
+    subtitle: "직관 · 내면의 목소리 · 비밀",
+    keywords: ["직감", "관찰", "침묵 속 통찰"],
+    story:
+      "여사제 카드는 조용히 앉아 있지만, 누구보다 많은 것을 보고 느끼는 사람을 상징합니다. 지금의 당신은 이미 답을 알고 있지만, 스스로에게 아직 그 답을 허락하지 못하고 있을 수도 있습니다.",
+    advice:
+      "조언을 더 구하기 전에, 내 마음이 처음부터 무엇을 말하고 있었는지 돌아보세요. 조용한 시간을 짧게라도 내어, 나에게 솔직한 대답을 해주는 것이 중요합니다.",
+    oneLine:
+      "당신의 직감은 우연이 아니라, 그동안의 삶이 모여 만든 조용한 지혜입니다."
+  },
+  {
+    name: "3. 여황제 (The Empress)",
+    subtitle: "풍요 · 돌봄 · 성장",
+    keywords: ["풍요", "관계", "자기 돌봄"],
+    story:
+      "여황제 카드는 돌봄과 풍요의 에너지를 함께 품고 있습니다. 지금의 당신은 누군가를 돌보고 있거나, 반대로 돌봄을 필요로 하고 있을 수 있습니다. 관계와 사랑, 편안함이 중요한 주제로 떠오르는 시점입니다.",
+    advice:
+      "지금 내 마음과 몸이 충분히 쉬고 있는지 먼저 점검해 주세요. 나를 잘 돌보는 사람이, 다른 사람도 더 따뜻하게 안아줄 수 있습니다.",
+    oneLine:
+      "당신도 누군가에게 충분한 사랑을 줬다면, 이제는 그 사랑을 자신에게도 돌려줄 차례입니다."
+  },
+  {
+    name: "4. 황제 (The Emperor)",
+    subtitle: "구조 · 책임 · 리더십",
+    keywords: ["책임", "결정", "권위"],
+    story:
+      "황제 카드는 어른의 결정을 상징합니다. 지금의 당신에게는 분명한 기준과 원칙을 세워야 할 일이 있을 수 있습니다. 누군가에게 기대기보다는, 내가 중심을 잡아야 하는 순간일지도 모릅니다.",
+    advice:
+      "모든 사람을 만족시키는 선택은 어렵습니다. 다만, 내가 책임질 수 있는 선택을 하는 것은 가능합니다. 기준을 세우고, 그 기준에 맞게 결정을 내려보세요.",
+    oneLine:
+      "당신이 세운 기준은, 앞으로의 삶을 지탱해 줄 든든한 기둥이 됩니다."
+  },
+  {
+    name: "6. 연인 (The Lovers)",
+    subtitle: "관계 · 선택 · 진심",
+    keywords: ["관계", "진실된 마음", "중요한 선택"],
+    story:
+      "연인 카드는 사랑뿐 아니라, ‘마음이 향하는 선택’을 상징합니다. 지금의 당신은 관계 혹은 중요한 선택의 기로에 서 있을 가능성이 큽니다. 머리가 아닌 마음이 어디를 향하고 있는지 살펴볼 때입니다.",
+    advice:
+      "타인의 기대보다, 내가 진짜 원하는 방향이 어디인지 솔직해져 보세요. 관계든 일이든, 진심이 담기지 않은 선택은 오래 버티기 어렵습니다.",
+    oneLine:
+      "당신의 마음이 향하는 곳이 결국 당신이 있어야 할 자리입니다."
+  },
+  {
+    name: "7. 전차 (The Chariot)",
+    subtitle: "전진 · 승리 · 추진력",
+    keywords: ["집중", "돌파", "속도 조절"],
+    story:
+      "전차 카드는 앞으로 나아가려는 강한 의지를 보여줍니다. 지금의 당신은 멈추기보다 움직이고 싶고, 한 번 마음먹은 일은 끝까지 밀어붙이고 싶은 상태일 수 있습니다.",
+    advice:
+      "속도만 중요한 것은 아닙니다. 내가 어디로 가고 있는지, 방향을 점검하면서 달려야 합니다. 목표를 한 번 더 정리한 뒤, 그 방향으로 에너지를 모아보세요.",
+    oneLine:
+      "당신이 집중한 방향으로, 삶의 에너지 또한 함께 모이게 됩니다."
+  },
+  {
+    name: "9. 은둔자 (The Hermit)",
+    subtitle: "고독 · 성찰 · 깊이",
+    keywords: ["혼자만의 시간", "정리", "깊은 생각"],
+    story:
+      "은둔자 카드는 일부러 거리를 두고, 스스로를 돌아보는 사람을 상징합니다. 지금의 당신은 잠시 시끄러운 것들에서 벗어나, 나만의 속도로 생각을 정리할 필요가 있습니다.",
+    advice:
+      "모두와 연결되어 있을 필요는 없습니다. 휴대폰을 잠시 멀리 두고, 조용한 산책이나 혼자만의 시간을 허락해 주세요. 그 안에서 중요한 통찰이 떠오를 수 있습니다.",
+    oneLine:
+      "조용히 멈춰 선 순간에도, 당신의 삶은 여전히 앞으로 나아가고 있습니다."
+  },
+  {
+    name: "10. 운명의 바퀴 (Wheel of Fortune)",
+    subtitle: "전환점 · 흐름 · 우연",
+    keywords: ["변화", "기회", "순환"],
+    story:
+      "운명의 바퀴 카드는 예기치 못한 변화와 전환점을 암시합니다. 좋고 나쁨의 이분법보다는, ‘이제 새로운 국면으로 넘어간다’는 의미가 더 강합니다.",
+    advice:
+      "흐름이 바뀌는 시기에는, 과거 방식만 고집하기보다 변화에 몸을 조금 맡겨보는 것도 필요합니다. 놓아야 할 것은 놓고, 들어올 것은 받아들이는 유연함을 가져보세요.",
+    oneLine:
+      "지금의 변화는, 당신이 다음 장으로 넘어가기 위한 자연스러운 흐름일 수 있습니다."
+  },
+  {
+    name: "17. 별 (The Star)",
+    subtitle: "희망 · 치유 · 영감",
+    keywords: ["회복", "희망", "영감"],
+    story:
+      "별 카드는 긴 어둠 끝에 보이는 작은 빛을 상징합니다. 완전히 괜찮아진 것은 아니지만, 다시 한 번 믿어보고 싶다는 마음이 피어오르는 시점입니다.",
+    advice:
+      "지나온 시간 속에서 내가 지켜낸 것들을 떠올려 보세요. 아직 부족해 보일지라도, 그 안에는 분명 당신만의 강인함이 담겨 있습니다. 스스로에게 조금 더 부드러운 시선을 건네도 괜찮습니다.",
+    oneLine:
+      "당신이 버티며 지나온 시간들 위에, 이제는 작은 빛이 하나둘 켜지고 있습니다."
+  },
+  {
+    name: "19. 태양 (The Sun)",
+    subtitle: "성취 · 기쁨 · 자신감",
+    keywords: ["성취", "명확함", "즐거움"],
+    story:
+      "태양 카드는 따뜻한 성공과 명확한 자신감을 보여줍니다. 지금의 당신은 이미 중요한 무언가를 이뤄냈거나, 그 직전에 서 있을 수 있습니다.",
+    advice:
+      "성과를 과하게 축소하지 말고, 내가 해낸 것을 인정해 주세요. 스스로를 격려하는 태도가 앞으로의 도전에도 큰 힘이 됩니다.",
+    oneLine:
+      "당신이 빛을 내기 시작하면, 주변의 풍경도 함께 밝아집니다."
+  }
+];
+
+// 랜덤으로 타로 카드 한 장 뽑기
+function pickRandomTarotCard() {
+  const index = Math.floor(Math.random() * tarotDeck.length);
+  return tarotDeck[index];
+}
+
+// 타로 결과 화면에 뿌려주기
+function renderTarotResult(card) {
+  const nameEl = document.getElementById("tarot-card-name");
+  const subEl = document.getElementById("tarot-card-sub");
+  const keywordsEl = document.getElementById("tarot-card-keywords");
+  const storyEl = document.getElementById("tarot-card-story");
+  const adviceEl = document.getElementById("tarot-card-advice");
+  const oneLineEl = document.getElementById("tarot-card-one-line");
+
+  if (!nameEl || !subEl || !keywordsEl || !storyEl || !adviceEl || !oneLineEl) {
+    // 타로 페이지가 아닐 때
+    return;
+  }
+
+  nameEl.textContent = card.name;
+  subEl.textContent = card.subtitle || "";
+  storyEl.textContent = card.story;
+  adviceEl.textContent = card.advice;
+  oneLineEl.textContent = card.oneLine;
+
+  keywordsEl.innerHTML = "";
+  (card.keywords || []).forEach((kw) => {
+    const span = document.createElement("span");
+    span.className = "chip";
+    span.textContent = kw;
+    keywordsEl.appendChild(span);
+  });
+}
+
+
+  
