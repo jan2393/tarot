@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  // 카드 선택 후 뒤집기
+  const tarotCards = document.querySelectorAll('.tarot-card-btn');
+
+  tarotCards.forEach((card) => {
+    card.addEventListener("click", (event) => {
+      event.preventDefault();
+      const flipCard = document.getElementById("tarot-flip-card");
+      flipCard.classList.toggle("is-flipped"); // 카드 뒤집기
+
+      const cards = pickThreeTarotCards();
+      renderTarotResult(cards);
+    });
+  });
+
+  
   // ✅ 1) 오늘의 운세 (홈 + today.html)
   const dateSeed = getDateSeed();
   const todayFortune = getFortuneBySeed(dateSeed);
