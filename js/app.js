@@ -1,4 +1,61 @@
-// js/app.js
+document.addEventListener("DOMContentLoaded", () => {
+  // ✅ 1) 오늘의 운세 (홈 + today.html)
+  const dateSeed = getDateSeed();
+  const todayFortune = getFortuneBySeed(dateSeed);
+
+  renderTodayPage(todayFortune);
+  renderHomePage(todayFortune);
+
+  // ✅ 2) 오늘의 운세 개인화 (이름 + 생년월일)
+  const btn = document.getElementById("personalize-btn");
+  if (btn) {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const nameInput = document.getElementById("personal-name");
+      const birthInput = document.getElementById("personal-birth");
+      const name = nameInput ? nameInput.value : "";
+      const birth = birthInput ? birthInput.value : "";
+
+      const personalSeed = getPersonalSeed(name, birth);
+      const personalFortune = getFortuneBySeed(personalSeed);
+
+      renderTodayPage(personalFortune);
+    });
+  }
+
+  // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
+  const tarotButtons = document.querySelectorAll(".tarot-pick");
+  const tarotRedrawBtn = document.getElementById("tarot-redraw");
+
+  const handleDraw = (event) => {
+    event.preventDefault();
+    const cards = pickThreeTarotCards();  // 3장 카드 뽑기
+    const clickedBtn =
+      event.currentTarget && event.currentTarget.classList.contains("tarot-pick")
+        ? event.currentTarget
+        : null;
+    renderTarotResult(cards, clickedBtn);
+  };
+
+  if (tarotButtons.length > 0) {
+    tarotButtons.forEach((btn) => {
+      btn.addEventListener("click", handleDraw);
+    });
+  } else {
+    console.error("타로 카드 버튼이 없습니다.");
+  }
+
+  if (tarotRedrawBtn) {
+    tarotRedrawBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      const cards = pickThreeTarotCards();
+      renderTarotResult(cards, null); // 다시 뽑기는 버튼 하이라이트 변경 없음
+    });
+  } else {
+    console.error("다시 뽑기 버튼이 없습니다.");
+  }
+});
 
 // 1. 운세 데이터 여러 개 (계속 추가 가능)
 const fortunes = [
@@ -152,7 +209,7 @@ const tarotDeck = [
     story: "광대 카드는 낯선 길 위에 선 당신을 비춥니다. 아직 모든 것이 정해지지 않았기에, 실수도 가능하지만 그만큼 새로운 가능성도 열려 있습니다. 주변에서는 무모하다고 말할지 몰라도, 당신의 마음은 이미 다음 장으로 넘어갈 준비를 하고 있습니다.",
     advice: "지금의 나는 완벽한 계획보다 한 걸음의 움직임이 더 필요할 수 있습니다. 너무 많은 가능성을 한 번에 붙잡으려 하지 말고, 오늘 딱 하나의 선택에만 집중해 보세요.",
     oneLine: "가벼운 발걸음 하나가, 생각보다 멀리 당신을 데려다 줄 수 있습니다.",
-    image: "img/tarot/fool.png"
+    image: "https://gi.esmplus.com/vovs123/app/tarot/fool.png"
   },
   {
     name: "1. 마법사 (The Magician)",
@@ -161,7 +218,7 @@ const tarotDeck = [
     story: "마법사는 이미 손 안에 필요한 도구들을 쥐고 있는 사람입니다. 당신에게는 이미 충분한 경험과 재능이 있지만, 스스로 그 사실을 잊고 있었을지도 모릅니다. 지금은 ‘할 수 있을까?’가 아니라 ‘어떻게 해볼까?’를 묻는 시점입니다.",
     advice: "머릿속에서만 맴돌던 생각을 지금 눈앞의 행동으로 옮겨보세요. 완벽한 준비가 아니어도 괜찮습니다. 시작한 사람만이 다음 단계를 볼 수 있습니다.",
     oneLine: "당신은 이미 준비되어 있습니다. 이제 필요한 건, 첫 번째 주문을 외우는 용기뿐입니다.",
-    image: "img/tarot/magician.png"
+    image: "https://gi.esmplus.com/vovs123/app/tarot/magician.png"
   },
   {
     name: "2. 여사제 (The High Priestess)",
@@ -170,9 +227,9 @@ const tarotDeck = [
     story: "여사제 카드는 조용히 앉아 있지만, 누구보다 많은 것을 보고 느끼는 사람을 상징합니다. 지금의 당신은 이미 답을 알고 있지만, 스스로에게 아직 그 답을 허락하지 못하고 있을 수도 있습니다.",
     advice: "조언을 더 구하기 전에, 내 마음이 처음부터 무엇을 말하고 있었는지 돌아보세요. 조용한 시간을 짧게라도 내어, 나에게 솔직한 대답을 해주는 것이 중요합니다.",
     oneLine: "당신의 직감은 우연이 아니라, 그동안의 삶이 모여 만든 조용한 지혜입니다.",
-    image: "img/tarot/high-priestess.png"
+    image: "https://gi.esmplus.com/vovs123/app/tarot/high-priestess.png"
   },
-  // ... (중간 카드들도 같은 형식으로 image만 추가)
+  // ... 추가 카드들도 같은 형식으로 이미지 경로 수정
   {
     name: "21. 세계 (The World)",
     subtitle: "완성 · 통합 · 하나의 사이클",
@@ -180,11 +237,11 @@ const tarotDeck = [
     story: "세계 카드는 하나의 큰 여정이 완성되는 순간을 상징합니다. 지금의 당신은 어떤 사이클을 마무리하고, 다음 단계로 나아갈 준비를 하고 있을 수 있습니다.",
     advice: "여기까지 온 나 자신을 충분히 축하해 주세요. 끝은 곧 새로운 시작의 문턱입니다. 다음 여정에서 무엇을 가져가고, 무엇을 내려놓을지 정해보는 시간도 필요합니다.",
     oneLine: "당신의 한 챕터가 끝났습니다. 그리고 새로운 이야기가 조용히 문을 두드리고 있습니다.",
-    image: "img/tarot/world.png"
+    image: "https://gi.esmplus.com/vovs123/app/tarot/world.png"
   }
 ];
 
-// 서로 다른 3장의 타로 카드 뽑기
+// 3. 서로 다른 3장의 타로 카드 뽑기
 function pickThreeTarotCards() {
   const indices = [];
   while (indices.length < 3) {
@@ -195,7 +252,6 @@ function pickThreeTarotCards() {
   }
   return indices.map(i => tarotDeck[i]);
 }
-
 
 // cards: [카드1, 카드2, 카드3], clickedButton: 사용자가 클릭한 버튼 (선택 하이라이트용)
 function renderTarotResult(cards, clickedButton) {
@@ -242,7 +298,7 @@ function renderTarotResult(cards, clickedButton) {
     keywordsEl.appendChild(span);
   });
 
-  // 🔹 3장 각각에 대한 설명
+  // 🔹 텍스트 해석 구성
   card1TextEl.textContent = card1.story;       // 현재의 나
   card2TextEl.textContent = card2.story;       // 오늘의 흐름
   card3TextEl.textContent = card3.advice;      // 오늘의 조언
@@ -251,14 +307,14 @@ function renderTarotResult(cards, clickedButton) {
   if (backNameEl) backNameEl.textContent = card2.name;
   if (backSubEl) backSubEl.textContent = card2.subtitle || "";
   if (backThumbEl) {
-    backThumbEl.src = card2.image || "img/tarot/back.png";
+    backThumbEl.src = card2.image || "https://gi.esmplus.com/vovs123/app/tarot/back.png";
     backThumbEl.alt = card2.name;
   }
 
   // 🔹 아래 3장 썸네일/이름 세팅
-  if (pos1Thumb) pos1Thumb.src = card1.image || "img/tarot/back.png";
-  if (pos2Thumb) pos2Thumb.src = card2.image || "img/tarot/back.png";
-  if (pos3Thumb) pos3Thumb.src = card3.image || "img/tarot/back.png";
+  if (pos1Thumb) pos1Thumb.src = card1.image || "https://gi.esmplus.com/vovs123/app/tarot/back.png";
+  if (pos2Thumb) pos2Thumb.src = card2.image || "https://gi.esmplus.com/vovs123/app/tarot/back.png";
+  if (pos3Thumb) pos3Thumb.src = card3.image || "https://gi.esmplus.com/vovs123/app/tarot/back.png";
 
   if (pos1Name) pos1Name.textContent = card1.name;
   if (pos2Name) pos2Name.textContent = card2.name;
@@ -280,242 +336,3 @@ function renderTarotResult(cards, clickedButton) {
     }, 30);
   }
 }
-
-
-
-// 3. 날짜 기반 시드 생성 (하루에 하나 고정)
-function getDateSeed() {
-  const d = new Date();
-  // YYYYMMDD 형식으로 하나의 숫자를 만듦
-  return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
-}
-
-// 4. 이름 + 생년월일 기반 개인 시드 생성
-function getPersonalSeed(name, birth) {
-  let base = getDateSeed();
-  const str = (name || "").trim() + (birth || "").trim();
-
-  for (let i = 0; i < str.length; i++) {
-    base += str.charCodeAt(i) * (i + 1);
-  }
-
-  return base;
-}
-
-// 5. 오늘의 운세 페이지 렌더링
-function renderTodayPage(f) {
-  const summaryEl = document.getElementById("summary-text");
-  if (!summaryEl) return; // 오늘의 운세 페이지가 아니면 스킵
-
-  const flowEl = document.getElementById("flow-text");
-  const emotionEl = document.getElementById("emotion-text");
-  const externalEl = document.getElementById("external-text");
-  const adviceEl = document.getElementById("advice-text");
-  const keywordListEl = document.getElementById("keyword-list");
-  const luckyInfoEl = document.getElementById("lucky-info");
-  const oneLineEl = document.getElementById("one-line");
-
-  summaryEl.textContent = f.summary;
-  flowEl.textContent = f.flow;
-  emotionEl.textContent = f.emotion;
-  externalEl.textContent = f.external;
-  adviceEl.textContent = f.advice;
-
-  // 키워드 초기화 후 채우기
-  keywordListEl.innerHTML = "";
-  f.keywords.forEach(keyword => {
-    const span = document.createElement("span");
-    span.className = "chip";
-    span.textContent = keyword;
-    keywordListEl.appendChild(span);
-  });
-
-  luckyInfoEl.innerHTML =
-    `숫자: <strong>${f.luckyNumbers.join(" · ")}</strong><br>` +
-    `컬러: <strong>${f.luckyColors.join(" · ")}</strong>`;
-
-  oneLineEl.textContent = f.oneLine;
-}
-
-// 6. 홈(index.html) 오늘의 한 줄/키워드 렌더링
-function renderHomePage(f) {
-  const oneLineHome = document.getElementById("home-one-line");
-  const keywordHome = document.getElementById("home-keywords");
-  if (!oneLineHome && !keywordHome) return; // 홈이 아니면 스킵
-
-  if (oneLineHome) {
-    oneLineHome.textContent = f.oneLine;
-  }
-
-  if (keywordHome) {
-    keywordHome.innerHTML = "";
-    f.keywords.forEach(keyword => {
-      const span = document.createElement("span");
-      span.className = "chip";
-      span.textContent = keyword;
-      keywordHome.appendChild(span);
-    });
-  }
-}
-
-// ---- TAROT: 서로 다른 3장의 타로 카드 뽑기 ----
-function pickThreeTarotCards() {
-  const indices = [];
-  while (indices.length < 3) {
-    const idx = Math.floor(Math.random() * tarotDeck.length);
-    if (!indices.includes(idx)) {
-      indices.push(idx);
-    }
-  }
-  return indices.map(i => tarotDeck[i]);
-}
-
-// cards: [카드1, 카드2, 카드3], clickedButton: 사용자가 클릭한 버튼 (선택 하이라이트용)
-function renderTarotResult(cards, clickedButton) {
-  if (!cards || cards.length < 3) return;
-
-  const card1 = cards[0]; // 현재의 나
-  const card2 = cards[1]; // 오늘의 흐름 (메인 카드)
-  const card3 = cards[2]; // 오늘의 조언
-
-  const nameEl = document.getElementById("tarot-card-name");
-  const subEl = document.getElementById("tarot-card-sub");
-  const keywordsEl = document.getElementById("tarot-card-keywords");
-  const storyEl = document.getElementById("tarot-card-story");
-  const adviceEl = document.getElementById("tarot-card-advice");
-  const oneLineEl = document.getElementById("tarot-card-one-line");
-
-  const flipCardEl = document.getElementById("tarot-flip-card");
-  const backNameEl = document.getElementById("tarot-back-name");
-  const backSubEl = document.getElementById("tarot-back-sub");
-  const backThumbEl = document.getElementById("tarot-back-thumb");
-
-  const pos1Thumb = document.getElementById("tarot-pos1-thumb");
-  const pos2Thumb = document.getElementById("tarot-pos2-thumb");
-  const pos3Thumb = document.getElementById("tarot-pos3-thumb");
-  const pos1Name = document.getElementById("tarot-pos1-name");
-  const pos2Name = document.getElementById("tarot-pos2-name");
-  const pos3Name = document.getElementById("tarot-pos3-name");
-
-  if (!nameEl || !subEl || !keywordsEl || !storyEl || !adviceEl || !oneLineEl) {
-    return; // 타로 페이지가 아닐 때
-  }
-
-  // 🔹 메인 카드(카드2)를 상단 제목으로 사용
-  nameEl.textContent = card2.name;
-  subEl.textContent = card2.subtitle || "";
-
-  // 🔹 키워드는 카드2 기준
-  keywordsEl.innerHTML = "";
-  (card2.keywords || []).forEach((kw) => {
-    const span = document.createElement("span");
-    span.className = "chip";
-    span.textContent = kw;
-    keywordsEl.appendChild(span);
-  });
-
-  // 🔹 텍스트 해석 구성
-  storyEl.textContent =
-    `【카드 1 · 현재의 나】 ${card1.name}\n` +
-    `${card1.story}`;
-
-  adviceEl.textContent =
-    `【카드 3 · 오늘의 조언】 ${card3.name}\n` +
-    `${card3.advice}`;
-
-  oneLineEl.textContent = card2.oneLine;
-
-  // 🔹 플립 카드 뒷면에는 메인 카드(2번) 정보 + 썸네일
-  if (backNameEl) backNameEl.textContent = card2.name;
-  if (backSubEl) backSubEl.textContent = card2.subtitle || "";
-  if (backThumbEl) {
-    backThumbEl.src = card2.image || "img/tarot/back.png";
-    backThumbEl.alt = card2.name;
-  }
-
-  // 🔹 아래 3장 썸네일/이름 세팅
-  if (pos1Thumb) pos1Thumb.src = card1.image || "img/tarot/back.png";
-  if (pos2Thumb) pos2Thumb.src = card2.image || "img/tarot/back.png";
-  if (pos3Thumb) pos3Thumb.src = card3.image || "img/tarot/back.png";
-
-  if (pos1Name) pos1Name.textContent = card1.name;
-  if (pos2Name) pos2Name.textContent = card2.name;
-  if (pos3Name) pos3Name.textContent = card3.name;
-
-  // 🔹 선택한 버튼 하이라이트
-  const allButtons = document.querySelectorAll(".tarot-card-btn");
-  allButtons.forEach((b) => b.classList.remove("selected"));
-  if (clickedButton) {
-    clickedButton.classList.add("selected");
-  }
-
-  // 🔹 플립 애니메이션
-  if (flipCardEl) {
-    flipCardEl.classList.remove("is-flipped");
-    void flipCardEl.offsetWidth; // 리셋 트릭
-    setTimeout(() => {
-      flipCardEl.classList.add("is-flipped");
-    }, 30);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  // ✅ 1) 오늘의 운세 (홈 + today.html)
-  const dateSeed = getDateSeed();
-  const todayFortune = getFortuneBySeed(dateSeed);
-
-  renderTodayPage(todayFortune);
-  renderHomePage(todayFortune);
-
-  // ✅ 2) 오늘의 운세 개인화 (이름 + 생년월일)
-  const btn = document.getElementById("personalize-btn");
-  if (btn) {
-    btn.addEventListener("click", (event) => {
-      event.preventDefault();
-
-      const nameInput = document.getElementById("personal-name");
-      const birthInput = document.getElementById("personal-birth");
-      const name = nameInput ? nameInput.value : "";
-      const birth = birthInput ? birthInput.value : "";
-
-      const personalSeed = getPersonalSeed(name, birth);
-      const personalFortune = getFortuneBySeed(personalSeed);
-
-      renderTodayPage(personalFortune);
-    });
-  }
-
-  // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
-  const tarotButtons = document.querySelectorAll(".tarot-pick");
-  const tarotRedrawBtn = document.getElementById("tarot-redraw");
-
-  const handleDraw = (event) => {
-    event.preventDefault();
-    const cards = pickThreeTarotCards();  // 3장 카드 뽑기
-    const clickedBtn =
-      event.currentTarget && event.currentTarget.classList.contains("tarot-pick")
-        ? event.currentTarget
-        : null;
-    renderTarotResult(cards, clickedBtn);
-  };
-
-  if (tarotButtons.length > 0) {
-    tarotButtons.forEach((btn) => {
-      btn.addEventListener("click", handleDraw);
-    });
-  } else {
-    console.error("타로 카드 버튼이 없습니다.");
-  }
-
-  if (tarotRedrawBtn) {
-    tarotRedrawBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      const cards = pickThreeTarotCards();
-      renderTarotResult(cards, null); // 다시 뽑기는 버튼 하이라이트 변경 없음
-    });
-  } else {
-    console.error("다시 뽑기 버튼이 없습니다.");
-  }
-});
-
-
