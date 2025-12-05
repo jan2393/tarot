@@ -37,6 +37,79 @@ const fortunes = [
   }
 ];
 
+// 2. 오늘 날짜를 기반으로 "하루에 하나" 운세 선택
+function pickTodayFortune() {
+  const today = new Date();
+  // 연+월+일 더해서 fortunes 길이로 나눈 나머지 → 날짜가 바뀌면 인덱스도 바뀜
+  const seed = today.getFullYear() + (today.getMonth() + 1) + today.getDate();
+  const index = seed % fortunes.length;
+  return fortunes[index];
+}
+
+// 3. 오늘의 운세 페이지(today.html)에 렌더링
+function renderTodayPage(f) {
+  const summaryEl = document.getElementById("summary-text");
+  if (!summaryEl) return; // 오늘의 운세 페이지가 아니면 스킵
+
+  const flowEl = document.getElementById("flow-text");
+  const emotionEl = document.getElementById("emotion-text");
+  const externalEl = document.getElementById("external-text");
+  const adviceEl = document.getElementById("advice-text");
+  const keywordListEl = document.getElementById("keyword-list");
+  const luckyInfoEl = document.getElementById("lucky-info");
+  const oneLineEl = document.getElementById("one-line");
+
+  summaryEl.textContent = f.summary;
+  flowEl.textContent = f.flow;
+  emotionEl.textContent = f.emotion;
+  externalEl.textContent = f.external;
+  adviceEl.textContent = f.advice;
+
+  // 키워드 초기화 후 채우기
+  keywordListEl.innerHTML = "";
+  f.keywords.forEach(keyword => {
+    const span = document.createElement("span");
+    span.className = "chip";
+    span.textContent = keyword;
+    keywordListEl.appendChild(span);
+  });
+
+  luckyInfoEl.innerHTML =
+    `숫자: <strong>${f.luckyNumbers.join(" · ")}</strong><br>` +
+    `컬러: <strong>${f.luckyColors.join(" · ")}</strong>`;
+
+  oneLineEl.textContent = f.oneLine;
+}
+
+// 4. 홈(index.html)에도 오늘의 한 줄/키워드 동기화
+function renderHomePage(f) {
+  const oneLineHome = document.getElementById("home-one-line");
+  const keywordHome = document.getElementById("home-keywords");
+  if (!oneLineHome && !keywordHome) return; // 홈이 아니면 스킵
+
+  if (oneLineHome) {
+    oneLineHome.innerHTML = f.oneLine.replace(/\\n/g, "<br>");
+  }
+
+  if (keywordHome) {
+    keywordHome.innerHTML = "";
+    f.keywords.forEach(keyword => {
+      const span = document.createElement("span");
+      span.className = "chip";
+      span.textContent = keyword;
+      keywordHome.appendChild(span);
+    });
+  }
+}
+
+// 5. DOM 로드 후 실행
+document.addEventListener("DOMContentLoaded", () => {
+  const todayFortune = pickTodayFortune();
+  renderTodayPage(todayFortune);
+  renderHomePage(todayFortune);
+});
+
+
 // 2. 랜덤으로 하나 뽑는 함수
 function pickRandomFortune() {
   const index = Math.floor(Math.random() * fortunes.length);
