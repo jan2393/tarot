@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tarotRedrawBtn.addEventListener("click", (event) => {
       event.preventDefault();
       const cards = pickThreeTarotCards();
-      renderTarotResult(cards, null); // 다시 뽑기는 버튼 하이라이트 변경 없음
+      renderTarotResult(cards); // 다시 뽑기는 버튼 하이라이트 변경 없음
     });
   } else {
     console.error("다시 뽑기 버튼이 없습니다.");
@@ -327,7 +327,7 @@ function flipAllCards() {
 
 
 // cards: [카드1, 카드2, 카드3], clickedButton: 사용자가 클릭한 버튼 (선택 하이라이트용)
-function renderTarotResult(cards, clickedButton) {
+function renderTarotResult(cards) {
   if (!cards || cards.length < 3) return;
 
   const card1 = cards[0]; // 현재의 나
@@ -338,9 +338,9 @@ function renderTarotResult(cards, clickedButton) {
   const subEl = document.getElementById("tarot-card-sub");
   const keywordsEl = document.getElementById("tarot-card-keywords");
 
-  const card1TextEl = document.getElementById("tarot-card1-text");
-  const card2TextEl = document.getElementById("tarot-card2-text");
-  const card3TextEl = document.getElementById("tarot-card3-text");
+  const card1TextEl = document.getElementById("tarot-pos1-text").textContent = card1.story;
+  const card2TextEl = document.getElementById("tarot-pos2-text").textContent = card2.story;
+  const card3TextEl = document.getElementById("tarot-pos3-text").textContent = card3.advice;
 
   const flipCardEl = document.getElementById("tarot-flip-card");
   const backNameEl = document.getElementById("tarot-back-name");
@@ -354,6 +354,25 @@ function renderTarotResult(cards, clickedButton) {
   const pos2Name = document.getElementById("tarot-pos2-name");
   const pos3Name = document.getElementById("tarot-pos3-name");
 
+   // 카드 1, 2, 3 이미지 및 텍스트 업데이트
+    document.getElementById("tarot-pos1").innerHTML = `
+      <h3>카드 1: 현재의 나</h3>
+      <p>${card1.name}</p>
+      <img src="${card1.image}" alt="${card1.name}">
+    `;
+    document.getElementById("tarot-pos2").innerHTML = `
+      <h3>카드 2: 오늘의 흐름</h3>
+      <p>${card2.name}</p>
+      <img src="${card2.image}" alt="${card2.name}">
+    `;
+    document.getElementById("tarot-pos3").innerHTML = `
+      <h3>카드 3: 오늘의 조언</h3>
+      <p>${card3.name}</p>
+      <img src="${card3.image}" alt="${card3.name}">
+    `;
+  }
+
+  
   if (!nameEl || !subEl || !keywordsEl || !card1TextEl || !card2TextEl || !card3TextEl) {
     return; // 타로 페이지가 아닐 때
   }
