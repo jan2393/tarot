@@ -485,13 +485,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-    // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
+  // ✅ 3) 타로 카드 페이지 초기화 (3장 스프레드)
   const tarotButtons = document.querySelectorAll(".tarot-pick");
   const tarotRedrawBtn = document.getElementById("tarot-redraw");
 
   const handleDraw = (event) => {
     event.preventDefault();
-    const cards = pickThreeTarotCards();  // ← 여기!
+    const cards = pickThreeTarotCards();  // 3장 카드 뽑기
     const clickedBtn =
       event.currentTarget && event.currentTarget.classList.contains("tarot-pick")
         ? event.currentTarget
@@ -499,10 +499,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTarotResult(cards, clickedBtn);
   };
 
-  if (tarotButtons && tarotButtons.length > 0) {
+  if (tarotButtons.length > 0) {
     tarotButtons.forEach((btn) => {
       btn.addEventListener("click", handleDraw);
     });
+  } else {
+    console.error("타로 카드 버튼이 없습니다.");
   }
 
   if (tarotRedrawBtn) {
@@ -511,7 +513,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const cards = pickThreeTarotCards();
       renderTarotResult(cards, null); // 다시 뽑기는 버튼 하이라이트 변경 없음
     });
+  } else {
+    console.error("다시 뽑기 버튼이 없습니다.");
   }
-
 });
+
 
